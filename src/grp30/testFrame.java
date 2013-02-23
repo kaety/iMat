@@ -19,7 +19,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ShoppingCart;
+
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
 
 public class testFrame extends Observable implements Observer{
 	Box box;
@@ -32,6 +37,7 @@ public class testFrame extends Observable implements Observer{
 	private final Action action_1 = new TestBattan();
 	private JTextField txtPotatis;
 	private final Action action_2 = new searchAll();
+	private JList list;
 
 	/**
 	 * Launch the application.
@@ -88,6 +94,17 @@ public class testFrame extends Observable implements Observer{
 		scrollPane = new JScrollPane();
 		box = Box.createVerticalBox();
 		scrollPane.setViewportView(box);
+		
+		list = new JList();
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] {};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -101,7 +118,9 @@ public class testFrame extends Observable implements Observer{
 					.addGap(200))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(list, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -110,8 +129,13 @@ public class testFrame extends Observable implements Observer{
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(pinkPanel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(7)
+							.addComponent(list, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnB)
@@ -188,7 +212,7 @@ public class testFrame extends Observable implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if(arg instanceof ArrayList<?>) displayFoodList((ArrayList<Product>) arg);
-		//else lblMcpenispants.setText((String) arg);
+		else if(arg instanceof ShoppingCart) list.setListData((IMatDataHandler.getInstance().getShoppingCart().getItems()).toArray());
 	}
 	private class TestBattan extends AbstractAction {
 		public TestBattan() {
@@ -219,10 +243,11 @@ public class testFrame extends Observable implements Observer{
 		boolean b = true;
 		for(Product p : foodlist){
 			MatRes mm = new MatRes(p,b);
+			setChanged();
+			notifyObservers(mm);
 			box.add(mm);
 			b = !b;
 		}
 		scrollPane.validate();
 	}
-	
 }

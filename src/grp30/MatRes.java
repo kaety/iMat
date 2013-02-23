@@ -2,6 +2,9 @@ package grp30;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -16,18 +19,22 @@ import javax.swing.border.LineBorder;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
+import javax.swing.AbstractAction;
+import java.awt.event.ActionEvent;
+import javax.swing.Action;
 
 
 public class MatRes extends JPanel implements MouseListener{
-
 	/**
 	 * Create the panel.
 	 */
 	private Color panelColor;
 	private final Color highLightColor = Color.WHITE;
 	private Product product;
+	JButton btnBattan;
 
 	public MatRes(Product p, boolean lightPanel) {
+		product = p;
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		if(lightPanel) panelColor = Color.LIGHT_GRAY;
 		else panelColor = Color.DARK_GRAY;
@@ -35,8 +42,8 @@ public class MatRes extends JPanel implements MouseListener{
 	    addMouseListener(this);
 		JLabel lblFood = new JLabel(p.getName());
 		
-		JButton btnBattan = new JButton("battan");
-		
+		btnBattan = new JButton("battan");
+		btnBattan.setAction(action);
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "5", "10"}));
 		
@@ -105,8 +112,30 @@ public class MatRes extends JPanel implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+    public static class MyObservable extends Observable {
+        @Override
+        public void setChanged() {
+            super.setChanged();
+        }
+    }
+    private final MyObservable observable = new MyObservable();
+    private final Action action = new SwingAction();
+    
+    public void addObserver(Observer o){
+    	observable.addObserver(o);
+    }
 	
 	public Product getProduct() {
 		return product;
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			observable.setChanged();
+			observable.notifyObservers(product);
+		}
 	}
 }
