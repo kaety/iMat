@@ -1,5 +1,24 @@
-import com.jgoodies.forms.layout.CellConstraints.Alignment;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.Box;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+
+import se.chalmers.ait.dat215.project.Product;
 
 public class testFrame extends Observable implements Observer{
 	Box box;
@@ -11,7 +30,7 @@ public class testFrame extends Observable implements Observer{
 	private final Action action = new HidePinkMenu();
 	private final Action action_1 = new TestBattan();
 	private JTextField txtPotatis;
-	private final Action action_2 = new addNewPanel();
+	private final Action action_2 = new searchAll();
 
 	/**
 	 * Launch the application.
@@ -167,7 +186,8 @@ public class testFrame extends Observable implements Observer{
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		lblMcpenispants.setText((String) arg);
+		if(arg instanceof ArrayList<?>) displayFoodList((ArrayList<Product>) arg);
+		//else lblMcpenispants.setText((String) arg);
 	}
 	private class TestBattan extends AbstractAction {
 		public TestBattan() {
@@ -175,23 +195,33 @@ public class testFrame extends Observable implements Observer{
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
-			iMatController.getInstance().testBattanPressed(txtPotatis.getText());
+			//cont.testBattanPressed(txtPotatis.getText());
 			
 		}
 	}
-	private class addNewPanel extends AbstractAction {
-		public addNewPanel() {
-			putValue(NAME, "add new Jpanel");
+	private class searchAll extends AbstractAction {
+		public searchAll() {
+			putValue(NAME, "Get all products");
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
-			addPanel();
+			searchFood();
 		}
 	}
-	private void addPanel(){
-		Integer k = kk++;
-		MatRes mm = new MatRes("Food " + k.toString());
-		box.add(mm);
+	private void searchFood(){
+		ButtonPressed b = new ButtonPressed("searchFood");
+		setChanged();
+		notifyObservers(b);
+	}
+	
+	private void displayFoodList(ArrayList<Product> foodlist){
+		boolean b = true;
+		for(Product p : foodlist){
+			MatRes mm = new MatRes(p,b);
+			box.add(mm);
+			b = !b;
+		}
 		scrollPane.validate();
 	}
+	
 }
