@@ -1,6 +1,11 @@
 package grp30;
+import grp30.MatRes.MyObservable;
+
 import java.util.Observable;
 import java.util.Observer;
+
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
 
 
 public class iMatController extends Observable implements Observer{
@@ -36,15 +41,22 @@ public class iMatController extends Observable implements Observer{
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if(arg0 instanceof testFrame){
-			if(arg1 instanceof ButtonPressed){
-				handleGuiPressed((ButtonPressed) arg1);
-			}
+			if(arg1 instanceof ButtonPressed) handleGuiPressed((ButtonPressed) arg1);
+			else if(arg1 instanceof MatRes) addAsObserver((MatRes) arg1); 
+		}
+		else if(arg0 instanceof MyObservable){
+			Product p = (Product) arg1;
+			m.addToShoppingCart(p);
 		}
 		
 	}
 	
 	private void handleGuiPressed(ButtonPressed but){
 		if(but.getButtonId().equals("searchFood")) searchFood();
+	}
+	
+	public void addAsObserver(MatRes o){
+		o.addObserver(this);
 	}
 	
 }

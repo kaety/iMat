@@ -9,7 +9,6 @@ import se.chalmers.ait.dat215.project.Product;
 public class iMatModel extends Observable{
 
 	List<Product> searchResult;
-	
 	public iMatModel(){
 	}
 	
@@ -23,6 +22,12 @@ public class iMatModel extends Observable{
 		searchResult = IMatDataHandler.getInstance().getProducts();
 		setChanged();
 		notifyObservers(searchResult);
+	}
+	
+	public void addToShoppingCart(Product p){
+		IMatDataHandler.getInstance().getShoppingCart().addProduct(p);
+		setChanged();
+		notifyObservers(IMatDataHandler.getInstance().getShoppingCart());
 	}
 	
 }
