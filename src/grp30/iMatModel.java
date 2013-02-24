@@ -2,9 +2,9 @@ package grp30;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Observable;
-
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 public class iMatModel extends Observable{
 
@@ -24,8 +24,8 @@ public class iMatModel extends Observable{
 		notifyObservers(searchResult);
 	}
 	
-	public void addToShoppingCart(Product p){
-		IMatDataHandler.getInstance().getShoppingCart().addProduct(p);
+	public void addToShoppingCart(ShoppingItem i){
+		IMatDataHandler.getInstance().getShoppingCart().addItem(i);
 		setChanged();
 		notifyObservers(IMatDataHandler.getInstance().getShoppingCart());
 	}

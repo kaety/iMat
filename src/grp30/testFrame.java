@@ -33,11 +33,12 @@ public class testFrame extends Observable implements Observer{
 	JScrollPane scrollPane;
 	JPanel pinkPanel;
 	JLabel lblMcpenispants;
+	JLabel lblAmount;
 	private final Action action = new HidePinkMenu();
 	private final Action action_1 = new TestBattan();
 	private JTextField txtPotatis;
 	private final Action action_2 = new searchAll();
-	private JList list;
+	DynamicLabel dnmclblHerro;
 
 	/**
 	 * Launch the application.
@@ -94,17 +95,6 @@ public class testFrame extends Observable implements Observer{
 		scrollPane = new JScrollPane();
 		box = Box.createVerticalBox();
 		scrollPane.setViewportView(box);
-		
-		list = new JList();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -118,9 +108,7 @@ public class testFrame extends Observable implements Observer{
 					.addGap(200))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(list, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -129,13 +117,8 @@ public class testFrame extends Observable implements Observer{
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(pinkPanel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(7)
-							.addComponent(list, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnB)
@@ -178,6 +161,12 @@ public class testFrame extends Observable implements Observer{
 		JButton btnA = new JButton("A 1");
 		
 		JButton btnA_1 = new JButton("A 2");
+		
+		lblAmount = new JLabel("amount");
+		
+		JLabel lblTotal = new JLabel("Total:");
+		
+		dnmclblHerro = new DynamicLabel(1200);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -186,15 +175,26 @@ public class testFrame extends Observable implements Observer{
 					.addComponent(btnA)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnA_1)
-					.addContainerGap(280, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+					.addComponent(dnmclblHerro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblTotal)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblAmount)
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnA)
-						.addComponent(btnA_1))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnA)
+							.addComponent(btnA_1))
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblAmount)
+							.addComponent(lblTotal)
+							.addComponent(dnmclblHerro, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
@@ -212,7 +212,7 @@ public class testFrame extends Observable implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		if(arg instanceof ArrayList<?>) displayFoodList((ArrayList<Product>) arg);
-		else if(arg instanceof ShoppingCart) list.setListData((IMatDataHandler.getInstance().getShoppingCart().getItems()).toArray());
+		else if(arg instanceof ShoppingCart) newPurchase(IMatDataHandler.getInstance().getShoppingCart());
 	}
 	private class TestBattan extends AbstractAction {
 		public TestBattan() {
@@ -237,6 +237,12 @@ public class testFrame extends Observable implements Observer{
 		ButtonPressed b = new ButtonPressed("searchFood");
 		setChanged();
 		notifyObservers(b);
+	}
+	
+	private void newPurchase(ShoppingCart sc){
+		Double tot = sc.getTotal();
+		lblAmount.setText(tot.toString());
+		dnmclblHerro.showLabel(sc.getItems().get(sc.getItems().size()-1).getProduct().getName());
 	}
 	
 	private void displayFoodList(ArrayList<Product> foodlist){
