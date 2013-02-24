@@ -7,9 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 
 public class DynamicLabel extends JLabel implements ActionListener{
-	private int delay; // 800 - 1500 recommended
 	private Timer tim;
-	public DynamicLabel(int delay){
+	public DynamicLabel(int delay){// 800 - 1500 recommended
 		tim = new Timer(delay, this);
 		setVisible(false);
 	}
