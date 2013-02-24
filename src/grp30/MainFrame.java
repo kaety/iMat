@@ -22,6 +22,10 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class MainFrame extends JFrame {
 
@@ -58,8 +62,8 @@ public class MainFrame extends JFrame {
 		carddropdownpanel.setBackground(Color.PINK);
 		carddropdownpanel.setVisible(false);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(Color.GRAY);
+		JPanel rightpanel = new JPanel();
+		rightpanel.setBackground(Color.GRAY);
 		
 		JPanel buttonpanel = new JPanel();
 		buttonpanel.setBackground(Color.GRAY);
@@ -91,7 +95,7 @@ public class MainFrame extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(kundvagnspanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-								.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))))
+								.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))))
 					.addContainerGap(23, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -110,7 +114,7 @@ public class MainFrame extends JFrame {
 							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
-						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 486, GroupLayout.PREFERRED_SIZE))
+						.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 486, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(buttonpanel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
@@ -140,24 +144,38 @@ public class MainFrame extends JFrame {
 		final JPanel dropdown6 = new JPanel();
 		dropdown6.setBackground(Color.BLUE);
 		carddropdownpanel.add(dropdown6, "foodbutton6");
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+		GroupLayout gl_rightpanel = new GroupLayout(rightpanel);
+		gl_rightpanel.setHorizontalGroup(
+			gl_rightpanel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 174, Short.MAX_VALUE)
 		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
+		gl_rightpanel.setVerticalGroup(
+			gl_rightpanel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 486, Short.MAX_VALUE)
 		);
-		panel_1.setLayout(gl_panel_1);
+		rightpanel.setLayout(gl_rightpanel);
+		
+		JLabel profilLink = new JLabel("namn namnsson");
+		
+		JLabel kundvagnLink = new JLabel("Kundvagn");
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 174, Short.MAX_VALUE)
+				.addGroup(gl_kundvagnspanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(profilLink)
+					.addGap(18)
+					.addComponent(kundvagnLink)
+					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		gl_kundvagnspanel.setVerticalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 114, Short.MAX_VALUE)
+				.addGroup(gl_kundvagnspanel.createSequentialGroup()
+					.addGap(21)
+					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(kundvagnLink, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+						.addComponent(profilLink))
+					.addContainerGap(68, Short.MAX_VALUE))
 		);
 		kundvagnspanel.setLayout(gl_kundvagnspanel);
 		
@@ -192,6 +210,27 @@ public class MainFrame extends JFrame {
 		buttonpanel.setLayout(gl_buttonpanel);
 		
 		searchstring = new JTextField();
+		searchstring.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				searchstring.setText("");
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				searchstring.setText("Search...");
+			}
+		});
+		searchstring.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				int key = arg0.getKeyCode();
+			    if (key == KeyEvent.VK_ENTER){
+			    	System.out.println("Söker på: "+searchstring.getText());
+			    	searchstring.setText("");
+				}
+			}
+		});
 		searchstring.setText("Search...");
 		searchstring.setColumns(10);
 
