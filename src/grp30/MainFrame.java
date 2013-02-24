@@ -20,6 +20,8 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MainFrame extends JFrame {
 
@@ -52,8 +54,9 @@ public class MainFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JPanel carddropdownpanel = new JPanel();
+		final JPanel carddropdownpanel = new JPanel();
 		carddropdownpanel.setBackground(Color.PINK);
+		carddropdownpanel.setVisible(false);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(Color.GRAY);
@@ -113,6 +116,30 @@ public class MainFrame extends JFrame {
 					.addContainerGap())
 		);
 		carddropdownpanel.setLayout(new CardLayout(0, 0));
+		
+		final JPanel dropdown1 = new JPanel();
+		dropdown1.setBackground(Color.PINK);
+		carddropdownpanel.add(dropdown1, "foodbutton1");
+		
+		final JPanel dropdown2 = new JPanel();
+		dropdown2.setBackground(Color.RED);
+		carddropdownpanel.add(dropdown2, "foodbutton2");
+		
+		final JPanel dropdown3 = new JPanel();
+		dropdown3.setBackground(Color.ORANGE);
+		carddropdownpanel.add(dropdown3, "foodbutton3");
+		
+		final JPanel dropdown4 = new JPanel();
+		dropdown4.setBackground(Color.GREEN);
+		carddropdownpanel.add(dropdown4, "foodbutton4");
+		
+		final JPanel dropdown5 = new JPanel();
+		dropdown5.setBackground(Color.MAGENTA);
+		carddropdownpanel.add(dropdown5, "foodbutton5");
+		
+		final JPanel dropdown6 = new JPanel();
+		dropdown6.setBackground(Color.BLUE);
+		carddropdownpanel.add(dropdown6, "foodbutton6");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -167,26 +194,122 @@ public class MainFrame extends JFrame {
 		searchstring = new JTextField();
 		searchstring.setText("Search...");
 		searchstring.setColumns(10);
-		
-		JButton btnNewButton = new JButton("k\u00F6tt");
-		
-		JButton btnNewButton_1 = new JButton("fisk");
+
+		JButton foodButton1 = new JButton("k\u00F6tt");
+		foodButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+
+				if (carddropdownpanel.isVisible() && dropdown1.isVisible()) {
+
+					carddropdownpanel.setVisible(false);
+
+				} else {
+					carddropdownpanel.setVisible(true);
+					CardLayout cardLayout = (CardLayout) (carddropdownpanel
+							.getLayout());
+					cardLayout.show(carddropdownpanel, "foodbutton1");
+				}
+			}
+		});
+
+		JButton foodButton2 = new JButton("fisk");
+		foodButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				if (carddropdownpanel.isVisible() && dropdown2.isVisible()) {
+
+					carddropdownpanel.setVisible(false);
+
+				} else {
+					carddropdownpanel.setVisible(true);
+
+					CardLayout cardLayout = (CardLayout) (carddropdownpanel
+							.getLayout());
+					cardLayout.show(carddropdownpanel, "foodbutton2");
+				}
+
+			}
+		});
 		
 		JButton btnNewButton_2 = new JButton("mejeri");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (carddropdownpanel.isVisible() && dropdown3.isVisible()) {
+
+					carddropdownpanel.setVisible(false);
+
+				} else {
+					carddropdownpanel.setVisible(true);
+
+					CardLayout cardLayout = (CardLayout) (carddropdownpanel
+							.getLayout());
+					cardLayout.show(carddropdownpanel, "foodbutton3");
+				}
+
+			
+				
+			}
+		});
 		
 		JButton btnNewButton_3 = new JButton("b\u00E4r");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (carddropdownpanel.isVisible() && dropdown4.isVisible()) {
+
+					carddropdownpanel.setVisible(false);
+
+				} else {
+					carddropdownpanel.setVisible(true);
+
+					CardLayout cardLayout = (CardLayout) (carddropdownpanel
+							.getLayout());
+					cardLayout.show(carddropdownpanel, "foodbutton4");
+				}
+
+			}
+		});
 		
 		JButton btnNewButton_4 = new JButton("n\u00F6tter");
+		btnNewButton_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (carddropdownpanel.isVisible() && dropdown5.isVisible()) {
+
+					carddropdownpanel.setVisible(false);
+
+				} else {
+					carddropdownpanel.setVisible(true);
+
+					CardLayout cardLayout = (CardLayout) (carddropdownpanel
+							.getLayout());
+					cardLayout.show(carddropdownpanel, "foodbutton5");
+				}
+			}
+		});
 		
 		JButton btnNewButton_5 = new JButton("folk\u00F6l");
+		btnNewButton_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (carddropdownpanel.isVisible() && dropdown6.isVisible()) {
+
+					carddropdownpanel.setVisible(false);
+
+				} else {
+					carddropdownpanel.setVisible(true);
+
+					CardLayout cardLayout = (CardLayout) (carddropdownpanel
+							.getLayout());
+					cardLayout.show(carddropdownpanel, "foodbutton6");
+				}
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(foodandsearchpanel);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 					.addGap(6)
-					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+					.addComponent(foodButton1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+					.addComponent(foodButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -205,8 +328,8 @@ public class MainFrame extends JFrame {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnNewButton)
-						.addComponent(btnNewButton_1)
+						.addComponent(foodButton1)
+						.addComponent(foodButton2)
 						.addComponent(btnNewButton_2)
 						.addComponent(btnNewButton_3)
 						.addComponent(btnNewButton_4)
@@ -236,6 +359,18 @@ public class MainFrame extends JFrame {
 		);
 		toppanel.setLayout(gl_toppanel);
 		centercardpanel.setLayout(new CardLayout(0, 0));
+		
+		JPanel varuvy = new JPanel();
+		varuvy.setBackground(Color.YELLOW);
+		centercardpanel.add(varuvy, "name_89197531763174");
+		
+		JPanel registrering = new JPanel();
+		registrering.setBackground(Color.BLUE);
+		centercardpanel.add(registrering, "name_89204269755190");
+		
+		JPanel kundvagn = new JPanel();
+		kundvagn.setBackground(Color.GREEN);
+		centercardpanel.add(kundvagn, "name_89208888451515");
 		contentPane.setLayout(gl_contentPane);
 	}
 }
