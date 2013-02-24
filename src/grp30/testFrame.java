@@ -31,14 +31,12 @@ public class testFrame extends Observable implements Observer{
 	int kk = 0;
 	private JFrame frame;
 	JScrollPane scrollPane;
-	JPanel pinkPanel;
-	JLabel lblMcpenispants;
 	JLabel lblAmount;
 	private final Action action = new HidePinkMenu();
 	private final Action action_1 = new TestBattan();
-	private JTextField txtPotatis;
 	private final Action action_2 = new searchAll();
 	DynamicLabel dnmclblHerro;
+	SlidingPanel slidingPanel;
 
 	/**
 	 * Launch the application.
@@ -88,18 +86,16 @@ public class testFrame extends Observable implements Observer{
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		
-		pinkPanel = new JPanel();
-		pinkPanel.setBackground(Color.PINK);
-		pinkPanel.setVisible(false);
-		
 		scrollPane = new JScrollPane();
 		box = Box.createVerticalBox();
 		scrollPane.setViewportView(box);
+		
+		slidingPanel = new SlidingPanel();
+		slidingPanel.setBackground(Color.ORANGE);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-				.addComponent(pinkPanel, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnB)
@@ -110,14 +106,15 @@ public class testFrame extends Observable implements Observer{
 					.addContainerGap()
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
 					.addContainerGap())
+				.addComponent(slidingPanel, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(pinkPanel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(slidingPanel, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+					.addGap(43)
 					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -126,37 +123,36 @@ public class testFrame extends Observable implements Observer{
 					.addContainerGap())
 		);
 		
-		JButton btnC = new JButton("C 1");
-		btnC.setAction(action_1);
+		JButton btnD = new JButton("D 1");
 		
-		lblMcpenispants = new JLabel("");
+		JButton btnD_1 = new JButton("D 2");
 		
-		txtPotatis = new JTextField();
-		txtPotatis.setText("Potatis");
-		txtPotatis.setColumns(10);
-		GroupLayout gl_pinkPanel = new GroupLayout(pinkPanel);
-		gl_pinkPanel.setHorizontalGroup(
-			gl_pinkPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pinkPanel.createSequentialGroup()
+		JButton btnD_2 = new JButton("D 3");
+		GroupLayout gl_slidingPanel = new GroupLayout(slidingPanel);
+		gl_slidingPanel.setHorizontalGroup(
+			gl_slidingPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_slidingPanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(txtPotatis, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_slidingPanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_slidingPanel.createSequentialGroup()
+							.addComponent(btnD)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnD_2))
+						.addComponent(btnD_1))
+					.addContainerGap(280, Short.MAX_VALUE))
+		);
+		gl_slidingPanel.setVerticalGroup(
+			gl_slidingPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_slidingPanel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_slidingPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnD)
+						.addComponent(btnD_2))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnC)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblMcpenispants)
-					.addContainerGap(154, Short.MAX_VALUE))
+					.addComponent(btnD_1)
+					.addContainerGap(50, Short.MAX_VALUE))
 		);
-		gl_pinkPanel.setVerticalGroup(
-			gl_pinkPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_pinkPanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_pinkPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtPotatis, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnC)
-						.addComponent(lblMcpenispants))
-					.addContainerGap(12, Short.MAX_VALUE))
-		);
-		pinkPanel.setLayout(gl_pinkPanel);
+		slidingPanel.setLayout(gl_slidingPanel);
 		
 		JButton btnA = new JButton("A 1");
 		
@@ -206,7 +202,7 @@ public class testFrame extends Observable implements Observer{
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
-			pinkPanel.setVisible(!pinkPanel.isVisible());
+			slidingPanel.changeState();
 		}
 	}
 	@Override
