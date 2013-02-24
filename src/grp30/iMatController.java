@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 
 public class iMatController extends Observable implements Observer{
@@ -45,8 +46,8 @@ public class iMatController extends Observable implements Observer{
 			else if(arg1 instanceof MatRes) addAsObserver((MatRes) arg1); 
 		}
 		else if(arg0 instanceof MyObservable){
-			Product p = (Product) arg1;
-			m.addToShoppingCart(p);
+			ShoppingItem i = (ShoppingItem) arg1;
+			m.addToShoppingCart(i);
 		}
 		
 	}

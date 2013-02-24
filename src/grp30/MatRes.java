@@ -1,11 +1,13 @@
 package grp30;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.beans.PropertyChangeListener;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -19,9 +21,7 @@ import javax.swing.border.LineBorder;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
-import javax.swing.AbstractAction;
-import java.awt.event.ActionEvent;
-import javax.swing.Action;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 
 public class MatRes extends JPanel implements MouseListener{
@@ -134,8 +134,9 @@ public class MatRes extends JPanel implements MouseListener{
 			putValue(SHORT_DESCRIPTION, "Some short description");
 		}
 		public void actionPerformed(ActionEvent e) {
+			ShoppingItem i = new ShoppingItem(product);
 			observable.setChanged();
-			observable.notifyObservers(product);
+			observable.notifyObservers(i);
 		}
 	}
 }
