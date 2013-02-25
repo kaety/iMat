@@ -1,6 +1,5 @@
 package grp30;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,6 +19,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import cards.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
@@ -32,29 +34,52 @@ public class MainFrame extends JFrame {
 	private JPanel contentPane;
 	private JTextField searchstring;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args){
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
 	public MainFrame() {
 		
-		CardManager cm =new CardManager();
-		JPanel centercardpanel=  CardManager.getCards();
+		JPanel centercardpanel = new JPanel();
+		
+		centercardpanel.setLayout(new CardLayout(0, 0));
+		
+		JPanel startUser = new UserStart();
+		centercardpanel.add(startUser, "startUser");
+		
+		JPanel startGuest = new GuestStart();
+		centercardpanel.add(startGuest, "startGuest");
+		
+		JPanel cart = new ShoppingCart();
+		centercardpanel.add(cart, "cart");
+		
+		JPanel SearchResults = new SearchResults();
+		centercardpanel.add(SearchResults, "searchResults");
+		
+		JPanel pay1 = new Pay1();
+		centercardpanel.add(pay1, "pay1");
+		
+		JPanel pay2 = new Pay2();
+		centercardpanel.add(pay2, "pay2");
+		
+		JPanel pay3 = new Pay3();
+		centercardpanel.add(pay3, "pay3");
+		
+		JPanel register = new Register();
+		centercardpanel.add(register, "register");
+		
+		JPanel confirmed = new ConfirmedBuy();
+		centercardpanel.add(confirmed, "confirmed");
+		
+		JPanel history = new History();
+		centercardpanel.add(history, "history");
+		
+		JPanel receipt = new Receipt();
+		centercardpanel.add(receipt, "receipt");
+		
+		JPanel details = new DetailedFoodView();
+		centercardpanel.add(details, "details");
+		
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,19 +112,19 @@ public class MainFrame extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(foodandsearchpanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(buttonpanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(foodandsearchpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(toppanel, 0, 0, Short.MAX_VALUE)
-								.addComponent(centercardpanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
-								.addComponent(carddropdownpanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(carddropdownpanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(centercardpanel, GroupLayout.PREFERRED_SIZE, 739, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(kundvagnspanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
 								.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))))
-					.addContainerGap(23, Short.MAX_VALUE))
+					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -399,6 +424,7 @@ public class MainFrame extends JFrame {
 					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		toppanel.setLayout(gl_toppanel);
+		
 		
 		
 		

@@ -1,6 +1,7 @@
 package grp30;
 import grp30.MatRes.MyObservable;
 
+import java.awt.EventQueue;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,6 +22,15 @@ public class iMatController extends Observable implements Observer{
 	
 	public static void main(String[] args) {
 		iMatController c = new iMatController();
+		
+				try {
+					MainFrame frame = new MainFrame();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			
+			
 		
 	}
 	

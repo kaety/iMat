@@ -1,0 +1,18 @@
+package cards;
+
+import java.awt.Color;
+
+import javax.swing.JPanel;
+
+public class Receipt extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public Receipt() {
+		
+		setBackground(Color.YELLOW);
+
+	}
+
+}
