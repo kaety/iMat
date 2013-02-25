@@ -52,6 +52,11 @@ public class MainFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		
+		CardManager cm =new CardManager();
+		JPanel centercardpanel=  CardManager.getCards();
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
@@ -68,8 +73,6 @@ public class MainFrame extends JFrame {
 		JPanel buttonpanel = new JPanel();
 		buttonpanel.setBackground(Color.GRAY);
 		
-		JPanel centercardpanel = new JPanel();
-		centercardpanel.setBackground(Color.GRAY);
 		
 		JPanel kundvagnspanel = new JPanel();
 		kundvagnspanel.setBackground(Color.GRAY);
@@ -84,14 +87,14 @@ public class MainFrame extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(foodandsearchpanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(buttonpanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(toppanel, 0, 0, Short.MAX_VALUE)
 								.addComponent(centercardpanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 785, Short.MAX_VALUE)
-								.addComponent(carddropdownpanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(foodandsearchpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(carddropdownpanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addComponent(kundvagnspanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
@@ -103,11 +106,10 @@ public class MainFrame extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(foodandsearchpanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
-						.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
+						.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 63, Short.MAX_VALUE)
+						.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(foodandsearchpanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -270,8 +272,8 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_2 = new JButton("mejeri");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton foodbutton3 = new JButton("mejeri");
+		foodbutton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown3.isVisible()) {
 
@@ -290,8 +292,8 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_3 = new JButton("b\u00E4r");
-		btnNewButton_3.addActionListener(new ActionListener() {
+		JButton foodbutton4 = new JButton("b\u00E4r");
+		foodbutton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown4.isVisible()) {
 
@@ -308,8 +310,8 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_4 = new JButton("n\u00F6tter");
-		btnNewButton_4.addActionListener(new ActionListener() {
+		JButton foodbutton5 = new JButton("n\u00F6tter");
+		foodbutton5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown5.isVisible()) {
 
@@ -325,8 +327,8 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton btnNewButton_5 = new JButton("folk\u00F6l");
-		btnNewButton_5.addActionListener(new ActionListener() {
+		JButton foodbutton6 = new JButton("folk\u00F6l");
+		foodbutton6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown6.isVisible()) {
 
@@ -343,23 +345,23 @@ public class MainFrame extends JFrame {
 		});
 		GroupLayout groupLayout = new GroupLayout(foodandsearchpanel);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(6)
 					.addComponent(foodButton1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+					.addComponent(foodbutton3, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_3, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+					.addComponent(foodbutton4, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_4, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+					.addComponent(foodbutton5, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton_5, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(38, Short.MAX_VALUE))
+					.addComponent(foodbutton6, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -369,10 +371,10 @@ public class MainFrame extends JFrame {
 						.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(foodButton1)
 						.addComponent(foodButton2)
-						.addComponent(btnNewButton_2)
-						.addComponent(btnNewButton_3)
-						.addComponent(btnNewButton_4)
-						.addComponent(btnNewButton_5))
+						.addComponent(foodbutton3)
+						.addComponent(foodbutton4)
+						.addComponent(foodbutton5)
+						.addComponent(foodbutton6))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		foodandsearchpanel.setLayout(groupLayout);
@@ -397,19 +399,9 @@ public class MainFrame extends JFrame {
 					.addContainerGap(26, Short.MAX_VALUE))
 		);
 		toppanel.setLayout(gl_toppanel);
-		centercardpanel.setLayout(new CardLayout(0, 0));
 		
-		JPanel varuvy = new JPanel();
-		varuvy.setBackground(Color.YELLOW);
-		centercardpanel.add(varuvy, "name_89197531763174");
 		
-		JPanel registrering = new JPanel();
-		registrering.setBackground(Color.BLUE);
-		centercardpanel.add(registrering, "name_89204269755190");
 		
-		JPanel kundvagn = new JPanel();
-		kundvagn.setBackground(Color.GREEN);
-		centercardpanel.add(kundvagn, "name_89208888451515");
 		contentPane.setLayout(gl_contentPane);
 	}
 }
