@@ -244,7 +244,7 @@ public class testFrame extends Observable implements Observer{
 	private void displayFoodList(ArrayList<Product> foodlist){
 		boolean b = true;
 		for(Product p : foodlist){
-			MatRes mm = new MatRes(p,b);
+			SearchResultPanel mm = new SearchResultPanel(p,b);
 			setChanged();
 			notifyObservers(mm);
 			box.add(mm);
