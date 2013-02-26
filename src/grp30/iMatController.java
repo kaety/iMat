@@ -11,10 +11,13 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 
 
 public class iMatController extends Observable implements Observer{
-	private static iMatController instance = null;
+	
+	//this should be deleted //Kryztof
+	//private static iMatController instance = null;
 	
 	testFrame t;
 	iMatModel m;
+	MainFrame mf;
 	
 	public iMatController(){
 		init();
@@ -23,22 +26,22 @@ public class iMatController extends Observable implements Observer{
 	public static void main(String[] args) {
 		iMatController c = new iMatController();
 		
-				try {
-					MainFrame frame = new MainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			
-			
-		
-	}
+			}
 	
 	private void init(){
 		t = new testFrame();
 		t.addObserver(this);
 		m = new iMatModel();
 		m.addObserver(t);
+		//trying the Inglorious Bastard Observer pattern on MainFrame
+		mf = new MainFrame();
+		m.addObserver(mf);
+		mf.addObserver(this);
+		
+		
+		
+		
+		
 		}
 	
 	public void testBattanPressed(String input){
@@ -51,7 +54,8 @@ public class iMatController extends Observable implements Observer{
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if(arg0 instanceof testFrame){
+		
+		if(arg0 instanceof testFrame || arg0 instanceof MainFrame){
 			if(arg1 instanceof ButtonPressed) handleGuiPressed((ButtonPressed) arg1);
 			else if(arg1 instanceof MatRes) addAsObserver((MatRes) arg1); 
 		}
@@ -63,9 +67,17 @@ public class iMatController extends Observable implements Observer{
 	}
 	
 	private void handleGuiPressed(ButtonPressed but){
+		
+		
 		if(but.getButtonId().equals("searchFood")) searchFood();
+		else if(but.getButtonId().equals("foodbutton1")) foodButton1();
 	}
 	
+	private void foodButton1() {
+		m.getFoodQuery1();
+		
+	}
+
 	public void addAsObserver(MatRes o){
 		o.addObserver(this);
 	}

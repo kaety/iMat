@@ -1,13 +1,15 @@
 package grp30;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLayeredPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -20,6 +22,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import se.chalmers.ait.dat215.project.Product;
+
 import cards.*;
 
 import java.awt.event.ActionListener;
@@ -28,18 +32,24 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JTextPane;
+import javax.swing.JList;
 
-public class MainFrame extends JFrame {
-
+public class MainFrame extends Observable implements Observer{
+	private JFrame mf;
 	private JPanel contentPane;
 	private JTextField searchstring;
-
-
+	private JList list1;
+	private DefaultListModel<String> model1= new DefaultListModel();
+	private JList list2;
+	private DefaultListModel<String> model2= new DefaultListModel();
+	private int noFood = 0;
+	private boolean ididThis=false;
 	/**
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		
+		mf=new JFrame();
 		JPanel centercardpanel = new JPanel();
 		
 		centercardpanel.setLayout(new CardLayout(0, 0));
@@ -53,8 +63,8 @@ public class MainFrame extends JFrame {
 		JPanel cart = new ShoppingCart();
 		centercardpanel.add(cart, "cart");
 		
-		JPanel SearchResults = new SearchResults();
-		centercardpanel.add(SearchResults, "searchResults");
+		JPanel searchResults = new SearchResults();
+		centercardpanel.add(searchResults, "searchResults");
 		
 		JPanel pay1 = new Pay1();
 		centercardpanel.add(pay1, "pay1");
@@ -82,11 +92,16 @@ public class MainFrame extends JFrame {
 		
 		
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1024, 768);
+		mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mf.setBounds(100, 100, 1024, 768);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+		mf.setContentPane(contentPane);
+		
+		mf.setVisible(true);
+		
+		
+		
 		
 		final JPanel carddropdownpanel = new JPanel();
 		carddropdownpanel.setBackground(Color.PINK);
@@ -112,19 +127,20 @@ public class MainFrame extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(foodandsearchpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(toppanel, 0, 0, Short.MAX_VALUE)
-								.addComponent(carddropdownpanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(centercardpanel, GroupLayout.PREFERRED_SIZE, 739, GroupLayout.PREFERRED_SIZE))
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(kundvagnspanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-								.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))))
-					.addContainerGap(21, Short.MAX_VALUE))
+							.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
+						.addComponent(foodandsearchpanel, 0, 0, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(toppanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(kundvagnspanel, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -136,11 +152,11 @@ public class MainFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodandsearchpanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
+							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 486, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addComponent(buttonpanel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
@@ -151,6 +167,43 @@ public class MainFrame extends JFrame {
 		final JPanel dropdown1 = new JPanel();
 		dropdown1.setBackground(Color.PINK);
 		carddropdownpanel.add(dropdown1, "foodbutton1");
+		
+		
+		//testing
+		list1 = new JList(model1);
+		
+		JLabel label = new JLabel("K\u00F6tt");
+		
+		list2 = new JList(model2);
+		
+		JLabel lblFisk = new JLabel("Fisk");
+		GroupLayout gl_dropdown1 = new GroupLayout(dropdown1);
+		gl_dropdown1.setHorizontalGroup(
+			gl_dropdown1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_dropdown1.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dropdown1.createParallelGroup(Alignment.LEADING)
+						.addComponent(label)
+						.addComponent(list1, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(gl_dropdown1.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblFisk)
+						.addComponent(list2, GroupLayout.PREFERRED_SIZE, 222, GroupLayout.PREFERRED_SIZE))
+					.addGap(370))
+		);
+		gl_dropdown1.setVerticalGroup(
+			gl_dropdown1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_dropdown1.createSequentialGroup()
+					.addGroup(gl_dropdown1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(label)
+						.addComponent(lblFisk))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_dropdown1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(list1, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+						.addComponent(list2, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+					.addContainerGap(58, Short.MAX_VALUE))
+		);
+		dropdown1.setLayout(gl_dropdown1);
 		
 		final JPanel dropdown2 = new JPanel();
 		dropdown2.setBackground(Color.RED);
@@ -261,7 +314,7 @@ public class MainFrame extends JFrame {
 		searchstring.setText("Search...");
 		searchstring.setColumns(10);
 
-		JButton foodButton1 = new JButton("k\u00F6tt");
+		JButton foodButton1 = new JButton("K\u00F6tt & Fisk");
 		foodButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -274,11 +327,21 @@ public class MainFrame extends JFrame {
 					CardLayout cardLayout = (CardLayout) (carddropdownpanel
 							.getLayout());
 					cardLayout.show(carddropdownpanel, "foodbutton1");
+					//notify observer that foodbutton1 was pressed
+					if(noFood==0){
+						noFood++;
+					ButtonPressed b = new ButtonPressed("foodbutton1");
+					setChanged();
+					ididThis=true;
+					notifyObservers(b);
+					
+					
+					}
 				}
 			}
 		});
 
-		JButton foodButton2 = new JButton("fisk");
+		JButton foodButton2 = new JButton("Frukt & Gr\u00F6nsaker");
 		foodButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -297,7 +360,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton foodbutton3 = new JButton("mejeri");
+		JButton foodbutton3 = new JButton("Mejeri");
 		foodbutton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown3.isVisible()) {
@@ -317,7 +380,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton foodbutton4 = new JButton("b\u00E4r");
+		JButton foodbutton4 = new JButton("Dryck");
 		foodbutton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown4.isVisible()) {
@@ -335,7 +398,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton foodbutton5 = new JButton("n\u00F6tter");
+		JButton foodbutton5 = new JButton("Basvaror");
 		foodbutton5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown5.isVisible()) {
@@ -352,7 +415,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		JButton foodbutton6 = new JButton("folk\u00F6l");
+		JButton foodbutton6 = new JButton("\u00D6vrigt");
 		foodbutton6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown6.isVisible()) {
@@ -373,18 +436,18 @@ public class MainFrame extends JFrame {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(6)
-					.addComponent(foodButton1, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
+					.addComponent(foodButton1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodButton2, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+					.addComponent(foodButton2, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodbutton3, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(foodbutton5, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodbutton4, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodbutton5, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodbutton6, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 222, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
 					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
@@ -393,13 +456,13 @@ public class MainFrame extends JFrame {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(foodButton1)
 						.addComponent(foodButton2)
+						.addComponent(foodbutton5)
 						.addComponent(foodbutton3)
 						.addComponent(foodbutton4)
-						.addComponent(foodbutton5)
-						.addComponent(foodbutton6))
+						.addComponent(foodbutton6)
+						.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		foodandsearchpanel.setLayout(groupLayout);
@@ -429,5 +492,27 @@ public class MainFrame extends JFrame {
 		
 		
 		contentPane.setLayout(gl_contentPane);
+	}
+
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if(arg1 instanceof ArrayList<?> && arg0 instanceof iMatModel && ididThis){
+			setFood(arg1);
+			ididThis=false;
+		}
+		
+	}
+
+
+	private void setFood(Object arg1) {
+		int foodCounter =1;
+		ArrayList<String> names=(ArrayList<String>) arg1;
+		for(String s :names){
+			if(foodCounter<7)model1.addElement(s);
+			else	model2.addElement(s);
+			foodCounter++;
+		}
+		
 	}
 }

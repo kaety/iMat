@@ -37,6 +37,9 @@ public class testFrame extends Observable implements Observer{
 	private final Action action_2 = new searchAll();
 	DynamicLabel dnmclblHerro;
 	SlidingPanel slidingPanel;
+	
+	//
+	private boolean ididThis=false;
 
 	/**
 	 * Launch the application.
@@ -207,8 +210,10 @@ public class testFrame extends Observable implements Observer{
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		if(arg instanceof ArrayList<?>) displayFoodList((ArrayList<Product>) arg);
+		//conflict with update in mainframe both get the notify
+		if(arg instanceof ArrayList<?> && ididThis) displayFoodList((ArrayList<Product>) arg);
 		else if(arg instanceof ShoppingCart) newPurchase(IMatDataHandler.getInstance().getShoppingCart());
+		ididThis=false;
 	}
 	private class TestBattan extends AbstractAction {
 		public TestBattan() {
@@ -232,7 +237,9 @@ public class testFrame extends Observable implements Observer{
 	private void searchFood(){
 		ButtonPressed b = new ButtonPressed("searchFood");
 		setChanged();
+		ididThis=true;
 		notifyObservers(b);
+		
 	}
 	
 	private void newPurchase(ShoppingCart sc){
@@ -247,6 +254,7 @@ public class testFrame extends Observable implements Observer{
 			MatRes mm = new MatRes(p,b);
 			setChanged();
 			notifyObservers(mm);
+			
 			box.add(mm);
 			b = !b;
 		}
