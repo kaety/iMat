@@ -42,6 +42,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	final protected int imageDimension = 100;
 	JComboBox comboBox;
 	JPanel middlePanel;
+	JLabel lblPrice;
 
 	public SearchResultPanel(Product p, boolean lightPanel) {
 		product = p;
@@ -59,16 +60,15 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		
 		middlePanel = new JPanel();
 		
-		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(imagePanel, GroupLayout.PREFERRED_SIZE, 123, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(middlePanel, GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(selectorPanel, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
+					.addComponent(middlePanel, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(selectorPanel, GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -77,27 +77,43 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(middlePanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-						.addComponent(selectorPanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+						.addComponent(selectorPanel, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 86, Short.MAX_VALUE)
+						.addComponent(middlePanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		middlePanel.setLayout(new BorderLayout(0, 0));
 		JLabel lblFood = new JLabel(p.getName());
-		lblFood.setFont(new Font("Tahoma", Font.BOLD, 15));
-		middlePanel.add(lblFood, BorderLayout.WEST);
-		
-		JLabel lblPrice = new JLabel("price");
-		middlePanel.add(lblPrice, BorderLayout.EAST);
+		lblFood.setFont(new Font("Tahoma", Font.BOLD, 18));
 		middlePanel.setBackground(panelColor);
+		GroupLayout gl_middlePanel = new GroupLayout(middlePanel);
+		gl_middlePanel.setHorizontalGroup(
+			gl_middlePanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_middlePanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblFood)
+					.addContainerGap(61, Short.MAX_VALUE))
+		);
+		gl_middlePanel.setVerticalGroup(
+			gl_middlePanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_middlePanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblFood)
+					.addContainerGap(56, Short.MAX_VALUE))
+		);
+		middlePanel.setLayout(gl_middlePanel);
 		btnBattan = new JButton("battan");
 		btnBattan.setAction(action);
 		comboBox = new JComboBox();
 		initCombobox();
+		
+		lblPrice = new JLabel(product.getPrice() + " " +  product.getUnit());
+		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout gl_selectorPanel = new GroupLayout(selectorPanel);
 		gl_selectorPanel.setHorizontalGroup(
 			gl_selectorPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_selectorPanel.createSequentialGroup()
-					.addContainerGap(131, Short.MAX_VALUE)
+					.addContainerGap(116, Short.MAX_VALUE)
+					.addComponent(lblPrice)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnBattan)
@@ -108,9 +124,10 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 				.addGroup(gl_selectorPanel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_selectorPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBattan)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(264, Short.MAX_VALUE))
+						.addComponent(lblPrice, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(52, Short.MAX_VALUE))
 		);
 		selectorPanel.setLayout(gl_selectorPanel);
 		JLabel lblImage = new JLabel(icon);
