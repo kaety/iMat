@@ -37,6 +37,7 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JTextPane;
 import javax.swing.JList;
+import javax.swing.ListModel;
 
 public class MainFrame extends Observable implements Observer{
 	private JFrame mf;
@@ -62,6 +63,7 @@ public class MainFrame extends Observable implements Observer{
 	private DefaultListModel<String> model18;
 	private DefaultListModel<String> model19;
 	private DefaultListModel<String> model20;
+	private DefaultListModel<String> model21;
 
 
 	
@@ -90,6 +92,7 @@ public class MainFrame extends Observable implements Observer{
 		model18= new DefaultListModel();
 		model19= new DefaultListModel();
 		model20= new DefaultListModel();
+		model21= new DefaultListModel();
 		
 		fillMyListsUp();
 		
@@ -173,16 +176,16 @@ public class MainFrame extends Observable implements Observer{
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, 978, Short.MAX_VALUE)
+						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 794, Short.MAX_VALUE))
+								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
 						.addComponent(foodandsearchpanel, 0, 0, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
@@ -199,10 +202,10 @@ public class MainFrame extends Observable implements Observer{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 205, GroupLayout.PREFERRED_SIZE)
+							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 208, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(centercardpanel, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE))
+							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
 					.addGap(18)
 					.addComponent(buttonpanel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
@@ -356,56 +359,193 @@ public class MainFrame extends Observable implements Observer{
 		final JPanel dropdown3 = new JPanel();
 		dropdown3.setBackground(Color.ORANGE);
 		carddropdownpanel.add(dropdown3, "foodbutton3");
+		
+		JList list11 = new JList(model11);
+		
+		JLabel lblMejeriprodukter = new JLabel("Mejeriprodukter");
 		GroupLayout gl_dropdown3 = new GroupLayout(dropdown3);
 		gl_dropdown3.setHorizontalGroup(
 			gl_dropdown3.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 794, Short.MAX_VALUE)
+				.addGroup(gl_dropdown3.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dropdown3.createParallelGroup(Alignment.LEADING)
+						.addComponent(list11, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblMejeriprodukter))
+					.addContainerGap(785, Short.MAX_VALUE))
 		);
 		gl_dropdown3.setVerticalGroup(
 			gl_dropdown3.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 205, Short.MAX_VALUE)
+				.addGroup(gl_dropdown3.createSequentialGroup()
+					.addGap(5)
+					.addComponent(lblMejeriprodukter)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(list11, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		dropdown3.setLayout(gl_dropdown3);
 		
 		final JPanel dropdown4 = new JPanel();
 		dropdown4.setBackground(Color.GREEN);
 		carddropdownpanel.add(dropdown4, "foodbutton4");
+		
+		JList list12 = new JList(model12);
+		
+		JLabel lblBrd = new JLabel("Br\u00F6d");
+		
+		JList list13 = new JList(model13);
+		
+		JLabel lblMjlsockerSalt = new JLabel("Mj\u00F6l, Socker & Salt");
+		
+		JList list14 = new JList(model14);
+		
+		JLabel lblNewLabel_5 = new JLabel("Pasta");
+		
+		JList list15 = new JList(model15);
+		
+		JLabel lblPotatisRis = new JLabel("Potatis & Ris");
+		
+		JList list16 = new JList(model16);
+		
+		JLabel lblrter_1 = new JLabel("\u00D6rter");
 		GroupLayout gl_dropdown4 = new GroupLayout(dropdown4);
 		gl_dropdown4.setHorizontalGroup(
 			gl_dropdown4.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 794, Short.MAX_VALUE)
+				.addGroup(gl_dropdown4.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dropdown4.createParallelGroup(Alignment.LEADING)
+						.addComponent(list12, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblBrd))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_dropdown4.createParallelGroup(Alignment.LEADING)
+						.addComponent(list13, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblMjlsockerSalt))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_dropdown4.createParallelGroup(Alignment.LEADING)
+						.addComponent(list14, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel_5))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_dropdown4.createParallelGroup(Alignment.LEADING)
+						.addComponent(list15, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblPotatisRis))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_dropdown4.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblrter_1)
+						.addComponent(list16, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(353, Short.MAX_VALUE))
 		);
 		gl_dropdown4.setVerticalGroup(
-			gl_dropdown4.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 205, Short.MAX_VALUE)
+			gl_dropdown4.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_dropdown4.createSequentialGroup()
+					.addGap(4)
+					.addGroup(gl_dropdown4.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblBrd)
+						.addComponent(lblMjlsockerSalt)
+						.addComponent(lblNewLabel_5)
+						.addComponent(lblPotatisRis)
+						.addComponent(lblrter_1))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_dropdown4.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_dropdown4.createParallelGroup(Alignment.BASELINE)
+							.addComponent(list14, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+							.addComponent(list15, GroupLayout.PREFERRED_SIZE, 170, GroupLayout.PREFERRED_SIZE)
+							.addComponent(list16, GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+						.addGroup(Alignment.TRAILING, gl_dropdown4.createParallelGroup(Alignment.BASELINE)
+							.addComponent(list12, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+							.addComponent(list13, GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		dropdown4.setLayout(gl_dropdown4);
 		
 		final JPanel dropdown5 = new JPanel();
 		dropdown5.setBackground(Color.MAGENTA);
 		carddropdownpanel.add(dropdown5, "foodbutton5");
+		
+		JList list17 = new JList(model17);
+		
+		JList list18 = new JList(model18);
+		
+		JLabel lblKallaDrycker = new JLabel("Kylda Drycker");
+		
+		JLabel lblVarmaDrycker = new JLabel("Varma Drycker");
 		GroupLayout gl_dropdown5 = new GroupLayout(dropdown5);
 		gl_dropdown5.setHorizontalGroup(
 			gl_dropdown5.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 794, Short.MAX_VALUE)
+				.addGroup(gl_dropdown5.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dropdown5.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblKallaDrycker)
+						.addComponent(list17, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_dropdown5.createParallelGroup(Alignment.LEADING)
+						.addComponent(list18, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblVarmaDrycker))
+					.addContainerGap(734, Short.MAX_VALUE))
 		);
 		gl_dropdown5.setVerticalGroup(
-			gl_dropdown5.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 205, Short.MAX_VALUE)
+			gl_dropdown5.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_dropdown5.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dropdown5.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblKallaDrycker)
+						.addComponent(lblVarmaDrycker))
+					.addPreferredGap(ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+					.addGroup(gl_dropdown5.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(list17, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(list18, GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+					.addGap(31))
 		);
 		dropdown5.setLayout(gl_dropdown5);
 		
 		final JPanel dropdown6 = new JPanel();
-		dropdown6.setBackground(Color.BLUE);
+		dropdown6.setBackground(Color.WHITE);
 		carddropdownpanel.add(dropdown6, "foodbutton6");
+		
+		JList list19 = new JList(model19);
+		
+		JList list20 = new JList(model20);
+		
+		JList list21 = new JList(model21);
+		
+		JLabel lblNtterFrn = new JLabel("N\u00F6tter & Fr\u00F6n");
+		
+		JLabel Sött = new JLabel("New label");
+		
+		JLabel lblrtorBnor = new JLabel("\u00C4rtor & B\u00F6nor");
 		GroupLayout gl_dropdown6 = new GroupLayout(dropdown6);
 		gl_dropdown6.setHorizontalGroup(
 			gl_dropdown6.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 794, Short.MAX_VALUE)
+				.addGroup(gl_dropdown6.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dropdown6.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNtterFrn)
+						.addComponent(list19, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_dropdown6.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_dropdown6.createSequentialGroup()
+							.addComponent(lblrtorBnor)
+							.addGap(50))
+						.addGroup(gl_dropdown6.createSequentialGroup()
+							.addComponent(list20, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)))
+					.addGroup(gl_dropdown6.createParallelGroup(Alignment.LEADING)
+						.addComponent(Sött)
+						.addComponent(list21, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(616, Short.MAX_VALUE))
 		);
 		gl_dropdown6.setVerticalGroup(
-			gl_dropdown6.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 205, Short.MAX_VALUE)
+			gl_dropdown6.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_dropdown6.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_dropdown6.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNtterFrn)
+						.addComponent(Sött)
+						.addComponent(lblrtorBnor))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_dropdown6.createParallelGroup(Alignment.BASELINE)
+						.addComponent(list19, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+						.addComponent(list20, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
+						.addComponent(list21, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap())
 		);
 		dropdown6.setLayout(gl_dropdown6);
 		
@@ -558,13 +698,13 @@ public class MainFrame extends Observable implements Observer{
 		JButton foodbutton4 = new JButton("Dryck");
 		foodbutton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (dropdown4.isVisible()) {
+				if (dropdown5.isVisible()) {
 					carddropdownpanel.changeState();
 				} else {
 
 					CardLayout cardLayout = (CardLayout) (carddropdownpanel
 							.getLayout());
-					cardLayout.show(carddropdownpanel, "foodbutton4");
+					cardLayout.show(carddropdownpanel, "foodbutton5");
 					
 				}
 
@@ -574,14 +714,14 @@ public class MainFrame extends Observable implements Observer{
 		JButton foodbutton5 = new JButton("Basvaror");
 		foodbutton5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (dropdown5.isVisible()) {
+				if (dropdown4.isVisible()) {
 					carddropdownpanel.changeState();
 
 				} else {
 
 					CardLayout cardLayout = (CardLayout) (carddropdownpanel
 							.getLayout());
-					cardLayout.show(carddropdownpanel, "foodbutton5");
+					cardLayout.show(carddropdownpanel, "foodbutton4");
 					
 				}
 			}
@@ -683,6 +823,18 @@ public class MainFrame extends Observable implements Observer{
 		addToModel("VEGETABLE_FRUIT",model8);
 		addToModel("MELONS",model9);
 		addToModel("ROOT_VEGETABLE",model10);
+		addToModel("DAIRIES",model11);
+		addToModel("BREAD",model12);
+		addToModel("FLOUR_SUGAR_SALT",model13);
+		addToModel("PASTA",model14);
+		addToModel("POTATO_RICE",model15);
+		addToModel("HERB",model16);
+		addToModel("COLD_DRINKS",model17);
+		addToModel("HOT_DRINKS",model18);
+		addToModel("NUTS_AND_SEEDS",model19);
+		addToModel("POD",model20);
+		addToModel("SWEET",model21);
+		
 	}
 	
 	public void addToModel(String category, DefaultListModel model){
