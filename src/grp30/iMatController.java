@@ -1,9 +1,11 @@
 package grp30;
-import grp30.SearchResultPanel.MyObservable;
 
 import java.awt.EventQueue;
 import java.util.Observable;
 import java.util.Observer;
+
+import SpecialPanels.SearchResultPanel;
+import SpecialPanels.SearchResultPanel.MyObservable;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;

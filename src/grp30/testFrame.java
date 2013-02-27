@@ -26,6 +26,9 @@ import se.chalmers.ait.dat215.project.ShoppingCart;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 
+import SpecialPanels.SearchResultPanel;
+import SpecialPanels.SlidingPanel;
+
 public class testFrame extends Observable implements Observer{
 	Box box;
 	int kk = 0;

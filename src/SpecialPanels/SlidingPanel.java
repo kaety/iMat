@@ -1,4 +1,4 @@
-package grp30;
+package SpecialPanels;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
