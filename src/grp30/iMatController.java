@@ -36,9 +36,9 @@ public class iMatController extends Observable implements Observer{
 		m = new iMatModel();
 		m.addObserver(t);
 		//trying the Inglorious Bastard Observer pattern on MainFrame
-		mf = new MainFrame();
-		m.addObserver(mf);
-		mf.addObserver(this);
+//		mf = new MainFrame();
+//		m.addObserver(mf);
+//		mf.addObserver(this);
 		}
 	
 	public void testBattanPressed(String input){
