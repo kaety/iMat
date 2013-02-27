@@ -24,7 +24,7 @@ import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 
 
-public class MatRes extends JPanel implements MouseListener{
+public class SearchResultPanel extends JPanel implements MouseListener{
 	/**
 	 * Create the panel.
 	 */
@@ -33,7 +33,7 @@ public class MatRes extends JPanel implements MouseListener{
 	private Product product;
 	JButton btnBattan;
 
-	public MatRes(Product p, boolean lightPanel) {
+	public SearchResultPanel(Product p, boolean lightPanel) {
 		product = p;
 		setBorder(new LineBorder(new Color(0, 0, 0)));
 		if(lightPanel) panelColor = Color.LIGHT_GRAY;

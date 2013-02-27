@@ -1,5 +1,5 @@
 package grp30;
-import grp30.MatRes.MyObservable;
+import grp30.SearchResultPanel.MyObservable;
 
 import java.awt.EventQueue;
 import java.util.Observable;
@@ -57,7 +57,7 @@ public class iMatController extends Observable implements Observer{
 		
 		if(arg0 instanceof testFrame || arg0 instanceof MainFrame){
 			if(arg1 instanceof ButtonPressed) handleGuiPressed((ButtonPressed) arg1);
-			else if(arg1 instanceof MatRes) addAsObserver((MatRes) arg1); 
+			else if(arg1 instanceof SearchResultPanel) addAsObserver((SearchResultPanel) arg1); 
 		}
 		else if(arg0 instanceof MyObservable){
 			ShoppingItem i = (ShoppingItem) arg1;
@@ -73,12 +73,15 @@ public class iMatController extends Observable implements Observer{
 		else if(but.getButtonId().equals("foodbutton1")) foodButton1();
 	}
 	
+
 	private void foodButton1() {
 		m.getFoodQuery1();
 		
 	}
 
-	public void addAsObserver(MatRes o){
+
+
+	public void addAsObserver(SearchResultPanel o){
 		o.addObserver(this);
 	}
 	
