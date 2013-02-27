@@ -22,7 +22,7 @@ public class SearchScrollPane extends JPanel {
 		box = Box.createVerticalBox();
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(box);
-		
+		scrollPane.getVerticalScrollBar().setUnitIncrement(16);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		GroupLayout groupLayout = new GroupLayout(this);
