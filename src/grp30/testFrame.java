@@ -28,12 +28,11 @@ import javax.swing.AbstractListModel;
 
 import SpecialPanels.SearchResultPanel;
 import SpecialPanels.SlidingPanel;
+import SpecialPanels.SearchScrollPane;
 
 public class testFrame extends Observable implements Observer{
-	Box box;
 	int kk = 0;
 	private JFrame frame;
-	JScrollPane scrollPane;
 	JLabel lblAmount;
 	private final Action action = new HidePinkMenu();
 	private final Action action_1 = new TestBattan();
@@ -75,7 +74,7 @@ public class testFrame extends Observable implements Observer{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 399);
+		frame.setBounds(100, 100, 617, 560);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Integer[] derp = {1,2,3};
 		
@@ -92,42 +91,8 @@ public class testFrame extends Observable implements Observer{
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.LIGHT_GRAY);
 		
-		scrollPane = new JScrollPane();
-		box = Box.createVerticalBox();
-		scrollPane.setViewportView(box);
-		
 		slidingPanel = new SlidingPanel();
 		slidingPanel.setBackground(Color.ORANGE);
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-				.addComponent(slidingPanel, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(btnB)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnB_1)
-					.addContainerGap(200, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(slidingPanel, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnB)
-						.addComponent(btnB_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addContainerGap())
-		);
 		
 		JButton btnD = new JButton("D 1");
 		
@@ -200,6 +165,38 @@ public class testFrame extends Observable implements Observer{
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
+		
+		SearchScrollPane searchScrollPane = new SearchScrollPane();
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(btnB)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnB_1)
+					.addGap(506))
+				.addComponent(slidingPanel, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+				.addComponent(panel, GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(slidingPanel, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnB)
+						.addComponent(btnB_1))
+					.addContainerGap())
+		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 	private class HidePinkMenu extends AbstractAction {
@@ -252,15 +249,7 @@ public class testFrame extends Observable implements Observer{
 	}
 	
 	private void displayFoodList(ArrayList<Product> foodlist){
-		boolean b = true;
-		for(Product p : foodlist){
-			SearchResultPanel mm = new SearchResultPanel(p,b);
-			setChanged();
-			notifyObservers(mm);
-			
-			box.add(mm);
-			b = !b;
-		}
-		scrollPane.validate();
+
+
 	}
 }

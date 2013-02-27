@@ -11,13 +11,15 @@ import javax.swing.JLabel;
 
 public class SmallPanel extends JPanel {
 	Color panelColor;
-	private final Color highLightColor = Color.WHITE;
+	private final Color highLightColor = Color.WHITE; //The color when mouse hover
+	private final Color lightColor = Color.PINK;      //Light striping color
+	private final Color darkColor = Color.CYAN;		  //Dark -||-
 	/**
 	 * Create the panel.
 	 */
 	public SmallPanel(boolean light) {
-		if(light) setBackground(Color.PINK);
-		else setBackground(Color.cyan);
+		if(light) setBackground(lightColor);
+		else setBackground(darkColor);
 		
 		JButton btnA = new JButton("A 1");
 		
