@@ -22,7 +22,9 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ProductCategory;
 
 import cards.*;
 
@@ -44,7 +46,6 @@ public class MainFrame extends Observable implements Observer{
 	private JList list2;
 	private DefaultListModel<String> model2= new DefaultListModel();
 	private int noFood = 0;
-	private boolean ididThis=false;
 	/**
 	 * Create the frame.
 	 */
@@ -317,7 +318,8 @@ public class MainFrame extends Observable implements Observer{
 		JButton foodButton1 = new JButton("K\u00F6tt & Fisk");
 		foodButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
+				List<Product> food1= new ArrayList<Product>();
+				List<Product> food2= new ArrayList<Product>();
 				if (carddropdownpanel.isVisible() && dropdown1.isVisible()) {
 
 					carddropdownpanel.setVisible(false);
@@ -327,15 +329,21 @@ public class MainFrame extends Observable implements Observer{
 					CardLayout cardLayout = (CardLayout) (carddropdownpanel
 							.getLayout());
 					cardLayout.show(carddropdownpanel, "foodbutton1");
-					//notify observer that foodbutton1 was pressed
 					if(noFood==0){
 						noFood++;
-					ButtonPressed b = new ButtonPressed("foodbutton1");
-					setChanged();
-					ididThis=true;
-					notifyObservers(b);
+					ProductCategory meat = ProductCategory.valueOf("MEAT");
+					ProductCategory fish = ProductCategory.valueOf("FISH");
 					
+					food1.addAll(IMatDataHandler.getInstance().getProducts(meat));
+					food2.addAll(IMatDataHandler.getInstance().getProducts(fish));
+					}
+				
+					for(Product p: food1){
+						model1.addElement(p.getName());
+					}
 					
+					for(Product p: food2){
+						model2.addElement(p.getName());
 					}
 				}
 			}
@@ -497,22 +505,12 @@ public class MainFrame extends Observable implements Observer{
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		if(arg1 instanceof ArrayList<?> && arg0 instanceof iMatModel && ididThis){
-			setFood(arg1);
-			ididThis=false;
-		}
+		
+		
 		
 	}
 
 
-	private void setFood(Object arg1) {
-		int foodCounter =1;
-		ArrayList<String> names=(ArrayList<String>) arg1;
-		for(String s :names){
-			if(foodCounter<7)model1.addElement(s);
-			else	model2.addElement(s);
-			foodCounter++;
-		}
 		
-	}
+	
 }

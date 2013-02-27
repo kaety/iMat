@@ -70,14 +70,9 @@ public class iMatController extends Observable implements Observer{
 		
 		
 		if(but.getButtonId().equals("searchFood")) searchFood();
-		else if(but.getButtonId().equals("foodbutton1")) foodButton1();
 	}
 	
 
-	private void foodButton1() {
-		m.getFoodQuery1();
-		
-	}
 
 
 
