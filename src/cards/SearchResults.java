@@ -11,7 +11,7 @@ public class SearchResults extends JPanel {
 	 */
 	public SearchResults() {
 		
-		setBackground(Color.YELLOW);
+		setBackground(Color.BLACK);
 
 	}
 

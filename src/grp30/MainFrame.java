@@ -26,7 +26,7 @@ import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
 
 import SpecialPanels.SlidingPanel;
-import cards.*;
+
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -37,6 +37,24 @@ import java.awt.event.FocusEvent;
 import javax.swing.JTextPane;
 import javax.swing.JList;
 import javax.swing.ListModel;
+
+import cards.ConfirmedBuy;
+import cards.DetailedFoodView;
+import cards.GuestStart;
+import cards.History;
+import cards.Pay1;
+import cards.Pay2;
+import cards.Pay3;
+import cards.Receipt;
+import cards.Register;
+import cards.SearchResults;
+import cards.ShoppingCart;
+import cards.UserStart;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.ListSelectionEvent;
+
+
+
 
 public class MainFrame extends Observable implements Observer{
 	private JFrame mf;
@@ -96,14 +114,14 @@ public class MainFrame extends Observable implements Observer{
 		fillMyListsUp();
 		
 		mf=new JFrame();
-		JPanel centercardpanel = new JPanel();
+		final JPanel centercardpanel = new JPanel();
 		
 		centercardpanel.setLayout(new CardLayout(0, 0));
 		
-		JPanel startUser = new UserStart();
+		UserStart startUser = new UserStart();
 		centercardpanel.add(startUser, "startUser");
-		
-		JPanel startGuest = new GuestStart();
+	
+		GuestStart startGuest = new GuestStart();
 		centercardpanel.add(startGuest, "startGuest");
 		
 		JPanel cart = new ShoppingCart();
@@ -215,13 +233,54 @@ public class MainFrame extends Observable implements Observer{
 		dropdown1.setBackground(Color.PINK);
 		carddropdownpanel.add(dropdown1, "foodbutton1");
 		
+		final CardLayout cardLayout = (CardLayout) (centercardpanel
+				.getLayout());
 		
 		
-		JList list1 = new JList(model1);
+		
+		final JList list1 = new JList(model1);
+		list1.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list1.clearSelection();
+			}
+		});
+	
+		list1.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list1.isSelectionEmpty() ){
+				
+				name= (String) list1.getSelectedValue();
+				
+				cardLayout.show(centercardpanel, "details");
+				System.out.println("SELECTED: "+name);
+				}
+			}
+		});
 		
 		JLabel label = new JLabel("K\u00F6tt");
 		
-		JList list2 = new JList(model2);
+		final JList list2 = new JList(model2);
+		list2.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list2.clearSelection();
+			}
+		});
+	
+		list2.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list2.isSelectionEmpty() ){
+				
+				name= (String) list2.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblFisk = new JLabel("Fisk");
 		GroupLayout gl_dropdown1 = new GroupLayout(dropdown1);
@@ -256,19 +315,112 @@ public class MainFrame extends Observable implements Observer{
 		dropdown2.setBackground(Color.RED);
 		carddropdownpanel.add(dropdown2, "foodbutton2");
 		
-		JList list3 = new JList(model3);
+		final JList list3 = new JList(model3);
+		list3.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list3.clearSelection();
+			}
+		});
+	
+		list3.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list3.isSelectionEmpty() ){
+				
+				name= (String) list3.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblKl = new JLabel("K\u00E5l");
 		
 		JLabel lblCitrusfrukt = new JLabel("Citrusfrukter");
 		
-		JList list4 = new JList(model4);
+		final JList list4 = new JList(model4);
+		list4.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list4.clearSelection();
+			}
+		});
+	
+		list4.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list4.isSelectionEmpty() ){
+				
+				name= (String) list4.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
-		JList list5 = new JList(model5);
+		final JList list5 = new JList(model5);
+		list5.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list5.clearSelection();
+			}
+		});
+	
+		list5.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list5.isSelectionEmpty() ){
+				
+				name= (String) list5.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
-		JList list6 = new JList(model6);
+		final JList list6 = new JList(model6);
+		list6.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list6.clearSelection();
+			}
+		});
+	
+		list6.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list6.isSelectionEmpty() ){
+				
+				name= (String) list6.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
-		JList list7 = new JList(model7);
+		final JList list7 = new JList(model7);
+		list7.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list7.clearSelection();
+			}
+		});
+	
+		list7.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list7.isSelectionEmpty() ){
+				
+				name= (String) list7.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblNewLabel_1 = new JLabel("B\u00E4r");
 		
@@ -276,15 +428,69 @@ public class MainFrame extends Observable implements Observer{
 		
 		JLabel lblNewLabel_3 = new JLabel("Frukt");
 		
-		JList list8 = new JList(model8);
+		final JList list8 = new JList(model8);
+		list8.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list8.clearSelection();
+			}
+		});
+	
+		list8.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list8.isSelectionEmpty() ){
+				
+				name= (String) list8.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblrter = new JLabel("Gr\u00F6nsaker");
 		
-		JList list9 = new JList(model9);
+		final JList list9 = new JList(model9);
+		list9.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list9.clearSelection();
+			}
+		});
+	
+		list9.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list9.isSelectionEmpty() ){
+				
+				name= (String) list9.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblNewLabel_4 = new JLabel("Meloner");
 		
-		JList list10 = new JList(model10);
+		final JList list10 = new JList(model10);
+		list10.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list10.clearSelection();
+			}
+		});
+	
+		list10.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list10.isSelectionEmpty() ){
+				
+				name= (String) list10.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblRotfrukter = new JLabel("Rotfrukter");
 		GroupLayout gl_dropdown2 = new GroupLayout(dropdown2);
@@ -359,7 +565,25 @@ public class MainFrame extends Observable implements Observer{
 		dropdown3.setBackground(Color.ORANGE);
 		carddropdownpanel.add(dropdown3, "foodbutton3");
 		
-		JList list11 = new JList(model11);
+		final JList list11 = new JList(model11);
+		list11.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list11.clearSelection();
+			}
+		});
+	
+		list11.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list11.isSelectionEmpty() ){
+				
+				name= (String) list11.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblMejeriprodukter = new JLabel("Mejeriprodukter");
 		GroupLayout gl_dropdown3 = new GroupLayout(dropdown3);
@@ -387,23 +611,113 @@ public class MainFrame extends Observable implements Observer{
 		dropdown4.setBackground(Color.GREEN);
 		carddropdownpanel.add(dropdown4, "foodbutton4");
 		
-		JList list12 = new JList(model12);
+		final JList list12 = new JList(model12);
+		list12.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list12.clearSelection();
+			}
+		});
+	
+		list12.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list12.isSelectionEmpty() ){
+				
+				name= (String) list12.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblBrd = new JLabel("Br\u00F6d");
 		
-		JList list13 = new JList(model13);
+		final JList list13 = new JList(model13);
+		list13.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list13.clearSelection();
+			}
+		});
+	
+		list13.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list13.isSelectionEmpty() ){
+				
+				name= (String) list13.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblMjlsockerSalt = new JLabel("Mj\u00F6l, Socker & Salt");
 		
-		JList list14 = new JList(model14);
+		final JList list14 = new JList(model14);
+		list14.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list14.clearSelection();
+			}
+		});
+	
+		list14.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list14.isSelectionEmpty() ){
+				
+				name= (String) list14.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblNewLabel_5 = new JLabel("Pasta");
 		
-		JList list15 = new JList(model15);
+		final JList list15 = new JList(model15);
+		list15.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list15.clearSelection();
+			}
+		});
+	
+		list15.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list15.isSelectionEmpty() ){
+				
+				name= (String) list15.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblPotatisRis = new JLabel("Potatis & Ris");
 		
-		JList list16 = new JList(model16);
+		final JList list16 = new JList(model16);
+		list16.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list16.clearSelection();
+			}
+		});
+	
+		list16.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list16.isSelectionEmpty() ){
+				
+				name= (String) list16.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblrter_1 = new JLabel("\u00D6rter");
 		GroupLayout gl_dropdown4 = new GroupLayout(dropdown4);
@@ -459,9 +773,45 @@ public class MainFrame extends Observable implements Observer{
 		dropdown5.setBackground(Color.MAGENTA);
 		carddropdownpanel.add(dropdown5, "foodbutton5");
 		
-		JList list17 = new JList(model17);
+		final JList list17 = new JList(model17);
+		list17.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list17.clearSelection();
+			}
+		});
+	
+		list17.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list17.isSelectionEmpty() ){
+				
+				name= (String) list17.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
-		JList list18 = new JList(model18);
+		final JList list18 = new JList(model18);
+		list18.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list18.clearSelection();
+			}
+		});
+	
+		list18.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list18.isSelectionEmpty() ){
+				
+				name= (String) list18.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblKallaDrycker = new JLabel("Kylda Drycker");
 		
@@ -499,15 +849,70 @@ public class MainFrame extends Observable implements Observer{
 		dropdown6.setBackground(Color.WHITE);
 		carddropdownpanel.add(dropdown6, "foodbutton6");
 		
-		JList list19 = new JList(model19);
+		final JList list19 = new JList(model19);
+		list19.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list19.clearSelection();
+			}
+		});
+	
+		list19.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list19.isSelectionEmpty() ){
+				
+				name= (String) list19.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
-		JList list20 = new JList(model20);
+		final JList list20 = new JList(model20);
+		list20.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list20.clearSelection();
+			}
+		});
+	
+		list20.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list20.isSelectionEmpty() ){
+				
+				name= (String) list20.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
-		JList list21 = new JList(model21);
+		final JList list21 = new JList(model21);
+		list21.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				list21.clearSelection();
+			}
+		});
+	
+		list21.addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent arg0) {
+				String name;
+				if(arg0.getValueIsAdjusting() == false && !list21.isSelectionEmpty() ){
+				
+				name= (String) list21.getSelectedValue();
+				System.out.println("SELECTED: "+name);
+				cardLayout.show(centercardpanel, "details");
+				}
+			}
+		});
 		
 		JLabel lblNtterFrn = new JLabel("N\u00F6tter & Fr\u00F6n");
 		
-		JLabel Sött = new JLabel("New label");
+		JLabel snacks = new JLabel("Snacks");
+		snacks.setHorizontalAlignment(SwingConstants.TRAILING);
 		
 		JLabel lblrtorBnor = new JLabel("\u00C4rtor & B\u00F6nor");
 		GroupLayout gl_dropdown6 = new GroupLayout(dropdown6);
@@ -527,7 +932,7 @@ public class MainFrame extends Observable implements Observer{
 							.addComponent(list20, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGroup(gl_dropdown6.createParallelGroup(Alignment.LEADING)
-						.addComponent(Sött)
+						.addComponent(snacks)
 						.addComponent(list21, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(616, Short.MAX_VALUE))
 		);
@@ -537,7 +942,7 @@ public class MainFrame extends Observable implements Observer{
 					.addContainerGap()
 					.addGroup(gl_dropdown6.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNtterFrn)
-						.addComponent(Sött)
+						.addComponent(snacks)
 						.addComponent(lblrtorBnor))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_dropdown6.createParallelGroup(Alignment.BASELINE)
@@ -568,25 +973,33 @@ public class MainFrame extends Observable implements Observer{
 		
 		JLabel profilLink = new JLabel("namn namnsson");
 		
-		JLabel kundvagnLink = new JLabel("Kundvagn");
+		JButton cartbutton = new JButton("Kundvagn");
+		cartbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				cardLayout.show(centercardpanel, "cart");
+				
+				
+			}
+		});
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addContainerGap(21, Short.MAX_VALUE)
-					.addComponent(profilLink)
-					.addGap(18)
-					.addComponent(kundvagnLink)
-					.addGap(14))
+					.addContainerGap()
+					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(profilLink, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+						.addComponent(cartbutton, Alignment.TRAILING))
+					.addContainerGap())
 		);
 		gl_kundvagnspanel.setVerticalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addGap(21)
-					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(profilLink)
-						.addComponent(kundvagnLink, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(7)
+					.addComponent(cartbutton)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(profilLink, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(41, Short.MAX_VALUE))
 		);
 		kundvagnspanel.setLayout(gl_kundvagnspanel);
 		
@@ -638,6 +1051,8 @@ public class MainFrame extends Observable implements Observer{
 				int key = arg0.getKeyCode();
 			    if (key == KeyEvent.VK_ENTER){
 			    	System.out.println("Söker på: "+searchstring.getText());
+			    
+					cardLayout.show(centercardpanel, "searchResults");
 			    	searchstring.setText("");
 				}
 			}
@@ -756,7 +1171,7 @@ public class MainFrame extends Observable implements Observer{
 					.addComponent(foodbutton4, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodbutton6, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
 					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
