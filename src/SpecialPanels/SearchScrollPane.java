@@ -45,8 +45,6 @@ public class SearchScrollPane extends JPanel {
 		boolean b = true;
 		for(Product p : foodlist){
 			SearchResultPanel mm = new SearchResultPanel(p,b);
-//			setChanged();
-//			notifyObservers(mm);
 			mm.addObserver(o);
 			box.add(mm);
 			b = !b;

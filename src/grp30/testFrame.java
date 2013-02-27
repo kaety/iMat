@@ -22,6 +22,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingCart;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
@@ -130,7 +131,6 @@ public class testFrame extends Observable implements Observer{
 		JButton btnA_1 = new JButton("A 2");
 		
 		lblAmount = new JLabel("amount");
-		
 		JLabel lblTotal = new JLabel("Total:");
 		
 		dnmclblHerro = new DynamicLabel(1200);
@@ -215,6 +215,7 @@ public class testFrame extends Observable implements Observer{
 		//conflict with update in mainframe both get the notify
 		if(arg instanceof ArrayList<?> && ididThis) displayFoodList((ArrayList<Product>) arg);
 		else if(arg instanceof ShoppingCart) newPurchase(IMatDataHandler.getInstance().getShoppingCart());
+		else if(arg instanceof ShoppingItem) dnmclblHerro.showLabel(((ShoppingItem)arg).getProduct().getName() + " (" + ((ShoppingItem)arg).getAmount() + ")");
 		ididThis=false;
 	}
 	private class TestBattan extends AbstractAction {
