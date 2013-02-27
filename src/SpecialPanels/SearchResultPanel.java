@@ -43,6 +43,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	JComboBox comboBox;
 	JPanel middlePanel;
 	JLabel lblPrice;
+	JButton favbut = new JButton();
 
 	public SearchResultPanel(Product p, boolean lightPanel) {
 		product = p;
@@ -107,11 +108,16 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		
 		lblPrice = new JLabel(product.getPrice() + " " +  product.getUnit());
 		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		favbut = new JButton();
+		isFavbut();
+		favbut.setAction(action_1);
 		GroupLayout gl_selectorPanel = new GroupLayout(selectorPanel);
 		gl_selectorPanel.setHorizontalGroup(
-			gl_selectorPanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_selectorPanel.createSequentialGroup()
-					.addContainerGap(116, Short.MAX_VALUE)
+			gl_selectorPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_selectorPanel.createSequentialGroup()
+					.addContainerGap(23, Short.MAX_VALUE)
+					.addComponent(favbut)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblPrice)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -126,8 +132,9 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 					.addGroup(gl_selectorPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnBattan)
-						.addComponent(lblPrice, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(52, Short.MAX_VALUE))
+						.addComponent(lblPrice, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
+						.addComponent(favbut))
+					.addContainerGap(49, Short.MAX_VALUE))
 		);
 		selectorPanel.setLayout(gl_selectorPanel);
 		JLabel lblImage = new JLabel(icon);
@@ -187,6 +194,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
     }
     private final MyObservable observable = new MyObservable();
     private final Action action = new SwingAction();
+    private final Action action_1 = new SwingAction_1();
     
     public void addObserver(Observer o){
     	observable.addObserver(o);
@@ -204,6 +212,34 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 			ShoppingItem i = new ShoppingItem(product, prices[comboBox.getSelectedIndex()]);
 			observable.setChanged();
 			observable.notifyObservers(i);
+		}
+	}
+	
+	private void isFavbut(){
+		if(IMatDataHandler.getInstance().favorites().contains(product)) favbut.setText("FAV");
+		else favbut.setText("NO FAV");
+	}
+	
+	private String returnFav(){
+		if(IMatDataHandler.getInstance().favorites().contains(product)) return("FAV");
+		else return("NO FAV");
+	}
+	
+	private class SwingAction_1 extends AbstractAction {
+		public SwingAction_1() {
+			putValue(NAME, returnFav());
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+			if(IMatDataHandler.getInstance().favorites().contains(product)){
+				IMatDataHandler.getInstance().favorites().remove(product);
+				favbut.setText("NO FAV");
+			}
+			else{
+				IMatDataHandler.getInstance().favorites().add(product);
+				favbut.setText("FAV");
+			}
+			System.out.println(IMatDataHandler.getInstance().favorites());
 		}
 	}
 }

@@ -198,7 +198,7 @@ public class testFrame extends Observable implements Observer{
 						.addComponent(btnB_1))
 					.addContainerGap())
 		);
-		slidingPanel.changeState();
+//		slidingPanel.changeState();
 		frame.getContentPane().setLayout(groupLayout);
 	}
 	private class HidePinkMenu extends AbstractAction {
