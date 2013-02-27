@@ -94,7 +94,6 @@ public class testFrame extends Observable implements Observer{
 		
 		slidingPanel = new SlidingPanel();
 		slidingPanel.setBackground(Color.ORANGE);
-		
 		JButton btnD = new JButton("D 1");
 		
 		JButton btnD_1 = new JButton("D 2");
@@ -199,6 +198,7 @@ public class testFrame extends Observable implements Observer{
 						.addComponent(btnB_1))
 					.addContainerGap())
 		);
+		slidingPanel.changeState();
 		frame.getContentPane().setLayout(groupLayout);
 	}
 	private class HidePinkMenu extends AbstractAction {
