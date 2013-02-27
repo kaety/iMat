@@ -33,6 +33,7 @@ import SpecialPanels.SearchScrollPane;
 public class testFrame extends Observable implements Observer{
 	int kk = 0;
 	private JFrame frame;
+	SearchScrollPane searchScrollPane;
 	JLabel lblAmount;
 	private final Action action = new HidePinkMenu();
 	private final Action action_1 = new TestBattan();
@@ -166,7 +167,8 @@ public class testFrame extends Observable implements Observer{
 		);
 		panel.setLayout(gl_panel);
 		
-		SearchScrollPane searchScrollPane = new SearchScrollPane();
+		searchScrollPane = new SearchScrollPane();
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -249,7 +251,6 @@ public class testFrame extends Observable implements Observer{
 	}
 	
 	private void displayFoodList(ArrayList<Product> foodlist){
-
-
+		searchScrollPane.setListData(foodlist);
 	}
 }
