@@ -138,9 +138,9 @@ public class MainFrame extends Observable implements Observer{
 							.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
 						.addComponent(foodandsearchpanel, 0, 0, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(toppanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(kundvagnspanel, GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)))
+							.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
@@ -225,14 +225,22 @@ public class MainFrame extends Observable implements Observer{
 		final JPanel dropdown6 = new JPanel();
 		dropdown6.setBackground(Color.BLUE);
 		carddropdownpanel.add(dropdown6, "foodbutton6");
+		
+		JLabel lblNewLabel = new JLabel("Favoriter");
 		GroupLayout gl_rightpanel = new GroupLayout(rightpanel);
 		gl_rightpanel.setHorizontalGroup(
 			gl_rightpanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 174, Short.MAX_VALUE)
+				.addGroup(gl_rightpanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		gl_rightpanel.setVerticalGroup(
 			gl_rightpanel.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 486, Short.MAX_VALUE)
+				.addGroup(gl_rightpanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(448, Short.MAX_VALUE))
 		);
 		rightpanel.setLayout(gl_rightpanel);
 		
@@ -242,21 +250,21 @@ public class MainFrame extends Observable implements Observer{
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addContainerGap()
+				.addGroup(Alignment.TRAILING, gl_kundvagnspanel.createSequentialGroup()
+					.addContainerGap(33, Short.MAX_VALUE)
 					.addComponent(profilLink)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(kundvagnLink)
-					.addContainerGap(21, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_kundvagnspanel.setVerticalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
 					.addGap(21)
 					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(kundvagnLink, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-						.addComponent(profilLink))
-					.addContainerGap(68, Short.MAX_VALUE))
+						.addComponent(profilLink)
+						.addComponent(kundvagnLink, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		kundvagnspanel.setLayout(gl_kundvagnspanel);
 		
@@ -509,8 +517,4 @@ public class MainFrame extends Observable implements Observer{
 		
 		
 	}
-
-
-		
-	
 }
