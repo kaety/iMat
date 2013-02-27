@@ -2,6 +2,7 @@ package SpecialPanels;
 
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 import javax.swing.Box;
 import javax.swing.JPanel;
@@ -15,10 +16,12 @@ import se.chalmers.ait.dat215.project.Product;
 public class SearchScrollPane extends JPanel {
 	Box box;
 	JScrollPane scrollPane;
+	Observer o;
 	/**
 	 * Create the panel.
 	 */
-	public SearchScrollPane() {
+	public SearchScrollPane(Observer o) {
+		this.o = o;
 		box = Box.createVerticalBox();
 		scrollPane = new JScrollPane();
 		scrollPane.setViewportView(box);
@@ -44,6 +47,7 @@ public class SearchScrollPane extends JPanel {
 			SearchResultPanel mm = new SearchResultPanel(p,b);
 //			setChanged();
 //			notifyObservers(mm);
+			mm.addObserver(o);
 			box.add(mm);
 			b = !b;
 		}

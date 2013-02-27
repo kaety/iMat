@@ -166,7 +166,7 @@ public class testFrame extends Observable implements Observer{
 		);
 		panel.setLayout(gl_panel);
 		
-		searchScrollPane = new SearchScrollPane();
+		searchScrollPane = new SearchScrollPane(this);
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
