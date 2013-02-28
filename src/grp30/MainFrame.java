@@ -124,36 +124,41 @@ public class MainFrame extends Observable implements Observer{
 		GuestStart startGuest = new GuestStart();
 		centercardpanel.add(startGuest, "startGuest");
 		
-		JPanel cart = new ShoppingCart();
+		ShoppingCart cart = new ShoppingCart();
 		centercardpanel.add(cart, "cart");
 		
-		JPanel searchResults = new SearchResults();
+		SearchResults searchResults = new SearchResults();
 		centercardpanel.add(searchResults, "searchResults");
 		
-		JPanel pay1 = new Pay1();
+		Pay1 pay1 = new Pay1();
 		centercardpanel.add(pay1, "pay1");
 		
-		JPanel pay2 = new Pay2();
+		Pay2 pay2 = new Pay2();
 		centercardpanel.add(pay2, "pay2");
 		
-		JPanel pay3 = new Pay3();
+		Pay3 pay3 = new Pay3();
 		centercardpanel.add(pay3, "pay3");
 		
-		JPanel register = new Register();
+		Register register = new Register();
 		centercardpanel.add(register, "register");
 		
-		JPanel confirmed = new ConfirmedBuy();
+		ConfirmedBuy confirmed = new ConfirmedBuy();
 		centercardpanel.add(confirmed, "confirmed");
 		
-		JPanel history = new History();
+		History history = new History();
 		centercardpanel.add(history, "history");
 		
-		JPanel receipt = new Receipt();
+		Receipt receipt = new Receipt();
 		centercardpanel.add(receipt, "receipt");
 		
-		JPanel details = new DetailedFoodView();
+		DetailedFoodView details = new DetailedFoodView();
 		centercardpanel.add(details, "details");
 		
+		//////////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////    TA BORT DET HÄR SEDAN!   ///////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////
+		details.setActiveProduct(IMatDataHandler.getInstance().getProduct(4));////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////
 		
 		
 		mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

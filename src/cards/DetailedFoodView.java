@@ -38,7 +38,7 @@ public class DetailedFoodView extends JPanel {
 		
 		setBackground(Color.WHITE);
 		
-		picLabel = new JLabel("BILD");
+		picLabel = new JLabel();
 		picLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		priceLabel = new JLabel("Pris");
@@ -134,8 +134,8 @@ public class DetailedFoodView extends JPanel {
 	}
 	
 	public void setActiveProduct(Product p){
-		picLabel = new JLabel(IMatDataHandler.getInstance().getImageIcon(p, 300, 300));
-		priceLabel.setText(p.getPrice() + p.getUnitSuffix());
+		picLabel.setIcon(IMatDataHandler.getInstance().getImageIcon(p, 170, 170));
+		priceLabel.setText(p.getPrice() + "kr / "+ p.getUnitSuffix());
 		productLabel.setText(p.getName());
 		RecipeGenerator r = new RecipeGenerator();
 		recipeLabel1.setText(r.getNewRecipe(p.getName()));
