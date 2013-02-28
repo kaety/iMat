@@ -239,6 +239,8 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 				IMatDataHandler.getInstance().favorites().add(product);
 				favbut.setText("FAV");
 			}
+			observable.setChanged();
+			observable.notifyObservers("fav");
 			System.out.println(IMatDataHandler.getInstance().favorites());
 		}
 	}
