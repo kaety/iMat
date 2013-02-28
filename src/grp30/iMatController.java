@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.util.Observable;
 import java.util.Observer;
 
+
 import SpecialPanels.SearchResultPanel;
 import SpecialPanels.SearchResultPanel.MyObservable;
 

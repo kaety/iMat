@@ -50,6 +50,7 @@ import cards.Register;
 import cards.SearchResults;
 import cards.ShoppingCart;
 import cards.UserStart;
+
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 
@@ -81,6 +82,10 @@ public class MainFrame extends Observable implements Observer{
 	private DefaultListModel<String> model19;
 	private DefaultListModel<String> model20;
 	private DefaultListModel<String> model21;
+	private final JPanel centercardpanel;
+	private final CardLayout cardLayout; 
+	private DetailedFoodView details;
+	private SearchResults searchResults;
 
 
 	
@@ -89,6 +94,9 @@ public class MainFrame extends Observable implements Observer{
 	 * Create the frame.
 	 */
 	public MainFrame() {
+		
+		mf=new JFrame();
+		
 		model1= new DefaultListModel();
 		model2= new DefaultListModel();
 		model3= new DefaultListModel();
@@ -111,11 +119,15 @@ public class MainFrame extends Observable implements Observer{
 		model20= new DefaultListModel();
 		model21= new DefaultListModel();
 		
+		
+		
 		fillMyListsUp();
 		
-		mf=new JFrame();
-		final JPanel centercardpanel = new JPanel();
 		
+		
+		
+		centercardpanel = new JPanel();
+
 		centercardpanel.setLayout(new CardLayout(0, 0));
 		
 		UserStart startUser = new UserStart();
@@ -127,8 +139,18 @@ public class MainFrame extends Observable implements Observer{
 		ShoppingCart cart = new ShoppingCart();
 		centercardpanel.add(cart, "cart");
 		
-		SearchResults searchResults = new SearchResults();
+		searchResults = new SearchResults();
 		centercardpanel.add(searchResults, "searchResults");
+		GroupLayout gl_searchResults = new GroupLayout(searchResults);
+		gl_searchResults.setHorizontalGroup(
+			gl_searchResults.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 970, Short.MAX_VALUE)
+		);
+		gl_searchResults.setVerticalGroup(
+			gl_searchResults.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 404, Short.MAX_VALUE)
+		);
+		searchResults.setLayout(gl_searchResults);
 		
 		Pay1 pay1 = new Pay1();
 		centercardpanel.add(pay1, "pay1");
@@ -151,14 +173,9 @@ public class MainFrame extends Observable implements Observer{
 		Receipt receipt = new Receipt();
 		centercardpanel.add(receipt, "receipt");
 		
-		DetailedFoodView details = new DetailedFoodView();
+		details = new DetailedFoodView();
 		centercardpanel.add(details, "details");
 		
-		//////////////////////////////////////////////////////////////////////////////////////////
-		//////////////////////////    TA BORT DET HÄR SEDAN!   ///////////////////////////////////
-		//////////////////////////////////////////////////////////////////////////////////////////
-		details.setActiveProduct(IMatDataHandler.getInstance().getProduct(4));////////////////////
-		//////////////////////////////////////////////////////////////////////////////////////////
 		
 		
 		mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -238,9 +255,8 @@ public class MainFrame extends Observable implements Observer{
 		dropdown1.setBackground(Color.PINK);
 		carddropdownpanel.add(dropdown1, "foodbutton1");
 		
-		final CardLayout cardLayout = (CardLayout) (centercardpanel
-				.getLayout());
 		
+		cardLayout = (CardLayout) (centercardpanel.getLayout());
 		
 		
 		final JList list1 = new JList(model1);
@@ -250,17 +266,12 @@ public class MainFrame extends Observable implements Observer{
 				list1.clearSelection();
 			}
 		});
-	
+
 		list1.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list1.isSelectionEmpty() ){
-				
-				name= (String) list1.getSelectedValue();
-				
-				cardLayout.show(centercardpanel, "details");
-				System.out.println("SELECTED: "+name);
-				}
+
+				SetDetailView(list1, arg0);
+
 			}
 		});
 		
@@ -276,14 +287,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list2.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list2.isSelectionEmpty() ){
-				
-				name= (String) list2.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list2, arg0);
 			}
 		});
 		
@@ -330,14 +334,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list3.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list3.isSelectionEmpty() ){
-				
-				name= (String) list3.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list3, arg0);
 			}
 		});
 		
@@ -355,14 +352,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list4.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list4.isSelectionEmpty() ){
-				
-				name= (String) list4.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list4, arg0);
 			}
 		});
 		
@@ -376,14 +366,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list5.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list5.isSelectionEmpty() ){
-				
-				name= (String) list5.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list5, arg0);
 			}
 		});
 		
@@ -397,13 +380,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list6.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list6.isSelectionEmpty() ){
-				
-				name= (String) list6.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list6, arg0);
 			}
 		});
 		
@@ -417,13 +394,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list7.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list7.isSelectionEmpty() ){
-				
-				name= (String) list7.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list7, arg0);
 			}
 		});
 		
@@ -443,13 +414,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list8.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list8.isSelectionEmpty() ){
-				
-				name= (String) list8.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list8, arg0);
 			}
 		});
 		
@@ -465,13 +430,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list9.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list9.isSelectionEmpty() ){
-				
-				name= (String) list9.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list9, arg0);
 			}
 		});
 		
@@ -487,13 +446,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list10.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list10.isSelectionEmpty() ){
-				
-				name= (String) list10.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list10, arg0);
 			}
 		});
 		
@@ -580,13 +533,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list11.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list11.isSelectionEmpty() ){
-				
-				name= (String) list11.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list11, arg0);
 			}
 		});
 		
@@ -626,13 +573,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list12.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list12.isSelectionEmpty() ){
-				
-				name= (String) list12.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list12, arg0);
 			}
 		});
 		
@@ -648,13 +589,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list13.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list13.isSelectionEmpty() ){
-				
-				name= (String) list13.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list13, arg0);
 			}
 		});
 		
@@ -670,13 +605,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list14.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list14.isSelectionEmpty() ){
-				
-				name= (String) list14.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list14, arg0);
 			}
 		});
 		
@@ -692,13 +621,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list15.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list15.isSelectionEmpty() ){
-				
-				name= (String) list15.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list15, arg0);
 			}
 		});
 		
@@ -714,13 +637,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list16.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list16.isSelectionEmpty() ){
-				
-				name= (String) list16.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list16, arg0);
 			}
 		});
 		
@@ -788,13 +705,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list17.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list17.isSelectionEmpty() ){
-				
-				name= (String) list17.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list17, arg0);
 			}
 		});
 		
@@ -808,13 +719,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list18.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list18.isSelectionEmpty() ){
-				
-				name= (String) list18.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list18, arg0);
 			}
 		});
 		
@@ -864,13 +769,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list19.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list19.isSelectionEmpty() ){
-				
-				name= (String) list19.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list19, arg0);
 			}
 		});
 		
@@ -884,13 +783,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list20.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list20.isSelectionEmpty() ){
-				
-				name= (String) list20.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list20, arg0);
 			}
 		});
 		
@@ -904,13 +797,7 @@ public class MainFrame extends Observable implements Observer{
 	
 		list21.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent arg0) {
-				String name;
-				if(arg0.getValueIsAdjusting() == false && !list21.isSelectionEmpty() ){
-				
-				name= (String) list21.getSelectedValue();
-				System.out.println("SELECTED: "+name);
-				cardLayout.show(centercardpanel, "details");
-				}
+				SetDetailView(list21, arg0);
 			}
 		});
 		
@@ -1056,7 +943,10 @@ public class MainFrame extends Observable implements Observer{
 				int key = arg0.getKeyCode();
 			    if (key == KeyEvent.VK_ENTER){
 			    	System.out.println("Söker på: "+searchstring.getText());
-			    
+			    	
+			    	//searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
+			    	
+			    	
 					cardLayout.show(centercardpanel, "searchResults");
 			    	searchstring.setText("");
 				}
@@ -1224,11 +1114,26 @@ public class MainFrame extends Observable implements Observer{
 	}
 
 
+	public void SetDetailView(JList list, ListSelectionEvent arg0) {
+
+		String name;
+		if(arg0.getValueIsAdjusting() == false && !list.isSelectionEmpty() ){
+		
+		name= (String) list.getSelectedValue();
+		
+		cardLayout.show(centercardpanel, "details");
+		List<Product> pro = IMatDataHandler.getInstance().findProducts(name);
+		details.setActiveProduct(pro.get(0));
+		}
+	}
+
+
+
+
+
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		
-		
-		
+			
 	}
 	
 	public void fillMyListsUp(){

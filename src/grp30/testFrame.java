@@ -27,6 +27,8 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
 
+
+
 import SpecialPanels.SearchResultPanel;
 import SpecialPanels.SlidingPanel;
 import SpecialPanels.SearchScrollPane;
