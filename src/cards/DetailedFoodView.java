@@ -1,37 +1,52 @@
 package cards;
 
-import java.awt.Color;
+import grp30.RecipeGenerator;
 
-import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Font;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.GridLayout;
 import javax.swing.SwingConstants;
-import javax.swing.DefaultComboBoxModel;
+
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Product;
 
 public class DetailedFoodView extends JPanel {
-
+	Product activeProduct;
 	/**
 	 * Create the panel.
 	 */
+	JLabel picLabel;
+	JLabel priceLabel;
+	JPanel panel;
+	JLabel productLabel;
+	
+	JLabel recipeLabel1;
+	JLabel recipeLabel2;
+	JLabel recipeLabel3;
+	
 	public DetailedFoodView() {
 		
 		setBackground(Color.WHITE);
 		
-		JLabel picLabel = new JLabel("BILD");
+		picLabel = new JLabel("BILD");
 		picLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JLabel priceLabel = new JLabel("Pris");
+		priceLabel = new JLabel("Pris");
 		priceLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		
-		JLabel productLabel = new JLabel("Matvara");
+		productLabel = new JLabel("Matvara");
 		productLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		productLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		
@@ -103,18 +118,28 @@ public class DetailedFoodView extends JPanel {
 		);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 		
-		JLabel recipeLabel1 = new JLabel("Recept");
+		recipeLabel1 = new JLabel("Recept");
 		recipeLabel1.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(recipeLabel1);
 		
-		JLabel recipeLabel2 = new JLabel("Recept");
+		recipeLabel2 = new JLabel("Recept");
 		recipeLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(recipeLabel2);
 		
-		JLabel recipeLabel3 = new JLabel("Recept");
+		recipeLabel3 = new JLabel("Recept");
 		recipeLabel3.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(recipeLabel3);
 		setLayout(groupLayout);
 
+	}
+	
+	public void setActiveProduct(Product p){
+		picLabel = new JLabel(IMatDataHandler.getInstance().getImageIcon(p, 300, 300));
+		priceLabel.setText(p.getPrice() + p.getUnitSuffix());
+		productLabel.setText(p.getName());
+		RecipeGenerator r = new RecipeGenerator();
+		recipeLabel1.setText(r.getNewRecipe(p.getName()));
+		recipeLabel2.setText(r.getNewRecipe(p.getName()));
+		recipeLabel3.setText(r.getNewRecipe(p.getName()));
 	}
 }
