@@ -17,9 +17,9 @@ import java.awt.Font;
 
 public class SearchResults extends JPanel{
 	SearchScrollPane searchScrollPane;
+	JLabel lblIngaVarorHittades;
 	public SearchResults(Observer o) {
 		setBackground(Color.CYAN);
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -36,28 +36,40 @@ public class SearchResults extends JPanel{
 		
 		JLabel lblSkresultat = new JLabel("S\u00F6kresultat:");
 		lblSkresultat.setFont(new Font("Tahoma", Font.BOLD, 13));
+		
+		lblIngaVarorHittades = new JLabel("Inga varor hittades!");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblSkresultat)
-					.addContainerGap(469, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblIngaVarorHittades)
+					.addContainerGap(332, Short.MAX_VALUE))
 				.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblSkresultat)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblSkresultat)
+						.addComponent(lblIngaVarorHittades))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
+					.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
 	}
 	
 	public void displayFoodList(ArrayList<Product> p){
+		lblIngaVarorHittades.setVisible(false);
+		searchScrollPane.setVisible(true);
 		searchScrollPane.setListData(p);
+		if(searchScrollPane.getListLength() == 0){
+			searchScrollPane.setVisible(false);
+			lblIngaVarorHittades.setVisible(true);
+		}
 	}
 }

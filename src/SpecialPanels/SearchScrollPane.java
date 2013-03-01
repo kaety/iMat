@@ -1,6 +1,7 @@
 package SpecialPanels;
 
 
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Observer;
 
@@ -14,7 +15,7 @@ import javax.swing.ScrollPaneConstants;
 import se.chalmers.ait.dat215.project.Product;
 
 public class SearchScrollPane extends JPanel {
-	Box box;
+	private Box box;
 	JScrollPane scrollPane;
 	Observer o;
 	/**
@@ -51,5 +52,10 @@ public class SearchScrollPane extends JPanel {
 			b = !b;
 		}
 		scrollPane.validate();
+	}
+	
+	public int getListLength(){
+		int i = box.getComponents().length;
+		return i;
 	}
 }

@@ -26,6 +26,8 @@ import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Component;
+import javax.swing.Box;
 
 
 public class SearchResultPanel extends JPanel implements MouseListener{
