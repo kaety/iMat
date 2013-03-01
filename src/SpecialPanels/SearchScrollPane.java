@@ -42,6 +42,7 @@ public class SearchScrollPane extends JPanel {
 	}
 	
 	public void setListData(ArrayList<Product> foodlist){
+		box.removeAll();
 		boolean b = true;
 		for(Product p : foodlist){
 			SearchResultPanel mm = new SearchResultPanel(p,b);

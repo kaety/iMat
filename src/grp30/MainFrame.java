@@ -87,7 +87,6 @@ public class MainFrame extends Observable implements Observer{
 	private DetailedFoodView details;
 	private SearchResults searchResults;
 
-
 	
 
 	/**
@@ -139,18 +138,8 @@ public class MainFrame extends Observable implements Observer{
 		ShoppingCart cart = new ShoppingCart();
 		centercardpanel.add(cart, "cart");
 		
-		searchResults = new SearchResults();
+		searchResults = new SearchResults(this);
 		centercardpanel.add(searchResults, "searchResults");
-		GroupLayout gl_searchResults = new GroupLayout(searchResults);
-		gl_searchResults.setHorizontalGroup(
-			gl_searchResults.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 970, Short.MAX_VALUE)
-		);
-		gl_searchResults.setVerticalGroup(
-			gl_searchResults.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 404, Short.MAX_VALUE)
-		);
-		searchResults.setLayout(gl_searchResults);
 		
 		Pay1 pay1 = new Pay1();
 		centercardpanel.add(pay1, "pay1");
@@ -868,10 +857,7 @@ public class MainFrame extends Observable implements Observer{
 		JButton cartbutton = new JButton("Kundvagn");
 		cartbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				cardLayout.show(centercardpanel, "cart");
-				
-				
 			}
 		});
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
@@ -943,10 +929,7 @@ public class MainFrame extends Observable implements Observer{
 				int key = arg0.getKeyCode();
 			    if (key == KeyEvent.VK_ENTER){
 			    	System.out.println("Söker på: "+searchstring.getText());
-			    	
-			    	//searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
-			    	
-			    	
+			    	searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
 					cardLayout.show(centercardpanel, "searchResults");
 			    	searchstring.setText("");
 				}
@@ -1122,6 +1105,7 @@ public class MainFrame extends Observable implements Observer{
 		name= (String) list.getSelectedValue();
 		
 		cardLayout.show(centercardpanel, "details");
+		
 		List<Product> pro = IMatDataHandler.getInstance().findProducts(name);
 		details.setActiveProduct(pro.get(0));
 		}
