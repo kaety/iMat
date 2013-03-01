@@ -917,10 +917,10 @@ public class MainFrame extends Observable implements Observer{
 			public void focusGained(FocusEvent arg0) {
 				searchstring.setText("");
 			}
-			@Override
+		/*	@Override
 			public void focusLost(FocusEvent e) {
 				searchstring.setText("Search...");
-			}
+			}*/
 		});
 		searchstring.addKeyListener(new KeyAdapter() {
 			@Override
@@ -928,7 +928,7 @@ public class MainFrame extends Observable implements Observer{
 				
 				int key = arg0.getKeyCode();
 			    if (key == KeyEvent.VK_ENTER){
-			    	System.out.println("Söker på: "+searchstring.getText());
+			    	
 			    	searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
 					cardLayout.show(centercardpanel, "searchResults");
 			    	searchstring.setText("");
@@ -1033,6 +1033,17 @@ public class MainFrame extends Observable implements Observer{
 				}
 			}
 		});
+		
+		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
+				cardLayout.show(centercardpanel, "searchResults");
+		    	searchstring.setText("Search...");
+				
+				
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(foodandsearchpanel);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -1049,8 +1060,10 @@ public class MainFrame extends Observable implements Observer{
 					.addComponent(foodbutton4, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodbutton6, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
-					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
+					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnSearch)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -1064,7 +1077,8 @@ public class MainFrame extends Observable implements Observer{
 						.addComponent(foodbutton3)
 						.addComponent(foodbutton4)
 						.addComponent(foodbutton6)
-						.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnSearch))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		foodandsearchpanel.setLayout(groupLayout);
@@ -1095,6 +1109,9 @@ public class MainFrame extends Observable implements Observer{
 		
 		contentPane.setLayout(gl_contentPane);
 	}
+
+
+	
 
 
 	public void SetDetailView(JList list, ListSelectionEvent arg0) {
