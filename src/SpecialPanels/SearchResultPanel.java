@@ -45,7 +45,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	JComboBox comboBox;
 	JPanel middlePanel;
 	JLabel lblPrice;
-	JButton favbut = new JButton();
+	JButton favbut;
 
 	public SearchResultPanel(Product p, boolean lightPanel) {
 		product = p;
@@ -62,7 +62,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		selectorPanel.setBackground(panelColor);
 		
 		middlePanel = new JPanel();
-		
+		favbut = new JButton();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -217,7 +217,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		}
 	}
 	
-	private void isFavbut(){
+	public void isFavbut(){
 		if(IMatDataHandler.getInstance().favorites().contains(product)) favbut.setText("FAV");
 		else favbut.setText("NO FAV");
 	}

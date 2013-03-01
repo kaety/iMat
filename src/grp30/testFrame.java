@@ -33,6 +33,7 @@ import SpecialPanels.SearchResultPanel;
 import SpecialPanels.SlidingPanel;
 import SpecialPanels.SearchScrollPane;
 import SpecialPanels.SearchResultPanel.MyObservable;
+import SpecialPanels.FavouritesScrollPane;
 
 public class testFrame extends Observable implements Observer{
 	int kk = 0;
@@ -45,6 +46,7 @@ public class testFrame extends Observable implements Observer{
 	DynamicLabel dnmclblHerro;
 	SlidingPanel slidingPanel;
 	JList list = new JList();
+	FavouritesScrollPane favouritesScrollPane;
 	
 	//
 	private boolean ididThis=false;
@@ -172,17 +174,7 @@ public class testFrame extends Observable implements Observer{
 		
 		searchScrollPane = new SearchScrollPane(this);
 		
-		list = new JList();
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] {"1", "1", "2"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		
+		favouritesScrollPane = new FavouritesScrollPane(this);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -198,7 +190,7 @@ public class testFrame extends Observable implements Observer{
 					.addContainerGap()
 					.addComponent(searchScrollPane, GroupLayout.PREFERRED_SIZE, 473, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(list, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+					.addComponent(favouritesScrollPane, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -208,8 +200,8 @@ public class testFrame extends Observable implements Observer{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(slidingPanel, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(list, GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(favouritesScrollPane, GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
 						.addComponent(searchScrollPane, GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -276,8 +268,7 @@ public class testFrame extends Observable implements Observer{
 	}
 	
 	public void setFavList(){
-		System.out.println("mcdoodle");
-		ArrayList<Product> fav = new ArrayList(IMatDataHandler.getInstance().favorites());
-		list.setListData(fav.toArray());
+		favouritesScrollPane.addFavourites();
+		searchScrollPane.setFavoritesButtons();
 	}
 }
