@@ -136,7 +136,7 @@ public class MainFrame extends Observable implements Observer{
 		
 		//SLIDER
 		final SlidingPanel carddropdownpanel = new SlidingPanel();
-		carddropdownpanel.setBackground(IMatColors.BASE);
+		carddropdownpanel.setBackground(Color.white);
 		//carddropdownpanel.setVisible(false);
 		carddropdownpanel.changeState();
 		
