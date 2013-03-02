@@ -57,6 +57,7 @@ public class SearchScrollPane extends JPanel {
 		scrollPane.validate();
 	}
 	
+
 	public void setFavoritesButtons(){
 		box.removeAll();
 		for(SearchResultPanel srp : products){

@@ -1,5 +1,7 @@
 package cards;
 
+import grp30.MainFrame;
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -24,7 +26,7 @@ public class Pay2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Pay2() {
+	public Pay2(final MainFrame mf) {
 		
 		setBackground(Color.WHITE);
 		
@@ -71,6 +73,7 @@ public class Pay2 extends JPanel {
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				mf.swapCard("pay1");
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);

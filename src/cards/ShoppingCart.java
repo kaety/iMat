@@ -1,5 +1,8 @@
 package cards;
 
+import grp30.MainFrame;
+
+import java.awt.CardLayout;
 import java.awt.Color;
 
 import javax.swing.GroupLayout;
@@ -13,46 +16,67 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import SpecialPanels.ShoppingCartScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JDialog;
 
-public class ShoppingCart extends JPanel implements ShoppingCartListener{
+public class ShoppingCart extends JPanel implements ShoppingCartListener {
 	JLabel lblNumpr;
 	JLabel lblSum;
-	public ShoppingCart(){
+	JLabel lblEmptyCart;
+
+	public ShoppingCart(final MainFrame mf){
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
 		setBackground(Color.GREEN);
 		
 		JButton btnTillKassan = new JButton("Till Kassan");
+		btnTillKassan.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(IMatDataHandler.getInstance().getShoppingCart().getItems().size() == 0){
+					lblEmptyCart.setVisible(true);
+				}
+				else{
+					mf.swapCard("pay1");
+				}
+			}
+		});
 		
 		JPanel panel = new JPanel();
 		
 		ShoppingCartScrollPane shoppingCartScrollPane = new ShoppingCartScrollPane();
+		
+		
+		//TODO ÄNDRA TILL JDIALOG 
+		lblEmptyCart = new JLabel("Tom Korg!!!");
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(shoppingCartScrollPane, GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap(582, Short.MAX_VALUE)
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(shoppingCartScrollPane, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(lblEmptyCart)
+							.addGap(18)
 							.addComponent(btnTillKassan))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)))
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(shoppingCartScrollPane, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+					.addComponent(shoppingCartScrollPane, GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnTillKassan)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnTillKassan)
+						.addComponent(lblEmptyCart))
 					.addContainerGap())
 		);
+		lblEmptyCart.setVisible(false);
 		
 		JLabel lblAntalVaror = new JLabel("Antal Varor:");
 		
@@ -90,15 +114,19 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener{
 		setLayout(groupLayout);
 
 	}
-	
-	private void refreshList(){
-		lblNumpr.setText(IMatDataHandler.getInstance().getShoppingCart().getItems().size() + " st varor");
-		lblSum.setText(IMatDataHandler.getInstance().getShoppingCart().getTotal() + " kr");
+
+	private void refreshList() {
+		lblNumpr.setText(IMatDataHandler.getInstance().getShoppingCart()
+				.getItems().size()
+				+ " st varor");
+		lblSum.setText(IMatDataHandler.getInstance().getShoppingCart()
+				.getTotal()
+				+ " kr");
 	}
-	
+
 	@Override
 	public void shoppingCartChanged() {
 		refreshList();
-		
+
 	}
 }

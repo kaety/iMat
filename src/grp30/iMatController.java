@@ -77,5 +77,11 @@ public class iMatController extends Observable implements Observer{
 	public void addAsObserver(SearchResultPanel o){
 		o.addObserver(this);
 	}
+
+	public MainFrame getMf() {
+		return mf;
+	}
+	
+	
 	
 }

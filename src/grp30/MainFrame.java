@@ -89,16 +89,16 @@ public class MainFrame extends Observable implements Observer{
 		GuestStart startGuest = new GuestStart();
 		centercardpanel.add(startGuest, "startGuest");
 		
-		ShoppingCart cart = new ShoppingCart();
+		ShoppingCart cart = new ShoppingCart(this);
 		centercardpanel.add(cart, "cart");
 		
 		searchResults = new SearchResults(this);
 		centercardpanel.add(searchResults, "searchResults");
 		
-		Pay1 pay1 = new Pay1();
+		Pay1 pay1 = new Pay1(this);
 		centercardpanel.add(pay1, "pay1");
 		
-		Pay2 pay2 = new Pay2();
+		Pay2 pay2 = new Pay2(this);
 		centercardpanel.add(pay2, "pay2");
 		
 		Pay3 pay3 = new Pay3();
@@ -823,6 +823,16 @@ public class MainFrame extends Observable implements Observer{
 		toppanel.setLayout(gl_toppanel);
 		
 		
+		 mf.addWindowListener(new java.awt.event.WindowAdapter() {
+			    @Override
+			    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			    	IMatDataHandler.getInstance().shutDown();
+			        javax.swing.JOptionPane.showConfirmDialog(mf, 
+			            "saving dataZz...", "Kipping dialog", 
+			            javax.swing.JOptionPane.DEFAULT_OPTION);
+			    }
+			});
+		
 		
 		
 		contentPane.setLayout(gl_contentPane);
@@ -846,4 +856,18 @@ public class MainFrame extends Observable implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		if((arg0 instanceof MyObservable) && (arg1 instanceof String)) setFavList();
 	}
+
+
+
+
+
+	public CardLayout getCardLayout() {
+		return cardLayout;
+	}
+	
+	 public void swapCard(String key) {
+	      cardLayout.show(centercardpanel, key);
+	   }
+	 
+	
 }
