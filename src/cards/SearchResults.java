@@ -72,4 +72,7 @@ public class SearchResults extends JPanel{
 			lblIngaVarorHittades.setVisible(true);
 		}
 	}
+	public void setFavoritesButtons(){
+		searchScrollPane.setFavoritesButtons();
+	}
 }

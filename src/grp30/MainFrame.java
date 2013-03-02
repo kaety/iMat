@@ -43,6 +43,8 @@ import cards.Register;
 import cards.SearchResults;
 import cards.ShoppingCart;
 import cards.UserStart;
+import SpecialPanels.FavouritesScrollPane;
+import SpecialPanels.SearchResultPanel.MyObservable;
 
 
 
@@ -57,7 +59,7 @@ public class MainFrame extends Observable implements Observer{
 	private final CardLayout cardLayout; 
 	private DetailedFoodView details;
 	private SearchResults searchResults;
-
+	private FavouritesScrollPane favouritesScrollPane;
 	
 
 	/**
@@ -512,12 +514,16 @@ public class MainFrame extends Observable implements Observer{
 		dropdown6.setLayout(gl_dropdown6);
 		
 		JLabel lblNewLabel = new JLabel("Favoriter");
+		
+		favouritesScrollPane = new FavouritesScrollPane(this);
 		GroupLayout gl_rightpanel = new GroupLayout(rightpanel);
 		gl_rightpanel.setHorizontalGroup(
 			gl_rightpanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_rightpanel.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_rightpanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+					.addGroup(gl_rightpanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(favouritesScrollPane, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+						.addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_rightpanel.setVerticalGroup(
@@ -525,7 +531,9 @@ public class MainFrame extends Observable implements Observer{
 				.addGroup(gl_rightpanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(448, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(favouritesScrollPane, GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		rightpanel.setLayout(gl_rightpanel);
 		
@@ -796,17 +804,13 @@ public class MainFrame extends Observable implements Observer{
 		cardLayout.show(centercardpanel, "searchResults");
 		
 	}
-
-
-
-
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-			
+	public void setFavList(){
+		favouritesScrollPane.addFavourites();
+		searchResults.setFavoritesButtons();
 	}
 	
-
-
-	
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		if((arg0 instanceof MyObservable) && (arg1 instanceof String)) setFavList();
+	}
 }
