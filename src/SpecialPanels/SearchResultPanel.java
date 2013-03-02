@@ -212,8 +212,10 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		}
 		public void actionPerformed(ActionEvent e) {
 			ShoppingItem i = new ShoppingItem(product, prices[comboBox.getSelectedIndex()]);
-			observable.setChanged();
-			observable.notifyObservers(i);
+			IMatDataHandler.getInstance().getShoppingCart().addItem(i);
+			
+			//observable.setChanged();
+			//observable.notifyObservers(i);
 		}
 	}
 	
