@@ -1,5 +1,7 @@
 package cards;
 
+import gui.IMatColors;
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -19,7 +21,7 @@ public class UserStart extends JPanel {
 	 */
 	public UserStart() {
 		
-		setBackground(Color.WHITE);
+		setBackground(IMatColors.BASE);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);

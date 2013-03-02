@@ -50,6 +50,8 @@ import SpecialPanels.SearchResultPanel.MyObservable;
 import javax.swing.ImageIcon;
 import java.awt.Component;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 
@@ -134,15 +136,15 @@ public class MainFrame extends Observable implements Observer{
 		
 		//SLIDER
 		final SlidingPanel carddropdownpanel = new SlidingPanel();
-		carddropdownpanel.setBackground(Color.GRAY);
+		carddropdownpanel.setBackground(IMatColors.BASE);
 		//carddropdownpanel.setVisible(false);
 		carddropdownpanel.changeState();
 		
 		JPanel rightpanel = new JPanel();
-		rightpanel.setBackground(Color.GRAY);
+		rightpanel.setBackground(IMatColors.BASE);
 		
 		JPanel buttonpanel = new JPanel();
-		buttonpanel.setBackground(Color.GRAY);
+		buttonpanel.setBackground(Color.WHITE);
 		
 		
 		JPanel kundvagnspanel = new JPanel();
@@ -196,7 +198,7 @@ public class MainFrame extends Observable implements Observer{
 		carddropdownpanel.setLayout(new CardLayout(0, 0));
 		
 		final JPanel dropdown1 = new JPanel();
-		dropdown1.setBackground(Color.GRAY);
+		dropdown1.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown1, "foodbutton1");
 		
 		
@@ -239,7 +241,7 @@ public class MainFrame extends Observable implements Observer{
 		dropdown1.setLayout(gl_dropdown1);
 		
 		final JPanel dropdown2 = new JPanel();
-		dropdown2.setBackground(Color.GRAY);
+		dropdown2.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown2, "foodbutton2");
 		
 		JButton lblKl = new JButton("K\u00E5l");
@@ -338,7 +340,7 @@ public class MainFrame extends Observable implements Observer{
 		dropdown2.setLayout(gl_dropdown2);
 		
 		final JPanel dropdown3 = new JPanel();
-		dropdown3.setBackground(Color.GRAY);
+		dropdown3.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown3, "foodbutton3");
 		
 		JButton lblMejeriprodukter = new JButton("Mejeriprodukter");
@@ -365,7 +367,7 @@ public class MainFrame extends Observable implements Observer{
 		dropdown3.setLayout(gl_dropdown3);
 		
 		final JPanel dropdown4 = new JPanel();
-		dropdown4.setBackground(Color.GRAY);
+		dropdown4.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown4, "foodbutton4");
 		
 		JButton lblBrd = new JButton("Br\u00F6d");
@@ -433,7 +435,7 @@ public class MainFrame extends Observable implements Observer{
 		dropdown4.setLayout(gl_dropdown4);
 		
 		final JPanel dropdown5 = new JPanel();
-		dropdown5.setBackground(Color.GRAY);
+		dropdown5.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown5, "foodbutton5");
 		
 		JButton lblKallaDrycker = new JButton("Kylda Drycker");
@@ -471,7 +473,7 @@ public class MainFrame extends Observable implements Observer{
 		dropdown5.setLayout(gl_dropdown5);
 		
 		final JPanel dropdown6 = new JPanel();
-		dropdown6.setBackground(Color.GRAY);
+		dropdown6.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown6, "foodbutton6");
 		
 		JButton lblNtterFrn = new JButton("N\u00F6tter & Fr\u00F6n");
@@ -803,6 +805,12 @@ public class MainFrame extends Observable implements Observer{
 		foodandsearchpanel.setLayout(groupLayout);
 		
 		JLabel lblImat = new JLabel("");
+		lblImat.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				cardLayout.show(centercardpanel, "startUser");
+			}
+		});
 		lblImat.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/main_logotype.png")));
 		lblImat.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblImat.setBackground(Color.WHITE);

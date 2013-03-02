@@ -1,6 +1,7 @@
 package cards;
 
 import grp30.MainFrame;
+import gui.IMatColors;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -27,7 +28,7 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 
 	public ShoppingCart(final MainFrame mf){
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
-		setBackground(Color.GREEN);
+		setBackground(IMatColors.BASE_LIGHT);
 		
 		JButton btnTillKassan = new JButton("Till Kassan");
 		btnTillKassan.addActionListener(new ActionListener() {
@@ -42,6 +43,7 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 		});
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(IMatColors.BASE_LIGHT);
 		
 		ShoppingCartScrollPane shoppingCartScrollPane = new ShoppingCartScrollPane();
 		

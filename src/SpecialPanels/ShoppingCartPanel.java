@@ -23,8 +23,8 @@ public class ShoppingCartPanel extends JPanel{
 	private JTextField textField;
 	private JTextField textField_1;
 	ShoppingItem p;
-	Color lightColor = new Color(0x308084);
-	Color darkColor = new Color(0x28AAB1);
+	Color lightColor = Color.LIGHT_GRAY;
+	Color darkColor = Color.white;
 	boolean b;
 	private final Action action = new SwingAction();
 	public ShoppingCartPanel(final ShoppingItem p, boolean b) {
