@@ -49,6 +49,7 @@ import SpecialPanels.FavouritesScrollPane;
 import SpecialPanels.SearchResultPanel.MyObservable;
 import javax.swing.ImageIcon;
 import java.awt.Component;
+import java.awt.GridLayout;
 
 
 
@@ -542,10 +543,6 @@ public class MainFrame extends Observable implements Observer{
 		);
 		rightpanel.setLayout(gl_rightpanel);
 		
-		JLabel profilLink = new JLabel("Antal varor: 2");
-		profilLink.setHorizontalAlignment(SwingConstants.RIGHT);
-		profilLink.setAlignmentY(Component.TOP_ALIGNMENT);
-		
 		JButton cartbutton = new JButton("");
 		cartbutton.setIconTextGap(2);
 		cartbutton.setFocusable(false);
@@ -558,32 +555,49 @@ public class MainFrame extends Observable implements Observer{
 			}
 		});
 		
-		JLabel lblSumma = new JLabel("Summa: 74:-");
-		lblSumma.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblSumma.setAlignmentY(0.0f);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		
+		JLabel lblEjInloggad = new JLabel("Ej inloggad...");
+		lblEjInloggad.setForeground(new Color(204, 153, 0));
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addContainerGap(25, Short.MAX_VALUE)
-					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(profilLink, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblSumma, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addContainerGap(51, Short.MAX_VALUE)
+					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblEjInloggad))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(cartbutton))
 		);
 		gl_kundvagnspanel.setVerticalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
 					.addGap(7)
-					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_kundvagnspanel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(profilLink)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblSumma))
-						.addComponent(cartbutton)))
+					.addComponent(cartbutton))
+				.addGroup(Alignment.TRAILING, gl_kundvagnspanel.createSequentialGroup()
+					.addComponent(lblEjInloggad)
+					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
+		panel.setLayout(new GridLayout(2, 2, 10, 1));
+		
+		JLabel lblAntalVaror = new JLabel("Antal varor:");
+		lblAntalVaror.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(lblAntalVaror);
+		
+		JLabel lblSumma = new JLabel("5 st");
+		panel.add(lblSumma);
+		
+		JLabel lblSumma_1 = new JLabel("Summa:");
+		lblSumma_1.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel.add(lblSumma_1);
+		
+		JLabel lblRegistreraDig = new JLabel("145:-");
+		lblRegistreraDig.setHorizontalAlignment(SwingConstants.LEFT);
+		lblRegistreraDig.setForeground(new Color(0, 0, 0));
+		panel.add(lblRegistreraDig);
 		kundvagnspanel.setLayout(gl_kundvagnspanel);
 		
 		JLabel lblKontakt = new JLabel("Kontakt:");
