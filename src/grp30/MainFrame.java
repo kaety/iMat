@@ -1,4 +1,6 @@
 package grp30;
+import gui.IMatColors;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -45,6 +47,8 @@ import cards.ShoppingCart;
 import cards.UserStart;
 import SpecialPanels.FavouritesScrollPane;
 import SpecialPanels.SearchResultPanel.MyObservable;
+import javax.swing.ImageIcon;
+import java.awt.Component;
 
 
 
@@ -119,6 +123,7 @@ public class MainFrame extends Observable implements Observer{
 		mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mf.setBounds(100, 100, 1200, 900);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		mf.setContentPane(contentPane);
 		
@@ -140,40 +145,40 @@ public class MainFrame extends Observable implements Observer{
 		
 		
 		JPanel kundvagnspanel = new JPanel();
-		kundvagnspanel.setBackground(Color.GRAY);
+		kundvagnspanel.setBackground(IMatColors.BACKGROUND);
 		
 		JPanel foodandsearchpanel = new JPanel();
-		foodandsearchpanel.setBackground(Color.GRAY);
+		foodandsearchpanel.setBackground(IMatColors.BASE);
 		
 		JPanel toppanel = new JPanel();
-		toppanel.setBackground(Color.GRAY);
+		toppanel.setBackground(new Color(255, 255, 255));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
+						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, 1150, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
-								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE))
+								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE)
+								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, 966, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE))
 						.addComponent(foodandsearchpanel, 0, 0, Short.MAX_VALUE)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
+							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, 887, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-						.addComponent(toppanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(toppanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(foodandsearchpanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -181,8 +186,8 @@ public class MainFrame extends Observable implements Observer{
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
-						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE))
+							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE))
+						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE))
 					.addGap(18)
 					.addComponent(buttonpanel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
@@ -537,32 +542,47 @@ public class MainFrame extends Observable implements Observer{
 		);
 		rightpanel.setLayout(gl_rightpanel);
 		
-		JLabel profilLink = new JLabel("namn namnsson");
+		JLabel profilLink = new JLabel("Antal varor: 2");
+		profilLink.setHorizontalAlignment(SwingConstants.RIGHT);
+		profilLink.setAlignmentY(Component.TOP_ALIGNMENT);
 		
-		JButton cartbutton = new JButton("Kundvagn");
+		JButton cartbutton = new JButton("");
+		cartbutton.setIconTextGap(2);
+		cartbutton.setFocusable(false);
+		cartbutton.setRolloverEnabled(false);
+		cartbutton.setRequestFocusEnabled(false);
+		cartbutton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/shopping_cart.png")));
 		cartbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cardLayout.show(centercardpanel, "cart");
 			}
 		});
+		
+		JLabel lblSumma = new JLabel("Summa: 74:-");
+		lblSumma.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblSumma.setAlignmentY(0.0f);
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(profilLink, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-						.addComponent(cartbutton, Alignment.TRAILING))
-					.addContainerGap())
+					.addContainerGap(25, Short.MAX_VALUE)
+					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
+						.addComponent(profilLink, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblSumma, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(cartbutton))
 		);
 		gl_kundvagnspanel.setVerticalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
 					.addGap(7)
-					.addComponent(cartbutton)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(profilLink, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(41, Short.MAX_VALUE))
+					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_kundvagnspanel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(profilLink)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblSumma))
+						.addComponent(cartbutton)))
 		);
 		kundvagnspanel.setLayout(gl_kundvagnspanel);
 		
@@ -768,7 +788,8 @@ public class MainFrame extends Observable implements Observer{
 		);
 		foodandsearchpanel.setLayout(groupLayout);
 		
-		JLabel lblImat = new JLabel("iMAT");
+		JLabel lblImat = new JLabel("");
+		lblImat.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/main_logotype.png")));
 		lblImat.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblImat.setBackground(Color.WHITE);
 		lblImat.setHorizontalAlignment(SwingConstants.CENTER);
@@ -776,16 +797,14 @@ public class MainFrame extends Observable implements Observer{
 		gl_toppanel.setHorizontalGroup(
 			gl_toppanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_toppanel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblImat, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(686, Short.MAX_VALUE))
+					.addComponent(lblImat)
+					.addContainerGap(795, Short.MAX_VALUE))
 		);
 		gl_toppanel.setVerticalGroup(
 			gl_toppanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_toppanel.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_toppanel.createSequentialGroup()
 					.addGap(5)
-					.addComponent(lblImat, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(26, Short.MAX_VALUE))
+					.addComponent(lblImat, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE))
 		);
 		toppanel.setLayout(gl_toppanel);
 		
