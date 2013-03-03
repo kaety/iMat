@@ -21,8 +21,8 @@ public class SmallPanel extends JPanel {
 	Product p;
 	Color panelColor;
 	private final Color highLightColor = Color.WHITE; //The color when mouse hover
-	private final Color lightColor = Color.PINK;      //Light striping color
-	private final Color darkColor = Color.CYAN;		  //Dark -||-
+	private final Color lightColor = Color.WHITE;      //Light striping color
+	private final Color darkColor = new Color(234,234,234);		  //Dark -||-
 	private final Action action = new SwingAction();
 	JLabel lblLabel;
 	private final Action action_1 = new SwingAction_1();

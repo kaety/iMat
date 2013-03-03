@@ -868,6 +868,10 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if((arg0 instanceof MyObservable) && (arg1 instanceof String)) setFavList();
+		if((arg0 instanceof MyObservable) && (arg1 instanceof Product)){
+			details.setActiveProduct((Product) arg1);
+			cardLayout.show(centercardpanel, "details");
+		}
 	}
 
 
