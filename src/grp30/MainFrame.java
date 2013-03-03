@@ -29,6 +29,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
@@ -42,6 +43,7 @@ import cards.ConfirmedBuy;
 import cards.DetailedFoodView;
 import cards.GuestStart;
 import cards.History;
+import cards.MyAccount;
 import cards.Pay1;
 import cards.Pay2;
 import cards.Pay3;
@@ -73,11 +75,11 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	private Receipt receipt;
 	private GuestStart startGuest;
 	private UserStart startUser;
+	private MyAccount myAccount;
 	
 	private JLabel lblEjInloggad;
 	private JLabel historyLabel;
 	private JLabel changeLabel;
-	private JLabel helpLabel;
 	private JLabel logOutLabel;
 	private JPanel menuPanel;
 	
@@ -161,6 +163,9 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		details = new DetailedFoodView(this);
 		centercardpanel.add(details, "details");
+		
+		myAccount = new MyAccount(this,pay3);
+		centercardpanel.add(myAccount, "myAccount");
 		
 		
 		
@@ -872,8 +877,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			gl_toppanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_toppanel.createSequentialGroup()
 					.addComponent(lblImat)
-					.addPreferredGap(ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
-					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
+					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
 		gl_toppanel.setVerticalGroup(
@@ -887,26 +892,44 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		);
 		
 		logOutLabel = new JLabel("Logga Ut");
+		logOutLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				setUser2("Utloggad");
+				swapCard("startGuest");
+				menuPanel.setVisible(false);
+			}
+		});
+		logOutLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		logOutLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		helpLabel = new JLabel("Hj\u00E4lp");
-		helpLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
 		changeLabel = new JLabel("Mina Uppgifter");
+		changeLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				swapCard("myAccount");
+			}
+		});
+		changeLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		changeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		historyLabel = new JLabel("Historik");
+		historyLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				swapCard("history");
+			}
+		});
+		historyLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		historyLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout gl_menuPanel = new GroupLayout(menuPanel);
 		gl_menuPanel.setHorizontalGroup(
 			gl_menuPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_menuPanel.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addContainerGap(58, Short.MAX_VALUE)
 					.addComponent(changeLabel)
 					.addGap(18)
 					.addComponent(historyLabel)
-					.addGap(18)
-					.addComponent(helpLabel)
 					.addGap(18)
 					.addComponent(logOutLabel)
 					.addContainerGap())
@@ -916,7 +939,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				.addGroup(gl_menuPanel.createSequentialGroup()
 					.addGroup(gl_menuPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(logOutLabel)
-						.addComponent(helpLabel)
 						.addComponent(historyLabel)
 						.addComponent(changeLabel))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -979,6 +1001,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 
 	 public void setUser(){
 		 lblEjInloggad.setText(IMatDataHandler.getInstance().getUser().getUserName());
+		 menuPanel.setVisible(true);
 		 
 	 }
 	 
