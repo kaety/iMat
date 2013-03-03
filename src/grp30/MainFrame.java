@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
+import se.chalmers.ait.dat215.project.ShoppingCartListener;
 
 import SpecialPanels.SlidingPanel;
 
@@ -57,7 +58,7 @@ import java.awt.event.MouseEvent;
 
 
 
-public class MainFrame extends Observable implements Observer{
+public class MainFrame extends Observable implements Observer, ShoppingCartListener{
 	private JFrame mf;
 	private JPanel contentPane;
 	private JTextField searchstring;
@@ -71,14 +72,15 @@ public class MainFrame extends Observable implements Observer{
 	private Pay1 pay1;
 	private Pay2 pay2;
 	private Pay3 pay3;
-
+	private JLabel lblSumma;
+	private JLabel lblRegistreraDig;
 	/**
 	 * Create the frame.
 	 */
 	public MainFrame() {
 		
 		mf=new JFrame();
-	
+		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
 		
 		
 		
@@ -570,7 +572,7 @@ public class MainFrame extends Observable implements Observer{
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addContainerGap(51, Short.MAX_VALUE)
+					.addContainerGap(72, Short.MAX_VALUE)
 					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblEjInloggad))
@@ -578,13 +580,13 @@ public class MainFrame extends Observable implements Observer{
 					.addComponent(cartbutton))
 		);
 		gl_kundvagnspanel.setVerticalGroup(
-			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
+			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
 					.addGap(7)
 					.addComponent(cartbutton))
-				.addGroup(Alignment.TRAILING, gl_kundvagnspanel.createSequentialGroup()
+				.addGroup(gl_kundvagnspanel.createSequentialGroup()
 					.addComponent(lblEjInloggad)
-					.addPreferredGap(ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 		);
 		panel.setLayout(new GridLayout(2, 2, 10, 1));
@@ -593,14 +595,14 @@ public class MainFrame extends Observable implements Observer{
 		lblAntalVaror.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblAntalVaror);
 		
-		JLabel lblSumma = new JLabel("5 st");
+		lblSumma = new JLabel(IMatDataHandler.getInstance().getShoppingCart().getItems().size() + " varor");
 		panel.add(lblSumma);
 		
 		JLabel lblSumma_1 = new JLabel("Summa:");
 		lblSumma_1.setHorizontalAlignment(SwingConstants.RIGHT);
 		panel.add(lblSumma_1);
 		
-		JLabel lblRegistreraDig = new JLabel("145:-");
+		lblRegistreraDig = new JLabel(IMatDataHandler.getInstance().getShoppingCart().getTotal() + ":-");
 		lblRegistreraDig.setHorizontalAlignment(SwingConstants.LEFT);
 		lblRegistreraDig.setForeground(new Color(0, 0, 0));
 		panel.add(lblRegistreraDig);
@@ -880,6 +882,14 @@ public class MainFrame extends Observable implements Observer{
 	 public void swapCard(String key) {
 	      cardLayout.show(centercardpanel, key);
 	   }
-	 
-	
+
+
+
+
+
+	@Override
+	public void shoppingCartChanged() {
+		lblSumma.setText(IMatDataHandler.getInstance().getShoppingCart().getItems().size() + " varor");
+		lblRegistreraDig.setText(IMatDataHandler.getInstance().getShoppingCart().getTotal() + ":-");
+	}
 }

@@ -222,7 +222,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "Lägg Till");
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			putValue(SHORT_DESCRIPTION, "Lägg i varukorgen");
 		}
 		public void actionPerformed(ActionEvent e) {
 			ShoppingItem i = new ShoppingItem(product, prices[comboBox.getSelectedIndex()]);
@@ -235,11 +235,11 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	
 	public void isFavbut(){
 		if(IMatDataHandler.getInstance().favorites().contains(product)){
-			favbut.setText("FAV");
+//			favbut.setText("FAV");
 			favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/goldstar.png")),30,30));
 		}
 		else{
-			favbut.setText("NO FAV");
+//			favbut.setText("NO FAV");
 			favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/greystar.png")),30,30));
 		}
 	}
@@ -251,18 +251,20 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	
 	private class SwingAction_1 extends AbstractAction {
 		public SwingAction_1() {
-			putValue(NAME, returnFav());
-			putValue(SHORT_DESCRIPTION, "Some short description");
+			//putValue(NAME, returnFav());
+			if(IMatDataHandler.getInstance().isFavorite(product)) putValue(LARGE_ICON_KEY, scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/goldstar.png")),30,30));
+			else putValue(LARGE_ICON_KEY, scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/greystar.png")),30,30));
+			putValue(SHORT_DESCRIPTION, "Lägg till/ta bort från favoriter");
 		}
 		public void actionPerformed(ActionEvent e) {
 			if(IMatDataHandler.getInstance().favorites().contains(product)){
 				IMatDataHandler.getInstance().favorites().remove(product);
-				favbut.setText("NO FAV");
+//				favbut.setText("NO FAV");
 				favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/greystar.png")),30,30));
 			}
 			else{
 				IMatDataHandler.getInstance().favorites().add(product);
-				favbut.setText("FAV");
+//				favbut.setText("FAV");
 				favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/goldstar.png")),30,30));
 			}
 			observable.setChanged();

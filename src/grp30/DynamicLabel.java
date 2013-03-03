@@ -2,8 +2,13 @@ package grp30;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.Timer;
+
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.ShoppingCartListener;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 public class DynamicLabel extends JLabel implements ActionListener{
 	private Timer tim;
@@ -18,11 +23,10 @@ public class DynamicLabel extends JLabel implements ActionListener{
 	}
 	
 	public void showLabel(String s){
-		setText(s + " added!");
+		setText(s + " tillagt!");
 		setVisible(true);
 		tim.restart();
 		tim.start();
 	}
-	
 	
 }
