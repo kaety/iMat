@@ -66,6 +66,7 @@ public class MainFrame extends Observable implements Observer{
 	private final CardLayout cardLayout; 
 	private DetailedFoodView details;
 	private SearchResults searchResults;
+	private ShoppingCart cart;
 	private FavouritesScrollPane favouritesScrollPane;
 	
 
@@ -84,14 +85,14 @@ public class MainFrame extends Observable implements Observer{
 		centercardpanel = new JPanel();
 
 		centercardpanel.setLayout(new CardLayout(0, 0));
-		
-		UserStart startUser = new UserStart();
-		centercardpanel.add(startUser, "startUser");
 	
 		GuestStart startGuest = new GuestStart();
 		centercardpanel.add(startGuest, "startGuest");
 		
-		ShoppingCart cart = new ShoppingCart(this);
+		UserStart startUser = new UserStart();
+		centercardpanel.add(startUser, "startUser");
+		
+		cart = new ShoppingCart(this);
 		centercardpanel.add(cart, "cart");
 		
 		searchResults = new SearchResults(this);
@@ -553,6 +554,7 @@ public class MainFrame extends Observable implements Observer{
 		cartbutton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/shopping_cart.png")));
 		cartbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cart.shoppingCartChanged2();
 				cardLayout.show(centercardpanel, "cart");
 			}
 		});

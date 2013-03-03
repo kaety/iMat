@@ -25,6 +25,7 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 	JLabel lblNumpr;
 	JLabel lblSum;
 	JLabel lblEmptyCart;
+	private ShoppingCartScrollPane shoppingCartScrollPane;
 
 	public ShoppingCart(final MainFrame mf){
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
@@ -45,7 +46,7 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 		JPanel panel = new JPanel();
 		panel.setBackground(IMatColors.BASE_LIGHT);
 		
-		ShoppingCartScrollPane shoppingCartScrollPane = new ShoppingCartScrollPane();
+		shoppingCartScrollPane = new ShoppingCartScrollPane();
 		
 		
 		//TODO ÄNDRA TILL JDIALOG 
@@ -129,6 +130,14 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 	@Override
 	public void shoppingCartChanged() {
 		refreshList();
+
+	}
+	
+	
+	//refresh for previous saved shopping cart
+	public void shoppingCartChanged2() {
+		refreshList();
+		shoppingCartScrollPane.shoppingCartChanged();
 
 	}
 }
