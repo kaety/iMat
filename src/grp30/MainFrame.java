@@ -1,39 +1,42 @@
 package grp30;
 import gui.IMatColors;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.CardLayout;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JTextField;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ProductCategory;
 import se.chalmers.ait.dat215.project.ShoppingCartListener;
-
+import SpecialPanels.FavouritesScrollPane;
+import SpecialPanels.SearchResultPanel.MyObservable;
 import SpecialPanels.SlidingPanel;
-
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-
 import cards.ConfirmedBuy;
 import cards.DetailedFoodView;
 import cards.GuestStart;
@@ -46,13 +49,6 @@ import cards.Register;
 import cards.SearchResults;
 import cards.ShoppingCart;
 import cards.UserStart;
-import SpecialPanels.FavouritesScrollPane;
-import SpecialPanels.SearchResultPanel.MyObservable;
-import javax.swing.ImageIcon;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 
 
@@ -889,6 +885,9 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	      cardLayout.show(centercardpanel, key);
 	   }
 
+	 public void lastReceipt(Order o){
+		 receipt.setReceipt(o);
+	 }
 
 
 

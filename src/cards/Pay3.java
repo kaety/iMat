@@ -3,19 +3,20 @@ package cards;
 import grp30.MainFrame;
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
-
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import se.chalmers.ait.dat215.project.Order;
+import se.chalmers.ait.dat215.project.ShoppingItem;
 
 public class Pay3 extends JPanel {
 	private JLabel nameLabel;
@@ -54,7 +55,8 @@ public class Pay3 extends JPanel {
 		JButton confirmButton = new JButton("Bekr\u00E4fta");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				IMatDataHandler.getInstance().placeOrder(true);
+				Order o = IMatDataHandler.getInstance().placeOrder(true);
+				mf.lastReceipt(o);
 				mf.swapCard("confirmed");
 			}
 		});

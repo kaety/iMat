@@ -21,9 +21,13 @@ import javax.swing.SwingConstants;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
+import se.chalmers.ait.dat215.project.ShoppingItem;
+
 import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 
 public class DetailedFoodView extends JPanel {
 	Product activeProduct;
@@ -39,6 +43,9 @@ public class DetailedFoodView extends JPanel {
 	JLabel recipeLabel2;
 	JLabel recipeLabel3;
 	private JTextPane txtpnPerGram;
+	private final int[] prices = {1, 2, 3, 5, 10};
+	private final Action action = new SwingAction();
+	private JComboBox ammountCombo;
 	
 	public DetailedFoodView(final MainFrame mf) {
 		
@@ -70,9 +77,10 @@ public class DetailedFoodView extends JPanel {
 		});
 		
 		JButton addButton = new JButton("L\u00E4gg Till");
+		addButton.setAction(action);
 		
-		JComboBox ammountCombo = new JComboBox();
-		ammountCombo.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9"}));
+		ammountCombo = new JComboBox();
+		ammountCombo.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "5", "10"}));
 		
 		JLabel lblNewLabel = new JLabel("Produktbeskrivning:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -168,6 +176,7 @@ public class DetailedFoodView extends JPanel {
 	}
 	
 	public void setActiveProduct(Product p){
+		activeProduct = p;
 		picLabel.setIcon(IMatDataHandler.getInstance().getImageIcon(p, 170, 170));
 		priceLabel.setText(p.getPrice() + "kr / "+ p.getUnitSuffix());
 		productLabel.setText(p.getName());
@@ -175,5 +184,15 @@ public class DetailedFoodView extends JPanel {
 		recipeLabel1.setText(r.getNewRecipe(p.getName()));
 		recipeLabel2.setText(r.getNewRecipe(p.getName()));
 		recipeLabel3.setText(r.getNewRecipe(p.getName()));
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "Lägg Till");
+			putValue(SHORT_DESCRIPTION, "Lägg varan i kundvagnen");
+		}
+		public void actionPerformed(ActionEvent e) {
+			ShoppingItem i = new ShoppingItem(activeProduct, prices[ammountCombo.getSelectedIndex()]);
+			IMatDataHandler.getInstance().getShoppingCart().addItem(i);
+		}
 	}
 }
