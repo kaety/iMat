@@ -54,6 +54,7 @@ public class Pay3 extends JPanel {
 		JButton confirmButton = new JButton("Bekr\u00E4fta");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				IMatDataHandler.getInstance().placeOrder(true);
 				mf.swapCard("confirmed");
 			}
 		});

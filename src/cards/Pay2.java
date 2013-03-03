@@ -32,10 +32,16 @@ public class Pay2 extends JPanel {
 	private JLabel cvcFail;
 	private JLabel nameFail;
 	private JLabel dateFail;
+	private JLabel lblFel;
 	private JComboBox yyCombo;
 	private JComboBox mmCombo;
+	private JCheckBox chckbx1;
+	private JCheckBox chckbx2;
+	private JCheckBox chckbx3;
+	
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
 
 	/**
 	 * Create the panel.
@@ -47,18 +53,18 @@ public class Pay2 extends JPanel {
 		JLabel label = new JLabel("2/3");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		
-		JCheckBox chckbxVisamastercard = new JCheckBox("Visa/Mastercard");
-		buttonGroup.add(chckbxVisamastercard);
-		chckbxVisamastercard.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		chckbxVisamastercard.setSelected(true);
+		chckbx1 = new JCheckBox("Visa/Mastercard");
+		buttonGroup.add(chckbx1);
+		chckbx1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		//chckbx1.setSelected(true);
 		
-		JCheckBox chckbxFaktura = new JCheckBox("Faktura");
-		buttonGroup.add(chckbxFaktura);
-		chckbxFaktura.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		chckbx2 = new JCheckBox("American Express");
+		buttonGroup.add(chckbx2);
+		chckbx2.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JCheckBox chckbxAvbetalning = new JCheckBox("Avbetalning");
-		buttonGroup.add(chckbxAvbetalning);
-		chckbxAvbetalning.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		chckbx3 = new JCheckBox("Maestro");
+		buttonGroup.add(chckbx3);
+		chckbx3.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		cardNumberLabel = new JTextField();
 		cardNumberLabel.addFocusListener(new FocusAdapter() {
@@ -68,7 +74,7 @@ public class Pay2 extends JPanel {
 			}
 		});
 		cardNumberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		cardNumberLabel.setText("Kortnummer");
+		
 		cardNumberLabel.setColumns(10);
 		
 		cvcLabel = new JTextField();
@@ -79,7 +85,7 @@ public class Pay2 extends JPanel {
 			}
 		});
 		cvcLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		cvcLabel.setText("cvc");
+		
 		cvcLabel.setColumns(10);
 		
 		nameLabel = new JTextField();
@@ -90,7 +96,7 @@ public class Pay2 extends JPanel {
 			}
 		});
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		nameLabel.setText("Fullst\u00E4ndigt namn");
+		
 		nameLabel.setColumns(10);
 		
 		yyCombo = new JComboBox();
@@ -100,6 +106,31 @@ public class Pay2 extends JPanel {
 		mmCombo = new JComboBox();
 		mmCombo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		mmCombo.setModel(new DefaultComboBoxModel(new String[] {"MM", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+		
+		
+		if(!IMatDataHandler.getInstance().getCreditCard().getCardNumber().equals("")){
+			
+			cardNumberLabel.setText(IMatDataHandler.getInstance().getCreditCard().getCardNumber());
+			cvcLabel.setText(Integer.toString(IMatDataHandler.getInstance().getCreditCard().getVerificationCode()));
+			nameLabel.setText(IMatDataHandler.getInstance().getCreditCard().getHoldersName());
+			if(IMatDataHandler.getInstance().getCreditCard().getCardType().equals("A")){
+				chckbx1.setSelected(true);
+			}
+			else if(IMatDataHandler.getInstance().getCreditCard().getCardType().equals("B")){
+				chckbx2.setSelected(true);
+			}
+			else{
+				chckbx3.setSelected(true);
+			}
+		
+		
+		}else{
+			cardNumberLabel.setText("Kortnummer");
+			cvcLabel.setText("cvc");
+			nameLabel.setText("Fullst\u00E4ndigt namn");
+			
+			
+		}
 		
 		
 		
@@ -127,6 +158,10 @@ public class Pay2 extends JPanel {
 		dateFail.setForeground(Color.RED);
 		dateFail.setVisible(false);
 		
+		lblFel = new JLabel("Fel");
+		lblFel.setForeground(Color.RED);
+		lblFel.setVisible(false);
+		
 		// TODO more checks
 		JButton okButton = new JButton("G\u00E5 Vidare");
 		okButton.addActionListener(new ActionListener() {
@@ -138,7 +173,8 @@ public class Pay2 extends JPanel {
 						|| cvcLabel.getText().equals("")
 						|| nameLabel.getText().equals("")
 						|| yyCombo.getSelectedItem().equals("ее")
-						|| mmCombo.getSelectedItem().equals("MM")) {
+						|| mmCombo.getSelectedItem().equals("MM") ||
+						buttonGroup.isSelected(null)) {
 					if (cardNumberLabel.getText().equals("") || cardNumberLabel.getText().equals("Kortnummer")) {
 						cardFail.setVisible(true);
 					}
@@ -152,26 +188,46 @@ public class Pay2 extends JPanel {
 							|| mmCombo.getSelectedItem().equals("MM")) {
 						dateFail.setVisible(true);
 					}
+					if (buttonGroup.isSelected(null)) {
+						lblFel.setVisible(true);
+					}
 				}else {
 					//store values and continue
+					try{
 					IMatDataHandler.getInstance().getCreditCard().setCardNumber(cardNumberLabel.getText());
 					IMatDataHandler.getInstance().getCreditCard().setVerificationCode(Integer.parseInt(cvcLabel.getText()));
 					IMatDataHandler.getInstance().getCreditCard().setHoldersName(nameLabel.getText());
 					IMatDataHandler.getInstance().getCreditCard().setCardNumber(cardNumberLabel.getText());
-					IMatDataHandler.getInstance().getCreditCard().setCardNumber(cardNumberLabel.getText());
+					IMatDataHandler.getInstance().getCreditCard().setValidYear(Integer.parseInt(yyCombo.getSelectedItem().toString()));
+					IMatDataHandler.getInstance().getCreditCard().setValidMonth(Integer.parseInt(mmCombo.getSelectedItem().toString()));
 					
+					if(chckbx1.isSelected()){
+						IMatDataHandler.getInstance().getCreditCard().setCardType("A");
+					}
+					else if(chckbx2.isSelected()){
+						IMatDataHandler.getInstance().getCreditCard().setCardType("B");
+					}
+					else{
+						IMatDataHandler.getInstance().getCreditCard().setCardType("C");
+					}
 					
 					mf.swapCard("pay3");
+					}catch(NumberFormatException e){
+						cvcFail.setVisible(true);
+					}
+					
 				}
 			}
 		});
 		okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		
 
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(200)
 							.addComponent(label, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
@@ -179,11 +235,13 @@ public class Pay2 extends JPanel {
 							.addGap(33)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(chckbxVisamastercard)
+									.addComponent(chckbx1)
 									.addGap(26)
-									.addComponent(chckbxFaktura, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+									.addComponent(chckbx2, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
 									.addGap(29)
-									.addComponent(chckbxAvbetalning, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
+									.addComponent(chckbx3, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblFel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addGroup(groupLayout.createSequentialGroup()
@@ -209,7 +267,7 @@ public class Pay2 extends JPanel {
 							.addComponent(backButton, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
 							.addGap(236)
 							.addComponent(okButton)))
-					.addContainerGap(23, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -218,9 +276,10 @@ public class Pay2 extends JPanel {
 					.addComponent(label, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbxVisamastercard)
-						.addComponent(chckbxFaktura)
-						.addComponent(chckbxAvbetalning))
+						.addComponent(chckbx1)
+						.addComponent(chckbx2)
+						.addComponent(chckbx3)
+						.addComponent(lblFel))
 					.addGap(47)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(cardNumberLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)

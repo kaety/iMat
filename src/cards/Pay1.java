@@ -134,15 +134,17 @@ public class Pay1 extends JPanel {
 		pCodeLabel.setColumns(10);
 			//IF we have first name, we have also other info
 			if(!IMatDataHandler.getInstance().getCustomer().getFirstName().equals("")){
-			firstLabel.setText(IMatDataHandler.getInstance().getCustomer().getFirstName());
-			addressLabel.setText(IMatDataHandler.getInstance().getCustomer().getAddress());
-			tNumberLabel.setText(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
-			lastLabel.setText(IMatDataHandler.getInstance().getCustomer().getLastName());
-			mailLabel.setText(IMatDataHandler.getInstance().getCustomer().getEmail());
-			homePhoneLabel.setText(IMatDataHandler.getInstance().getCustomer().getPhoneNumber());
-			cityLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostAddress());
-			pCodeLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostCode());}
-			else{
+				
+				firstLabel.setText(IMatDataHandler.getInstance().getCustomer().getFirstName());
+				addressLabel.setText(IMatDataHandler.getInstance().getCustomer().getAddress());
+				tNumberLabel.setText(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
+				lastLabel.setText(IMatDataHandler.getInstance().getCustomer().getLastName());
+				mailLabel.setText(IMatDataHandler.getInstance().getCustomer().getEmail());
+				homePhoneLabel.setText(IMatDataHandler.getInstance().getCustomer().getPhoneNumber());
+				cityLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostAddress());
+				pCodeLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostCode());
+			
+			}else{
 				firstLabel.setText("Förnamn");
 				addressLabel.setText("Adress");
 				lastLabel.setText("Efternamn");
@@ -155,12 +157,6 @@ public class Pay1 extends JPanel {
 				
 			}
 			
-			
-			
-			
-			
-		
-
 		
 		JButton okButton = new JButton("G\u00E5 Vidare");
 		okButton.addActionListener(new ActionListener() {
