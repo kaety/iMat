@@ -1,6 +1,7 @@
 package cards;
 
 
+import grp30.MainFrame;
 import grp30.RecipeGenerator;
 
 import java.awt.Color;
@@ -21,6 +22,8 @@ import javax.swing.SwingConstants;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DetailedFoodView extends JPanel {
 	Product activeProduct;
@@ -37,7 +40,7 @@ public class DetailedFoodView extends JPanel {
 	JLabel recipeLabel3;
 	private JTextPane txtpnPerGram;
 	
-	public DetailedFoodView() {
+	public DetailedFoodView(final MainFrame mf) {
 		
 		setBackground(Color.WHITE);
 		
@@ -60,6 +63,11 @@ public class DetailedFoodView extends JPanel {
 		lblNringsinnehll.setHorizontalAlignment(SwingConstants.RIGHT);
 		
 		JButton backButton = new JButton("Tillbaka");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mf.swapCard("searchResults");
+			}
+		});
 		
 		JButton addButton = new JButton("L\u00E4gg Till");
 		

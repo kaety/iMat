@@ -112,7 +112,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		centercardpanel.add(pay2, "pay2");
 		
 		
-		
 		Register register = new Register();
 		centercardpanel.add(register, "register");
 		
@@ -125,7 +124,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		Receipt receipt = new Receipt();
 		centercardpanel.add(receipt, "receipt");
 		
-		details = new DetailedFoodView();
+		details = new DetailedFoodView(this);
 		centercardpanel.add(details, "details");
 		
 		
