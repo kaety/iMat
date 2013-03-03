@@ -1,5 +1,7 @@
 package cards;
 
+import grp30.MainFrame;
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -8,39 +10,56 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Pay3 extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public Pay3() {
+	public Pay3(final MainFrame mf) {
 		
 		setBackground(Color.WHITE);
 		
-		JLabel nameLabel = new JLabel("Per Thoresson");
+		JLabel nameLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getFirstName()+" "+
+		IMatDataHandler.getInstance().getCustomer().getFirstName());
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel addressLabel = new JLabel("Fj\u00E4rde L\u00E5nggatan 26");
+		JLabel addressLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getAddress());
 		addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel cityLabel = new JLabel("41327 G\u00F6teborg");
+		JLabel cityLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getPostCode()+" "+
+				IMatDataHandler.getInstance().getCustomer().getPostAddress());
 		cityLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel numberLabel = new JLabel("0735924885");
+		JLabel numberLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
 		numberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblTotalsumma = new JLabel("Totalsumma:");
 		lblTotalsumma.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel totalLabel = new JLabel("7562:-");
+		JLabel totalLabel = new JLabel(IMatDataHandler.getInstance().getShoppingCart().getTotal()+"");
 		totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton confirmButton = new JButton("Bekr\u00E4fta");
+		confirmButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mf.swapCard("confirmed");
+			}
+		});
 		confirmButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton backButton = new JButton("Tillbaka");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mf.swapCard("pay2");
+			}
+		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
