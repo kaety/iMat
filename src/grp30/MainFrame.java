@@ -907,6 +907,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		changeLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				myAccount.updateInfo();
 				swapCard("myAccount");
 			}
 		});

@@ -208,8 +208,6 @@ public class MyAccount extends JPanel {
 					IMatDataHandler.getInstance().getCustomer().setPostAddress(cityLabel.getText());
 					IMatDataHandler.getInstance().getCustomer().setPostCode(pCodeLabel.getText());
 					
-					pay3.updateInfo();
-					
 					mf.swapCard("startUser");
 					
 				}
@@ -345,9 +343,17 @@ public class MyAccount extends JPanel {
 		setLayout(groupLayout);
 
 	}
+	
 
 	public void updateInfo() {
-		mailLabel.setText(IMatDataHandler.getInstance().getUser().getUserName());
+		firstLabel.setText(IMatDataHandler.getInstance().getCustomer().getFirstName());
+		addressLabel.setText(IMatDataHandler.getInstance().getCustomer().getAddress());
+		tNumberLabel.setText(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
+		lastLabel.setText(IMatDataHandler.getInstance().getCustomer().getLastName());
+		mailLabel.setText(IMatDataHandler.getInstance().getCustomer().getEmail());
+		homePhoneLabel.setText(IMatDataHandler.getInstance().getCustomer().getPhoneNumber());
+		cityLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostAddress());
+		pCodeLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostCode());
 		
 	}
 }
