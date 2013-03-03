@@ -1,5 +1,8 @@
 
 package SpecialPanels;
+import grp30.MainFrame;
+import gui.IMatColors;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -19,6 +22,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
@@ -27,6 +32,8 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Component;
+import java.awt.Image;
+
 import javax.swing.Box;
 
 
@@ -49,9 +56,8 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 
 	public SearchResultPanel(Product p, boolean lightPanel) {
 		product = p;
-		setBorder(new LineBorder(new Color(0, 0, 0)));
-		if(lightPanel) panelColor = Color.LIGHT_GRAY;
-		else panelColor = Color.DARK_GRAY;
+		if(lightPanel) panelColor = Color.white;
+		else panelColor = new Color(234,234,234);
 		setBackground(panelColor);
 	    addMouseListener(this);
 		ImageIcon icon = IMatDataHandler.getInstance().getImageIcon(p, imageDimension, imageDimension);
@@ -60,6 +66,8 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		selectorPanel = new JPanel();
 		imagePanel.setBackground(panelColor);
 		selectorPanel.setBackground(panelColor);
+		
+		
 		
 		middlePanel = new JPanel();
 		favbut = new JButton();
@@ -162,18 +170,24 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
+		this.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		/* Changed to just a border instead of change of colours.
 		setBackground(highLightColor);
 		imagePanel.setBackground(highLightColor);
 		selectorPanel.setBackground(highLightColor);
 		middlePanel.setBackground(highLightColor);
+		*/
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
+		this.setBorder(null);
+		/*
 		setBackground(panelColor);
 		imagePanel.setBackground(panelColor);
 		selectorPanel.setBackground(panelColor);
 		middlePanel.setBackground(panelColor);
+		*/
 		
 	}
 
@@ -220,8 +234,14 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	}
 	
 	public void isFavbut(){
-		if(IMatDataHandler.getInstance().favorites().contains(product)) favbut.setText("FAV");
-		else favbut.setText("NO FAV");
+		if(IMatDataHandler.getInstance().favorites().contains(product)){
+			favbut.setText("FAV");
+			favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/goldstar.png")),30,30));
+		}
+		else{
+			favbut.setText("NO FAV");
+			favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/greystar.png")),30,30));
+		}
 	}
 	
 	private String returnFav(){
@@ -238,14 +258,22 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 			if(IMatDataHandler.getInstance().favorites().contains(product)){
 				IMatDataHandler.getInstance().favorites().remove(product);
 				favbut.setText("NO FAV");
+				favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/greystar.png")),30,30));
 			}
 			else{
 				IMatDataHandler.getInstance().favorites().add(product);
 				favbut.setText("FAV");
+				favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/goldstar.png")),30,30));
 			}
 			observable.setChanged();
 			observable.notifyObservers("fav");
 			System.out.println(IMatDataHandler.getInstance().favorites());
 		}
+	}
+	
+	private static ImageIcon scaleIcon(ImageIcon icon, int width, int height){
+		Image img = icon.getImage();
+		Image newimg = img.getScaledInstance( width, height,  java.awt.Image.SCALE_SMOOTH ) ;  
+		return new ImageIcon( newimg );
 	}
 }
