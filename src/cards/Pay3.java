@@ -18,7 +18,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Pay3 extends JPanel {
-
+	private JLabel nameLabel;
+	private JLabel addressLabel;
+	private JLabel cityLabel;
+	private JLabel numberLabel;
+	private JLabel totalLabel;
+	
+	
+	
 	/**
 	 * Create the panel.
 	 */
@@ -26,24 +33,22 @@ public class Pay3 extends JPanel {
 		
 		setBackground(Color.WHITE);
 		
-		JLabel nameLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getFirstName()+" "+
-		IMatDataHandler.getInstance().getCustomer().getFirstName());
+		nameLabel = new JLabel();
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel addressLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getAddress());
+		addressLabel = new JLabel();
 		addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel cityLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getPostCode()+" "+
-				IMatDataHandler.getInstance().getCustomer().getPostAddress());
+		cityLabel = new JLabel();
 		cityLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel numberLabel = new JLabel(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
+		numberLabel = new JLabel();
 		numberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblTotalsumma = new JLabel("Totalsumma:");
 		lblTotalsumma.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel totalLabel = new JLabel(IMatDataHandler.getInstance().getShoppingCart().getTotal()+"");
+		totalLabel = new JLabel();
 		totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton confirmButton = new JButton("Bekr\u00E4fta");
@@ -109,6 +114,16 @@ public class Pay3 extends JPanel {
 		);
 		setLayout(groupLayout);
 
+	}
+
+	public void updateInfo() {
+		nameLabel.setText(IMatDataHandler.getInstance().getCustomer().getFirstName()+" "+
+		IMatDataHandler.getInstance().getCustomer().getLastName());
+		addressLabel.setText(IMatDataHandler.getInstance().getCustomer().getAddress());
+		cityLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostCode()+" "+
+				IMatDataHandler.getInstance().getCustomer().getPostAddress());
+		numberLabel.setText(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
+		totalLabel.setText(IMatDataHandler.getInstance().getShoppingCart().getTotal()+"");
 	}
 
 }

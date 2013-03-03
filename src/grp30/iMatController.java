@@ -15,14 +15,13 @@ import se.chalmers.ait.dat215.project.ShoppingItem;
 
 public class iMatController extends Observable implements Observer{
 	
-	//this should be deleted //Kryztof
-	//private static iMatController instance = null;
-	
 	testFrame t;
 	iMatModel m;
 	MainFrame mf;
 	
 	public iMatController(){
+		//Reset for Debugging //Kryztof
+		//IMatDataHandler.getInstance().reset();
 		init();
 	}
 	

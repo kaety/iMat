@@ -43,7 +43,7 @@ public class Pay1 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Pay1(final MainFrame mf) {
+	public Pay1(final MainFrame mf,final Pay3 pay3) {
 		
 		setBackground(Color.WHITE);
 		
@@ -210,6 +210,8 @@ public class Pay1 extends JPanel {
 					IMatDataHandler.getInstance().getCustomer().setPhoneNumber(homePhoneLabel.getText());
 					IMatDataHandler.getInstance().getCustomer().setPostAddress(cityLabel.getText());
 					IMatDataHandler.getInstance().getCustomer().setPostCode(pCodeLabel.getText());
+					
+					pay3.updateInfo();
 					
 					mf.swapCard("pay2");
 					

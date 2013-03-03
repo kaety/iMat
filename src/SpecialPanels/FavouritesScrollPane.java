@@ -21,6 +21,10 @@ public class FavouritesScrollPane extends JScrollPane{
 		box = Box.createVerticalBox();
 		setViewportView(box);
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		addFavourites();
+		
+		
 	}
 	
 	public void addFavourites(){

@@ -102,14 +102,16 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		searchResults = new SearchResults(this);
 		centercardpanel.add(searchResults, "searchResults");
 		
-		pay1 = new Pay1(this);
+		pay3 = new Pay3(this);
+		centercardpanel.add(pay3, "pay3");
+		
+		pay1 = new Pay1(this,pay3);
 		centercardpanel.add(pay1, "pay1");
 		
 		pay2 = new Pay2(this);
 		centercardpanel.add(pay2, "pay2");
 		
-		pay3 = new Pay3(this);
-		centercardpanel.add(pay3, "pay3");
+		
 		
 		Register register = new Register();
 		centercardpanel.add(register, "register");
@@ -840,10 +842,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		 mf.addWindowListener(new java.awt.event.WindowAdapter() {
 			    @Override
 			    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-			    	IMatDataHandler.getInstance().shutDown();
-			        javax.swing.JOptionPane.showConfirmDialog(mf, 
-			            "saving dataZz...", "Kipping dialog", 
-			            javax.swing.JOptionPane.DEFAULT_OPTION);
+			    	IMatDataHandler.getInstance().shutDown();    
 			    }
 			});
 		

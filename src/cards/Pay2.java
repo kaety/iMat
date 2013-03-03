@@ -21,6 +21,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.ButtonGroup;
 
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+
 public class Pay2 extends JPanel {
 	private JTextField cardNumberLabel;
 	private JTextField cvcLabel;
@@ -151,6 +153,14 @@ public class Pay2 extends JPanel {
 						dateFail.setVisible(true);
 					}
 				}else {
+					//store values and continue
+					IMatDataHandler.getInstance().getCreditCard().setCardNumber(cardNumberLabel.getText());
+					IMatDataHandler.getInstance().getCreditCard().setVerificationCode(Integer.parseInt(cvcLabel.getText()));
+					IMatDataHandler.getInstance().getCreditCard().setHoldersName(nameLabel.getText());
+					IMatDataHandler.getInstance().getCreditCard().setCardNumber(cardNumberLabel.getText());
+					IMatDataHandler.getInstance().getCreditCard().setCardNumber(cardNumberLabel.getText());
+					
+					
 					mf.swapCard("pay3");
 				}
 			}
