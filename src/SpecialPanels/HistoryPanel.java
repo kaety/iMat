@@ -22,8 +22,10 @@ public class HistoryPanel extends JPanel{
 	private final Action action = new SwingAction();
 	Order o;
 	public HistoryPanel(Order o, boolean b) {
-		if(b) setBackground(gui.IMatColors.BASE_LIGHT);
-		else setBackground(Color.WHITE);
+		Color c;
+		if(b)  c = new Color(240,240,240);
+		else c = Color.WHITE;
+		setBackground(c);
 		setLayout(new GridLayout(1, 0, 0, 0));
 		this.o = o;
 		JLabel lblNewLabel_1 = new JLabel(o.getDate() + "");
@@ -39,6 +41,7 @@ public class HistoryPanel extends JPanel{
 		add(lblNewLabel);
 		
 		JPanel panel = new JPanel();
+		panel.setBackground(c);
 		add(panel);
 		
 		JButton btnLggTill = new JButton("L\u00E4gg TIll");

@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
+import javax.swing.ScrollPaneConstants;
 
 public class HistoryScrollPane extends JPanel{
 	Box box;
@@ -18,6 +19,8 @@ public class HistoryScrollPane extends JPanel{
 		b = false;
 		box = Box.createVerticalBox();
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.setViewportView(box);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -28,6 +31,7 @@ public class HistoryScrollPane extends JPanel{
 				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
+		placeHistory();
 	}
 	
 	public void placeHistory(){
@@ -35,9 +39,12 @@ public class HistoryScrollPane extends JPanel{
 		boolean b = false;
 		ArrayList<Order> l = (ArrayList<Order>) IMatDataHandler.getInstance().getOrders();
 		for(Order o : l){
+			b = !b;
 			HistoryPanel p = new HistoryPanel(o,b);
 			box.add(p);
 		}
+		validate();
+		repaint();
 	}
 	
 }
