@@ -1,5 +1,8 @@
 package SpecialPanels;
+import grp30.MainFrame;
+
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.util.Observer;
 
@@ -15,6 +18,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import SpecialPanels.SearchResultPanel.MyObservable;
+import javax.swing.ImageIcon;
 
 public class SmallPanel extends JPanel {
 	MyObservable m = new MyObservable();
@@ -47,8 +51,8 @@ public class SmallPanel extends JPanel {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblLabel, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+					.addComponent(lblLabel, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 1, Short.MAX_VALUE)
 					.addComponent(btnA_1)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnA)
@@ -58,15 +62,16 @@ public class SmallPanel extends JPanel {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 					.addComponent(lblLabel)
-					.addComponent(btnA, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-					.addComponent(btnA_1, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addComponent(btnA, GroupLayout.DEFAULT_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnA_1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
 		);
 		setLayout(groupLayout);
 
 	}
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
-			putValue(NAME, "R");
+			//putValue(NAME, "R");
+			putValue(SMALL_ICON,new ImageIcon(MainFrame.class.getResource("/resources/trashcan.gif")));
 			putValue(SHORT_DESCRIPTION, "Ta bort varan från favoriter");
 		}
 		public void actionPerformed(ActionEvent e) {
@@ -77,11 +82,17 @@ public class SmallPanel extends JPanel {
 	}
 	private class SwingAction_1 extends AbstractAction {
 		public SwingAction_1() {
-			putValue(NAME, "L");
+			putValue(SMALL_ICON,new ImageIcon(MainFrame.class.getResource("/resources/shopping_cart.gif")));
 			putValue(SHORT_DESCRIPTION, "Lägg till i varukorgen");
 		}
 		public void actionPerformed(ActionEvent e) {
 			IMatDataHandler.getInstance().getShoppingCart().addProduct(p);
 		}
+	}
+	
+	private static ImageIcon scaleIcon(ImageIcon icon, int width, int height){
+		Image img = icon.getImage();
+		Image newimg = img.getScaledInstance( width, height,  java.awt.Image.SCALE_SMOOTH ) ;  
+		return new ImageIcon( newimg );
 	}
 }
