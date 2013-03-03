@@ -1,5 +1,7 @@
 package cards;
 
+import grp30.MainFrame;
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -11,13 +13,16 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ConfirmedBuy extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public ConfirmedBuy() {
+	public ConfirmedBuy(final MainFrame mf) {
 		
 		setBackground(Color.WHITE);
 		
@@ -31,11 +36,21 @@ public class ConfirmedBuy extends JPanel {
 		JLabel lblDuKanven = new JLabel("du kan \u00E4ven se det");
 		lblDuKanven.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		JLabel lblNewLabel_1 = new JLabel("H\u00E4r");
+		JButton lblNewLabel_1 = new JButton("H\u00E4r");
+		lblNewLabel_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mf.swapCard("receipt");
+			}
+		});
 		lblNewLabel_1.setForeground(Color.BLUE);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		JLabel lblLoggaUt = new JLabel("Logga Ut");
+		JButton lblLoggaUt = new JButton("Logga Ut");
+		lblLoggaUt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mf.swapCard("startGuest");
+			}
+		});
 		lblLoggaUt.setForeground(Color.BLUE);
 		lblLoggaUt.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GroupLayout groupLayout = new GroupLayout(this);

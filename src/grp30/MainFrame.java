@@ -69,6 +69,10 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	private SearchResults searchResults;
 	private ShoppingCart cart;
 	private FavouritesScrollPane favouritesScrollPane;
+	private ConfirmedBuy confirmed;
+	private Register register;
+	private History history;
+	private Receipt receipt;
 	private Pay1 pay1;
 	private Pay2 pay2;
 	private Pay3 pay3;
@@ -112,16 +116,16 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		centercardpanel.add(pay2, "pay2");
 		
 		
-		Register register = new Register();
+		register = new Register();
 		centercardpanel.add(register, "register");
 		
-		ConfirmedBuy confirmed = new ConfirmedBuy();
+		confirmed = new ConfirmedBuy(this);
 		centercardpanel.add(confirmed, "confirmed");
 		
-		History history = new History();
+		history = new History();
 		centercardpanel.add(history, "history");
 		
-		Receipt receipt = new Receipt();
+		receipt = new Receipt();
 		centercardpanel.add(receipt, "receipt");
 		
 		details = new DetailedFoodView(this);
