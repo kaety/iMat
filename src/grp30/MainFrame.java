@@ -68,7 +68,9 @@ public class MainFrame extends Observable implements Observer{
 	private SearchResults searchResults;
 	private ShoppingCart cart;
 	private FavouritesScrollPane favouritesScrollPane;
-	
+	private Pay1 pay1;
+	private Pay2 pay2;
+	private Pay3 pay3;
 
 	/**
 	 * Create the frame.
@@ -98,13 +100,13 @@ public class MainFrame extends Observable implements Observer{
 		searchResults = new SearchResults(this);
 		centercardpanel.add(searchResults, "searchResults");
 		
-		Pay1 pay1 = new Pay1(this);
+		pay1 = new Pay1(this);
 		centercardpanel.add(pay1, "pay1");
 		
-		Pay2 pay2 = new Pay2(this);
+		pay2 = new Pay2(this);
 		centercardpanel.add(pay2, "pay2");
 		
-		Pay3 pay3 = new Pay3();
+		pay3 = new Pay3(this);
 		centercardpanel.add(pay3, "pay3");
 		
 		Register register = new Register();

@@ -165,39 +165,42 @@ public class Pay1 extends JPanel {
 		JButton okButton = new JButton("G\u00E5 Vidare");
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//CHECK FOR EMPTY FIELDS AND NOTIFY 
-				//TODO more checks
-				if(firstLabel.getText().equals("") || addressLabel.getText().equals("") ||
-						tNumberLabel.getText().equals("") || lastLabel.getText().equals("") ||
-						cityLabel.getText().equals("") || mailLabel.getText().equals("") ||
-						homePhoneLabel.getText().equals("") || pCodeLabel.getText().equals(""))
-				{
-				if(firstLabel.getText().equals("")){
-					l1.setVisible(true);
-				}
-				if(addressLabel.getText().equals("")){
-					l2.setVisible(true);
-				}
-				if(tNumberLabel.getText().equals("")){
-					l3.setVisible(true);
-				}
-				if(lastLabel.getText().equals("")){
-					l4.setVisible(true);
-				}
-				if(cityLabel.getText().equals("")){
-					l5.setVisible(true);
-				}
-				if(mailLabel.getText().equals("")){
-					l6.setVisible(true);
-				}
-				if(homePhoneLabel.getText().equals("")){
-					l7.setVisible(true);
-				}
-				if(pCodeLabel.getText().equals("")){
-					l8.setVisible(true);
-				}
-				}else{
-					//Store values and Continue
+				// CHECK FOR EMPTY FIELDS AND NOTIFY
+				// TODO more checks
+				if (firstLabel.getText().equals("")
+						|| addressLabel.getText().equals("")
+						|| tNumberLabel.getText().equals("")
+						|| lastLabel.getText().equals("")
+						|| cityLabel.getText().equals("")
+						|| mailLabel.getText().equals("")
+						|| homePhoneLabel.getText().equals("")
+						|| pCodeLabel.getText().equals("")) {
+					if (firstLabel.getText().equals("")) {
+						l1.setVisible(true);
+					}
+					if (addressLabel.getText().equals("")) {
+						l2.setVisible(true);
+					}
+					if (tNumberLabel.getText().equals("")) {
+						l3.setVisible(true);
+					}
+					if (lastLabel.getText().equals("")) {
+						l4.setVisible(true);
+					}
+					if (cityLabel.getText().equals("")) {
+						l5.setVisible(true);
+					}
+					if (mailLabel.getText().equals("")) {
+						l6.setVisible(true);
+					}
+					if (homePhoneLabel.getText().equals("")) {
+						l7.setVisible(true);
+					}
+					if (pCodeLabel.getText().equals("")) {
+						l8.setVisible(true);
+					}
+				} else {
+					// Store values and Continue
 					
 					IMatDataHandler.getInstance().getCustomer().setFirstName(firstLabel.getText());
 					IMatDataHandler.getInstance().getCustomer().setAddress(addressLabel.getText());
