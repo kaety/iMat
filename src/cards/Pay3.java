@@ -53,6 +53,7 @@ public class Pay3 extends JPanel {
 		totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton confirmButton = new JButton("Bekr\u00E4fta");
+		confirmButton.setToolTipText("L\u00E4gg order");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Order o = IMatDataHandler.getInstance().placeOrder(true);
@@ -63,6 +64,7 @@ public class Pay3 extends JPanel {
 		confirmButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton backButton = new JButton("Tillbaka");
+		backButton.setToolTipText("Tillbaka till betals\u00E4tt");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mf.swapCard("pay2");
@@ -73,31 +75,31 @@ public class Pay3 extends JPanel {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(134)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(38)
+							.addGap(13)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(nameLabel)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 										.addComponent(numberLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(cityLabel, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+										.addComponent(cityLabel, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
 									.addGap(126)
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 										.addComponent(lblTotalsumma)
 										.addComponent(totalLabel)))
 								.addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(25)
 							.addComponent(backButton)
 							.addGap(249)
 							.addComponent(confirmButton)))
-					.addContainerGap(20, Short.MAX_VALUE))
+					.addContainerGap(200, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(36)
+					.addGap(58)
 					.addComponent(nameLabel)
 					.addGap(18)
 					.addComponent(addressLabel)
@@ -113,7 +115,7 @@ public class Pay3 extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(backButton)
 						.addComponent(confirmButton))
-					.addContainerGap(68, Short.MAX_VALUE))
+					.addContainerGap(120, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
