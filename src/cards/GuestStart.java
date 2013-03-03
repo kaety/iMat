@@ -1,5 +1,7 @@
 package cards;
 
+import grp30.MainFrame;
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -10,13 +12,16 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GuestStart extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public GuestStart() {
+	public GuestStart(final MainFrame mf) {
 		
 		setBackground(Color.WHITE);
 		
@@ -81,31 +86,46 @@ public class GuestStart extends JPanel {
 		
 		JLabel picLabel2 = new JLabel("BILD");
 		picLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JButton btnRegistreraDaj = new JButton("Registrera dig, cykel p\u00E5 k\u00F6pet! Extra erbjudande endast idag!");
+		btnRegistreraDaj.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mf.swapCard("register");
+			}
+		});
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(12)
 					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 434, Short.MAX_VALUE)
 					.addGap(8))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(45)
-					.addComponent(picLabel1, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-					.addGap(137)
-					.addComponent(picLabel2, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-					.addGap(146)
-					.addComponent(picLabel3, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
-					.addGap(58))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(84)
-					.addComponent(lblSomIcaFast, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(lblSomIcaFast, GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
 					.addGap(98))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(btnRegistreraDaj))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(45)
+							.addComponent(picLabel1, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+							.addGap(137)
+							.addComponent(picLabel2, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)))
+					.addGap(146)
+					.addComponent(picLabel3, GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+					.addGap(58))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(lblSomIcaFast)
-					.addGap(62)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnRegistreraDaj)
+					.addGap(33)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(picLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(picLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -117,5 +137,4 @@ public class GuestStart extends JPanel {
 		setLayout(groupLayout);
 
 	}
-
 }

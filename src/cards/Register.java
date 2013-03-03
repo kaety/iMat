@@ -1,5 +1,7 @@
 package cards;
 
+import grp30.MainFrame;
+
 import java.awt.Color;
 
 import javax.swing.JPanel;
@@ -11,15 +13,25 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import javax.swing.JPasswordField;
+
+import se.chalmers.ait.dat215.project.IMatDataHandler;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Register extends JPanel {
 	private JTextField mailField;
-	private JTextField passField;
+	private JPasswordField passField;
+	private JLabel fel1;
+	private JLabel fel3;
 
 	/**
 	 * Create the panel.
 	 */
-	public Register() {
+	public Register(final MainFrame mf, final Pay1 pay1) {
 		
 		setBackground(Color.WHITE);
 		
@@ -45,11 +57,11 @@ public class Register extends JPanel {
 		mailField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		mailField.setColumns(10);
 		
-		passField = new JTextField();
+		passField = new JPasswordField();
+		
 		passField.setHorizontalAlignment(SwingConstants.CENTER);
 		passField.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		passField.setForeground(Color.LIGHT_GRAY);
-		passField.setText("minst 8 tecken");
+		passField.setForeground(Color.BLACK);
 		passField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("E-Mail:");
@@ -60,36 +72,87 @@ public class Register extends JPanel {
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
+		fel1 = new JLabel("Ogiltlig EMAIL");
+		fel1.setForeground(Color.RED);
+		fel1.setVisible(false);
+		
+		fel3 = new JLabel("F\u00F6r kort L\u00F6senord, minst 8 tecken");
+		fel3.setForeground(Color.RED);
+		fel3.setVisible(false);
+		
 		JButton regButton = new JButton("Registrera");
+		regButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(mailField.getText().equals("")  || passField.getPassword().length < 8){
+					System.out.println(passField.getPassword().length);
+					if(mailField.getText().equals("")){
+						fel1.setVisible(true);
+						
+					}
+					if( passField.getPassword().length < 8){
+						fel3.setVisible(true);
+					}
+					
+				}
+				else{
+					//SAVE USERNAME AND PASSWORD
+					IMatDataHandler.getInstance().getUser().setUserName(mailField.getText());
+					IMatDataHandler.getInstance().getUser().setPassword(passField.getPassword().toString());
+					
+					mf.setUser();
+					
+					pay1.updateInfo();
+					
+					mf.swapCard("startUser");
+					
+					
+				}
+			}
+		});
+		
+		
+		
+		
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(79)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(lblNewLabel)
-								.addComponent(lblNewLabel_1))
-							.addGap(18)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(passField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(mailField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(79)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(lblNewLabel_1)
+										.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+											.addComponent(fel1)
+											.addComponent(lblNewLabel)))
+									.addGap(18)
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addComponent(passField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(mailField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(regButton)
+									.addGap(12))))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(regButton)
-							.addGap(12)))
-					.addContainerGap(254, Short.MAX_VALUE))
+							.addContainerGap()
+							.addComponent(fel3)))
+					.addContainerGap(100, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(65)
+					.addGap(45)
+					.addComponent(fel1)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE, false)
 						.addComponent(mailField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(4)
 							.addComponent(lblNewLabel)))
-					.addGap(36)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(fel3)
+					.addGap(11)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE, false)
 						.addComponent(passField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup()
@@ -97,7 +160,7 @@ public class Register extends JPanel {
 							.addComponent(lblNewLabel_1)))
 					.addGap(18)
 					.addComponent(regButton)
-					.addContainerGap(114, Short.MAX_VALUE))
+					.addContainerGap(64, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);

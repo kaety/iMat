@@ -38,7 +38,9 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 					lblEmptyCart.setVisible(true);
 				}
 				else{
+					
 					mf.swapCard("pay1");
+					
 				}
 			}
 		});

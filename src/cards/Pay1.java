@@ -149,10 +149,11 @@ public class Pay1 extends JPanel {
 				addressLabel.setText("Adress");
 				lastLabel.setText("Efternamn");
 				homePhoneLabel.setText("Hemtelefon");
-				mailLabel.setText("E-Mail");
 				cityLabel.setText("Postadress");
 				tNumberLabel.setText("Mobilnummer");
 				pCodeLabel.setText("Postkod");
+				mailLabel.setText("E-Mail");
+				
 				
 				
 			}
@@ -354,5 +355,10 @@ public class Pay1 extends JPanel {
 		);
 		setLayout(groupLayout);
 
+	}
+
+	public void updateInfo() {
+		mailLabel.setText(IMatDataHandler.getInstance().getUser().getUserName());
+		
 	}
 }

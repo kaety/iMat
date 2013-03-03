@@ -61,6 +61,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 
 	private final JPanel centercardpanel;
 	private final CardLayout cardLayout; 
+	
 	private DetailedFoodView details;
 	private SearchResults searchResults;
 	private ShoppingCart cart;
@@ -69,6 +70,11 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	private Register register;
 	private History history;
 	private Receipt receipt;
+	private GuestStart startGuest;
+	private UserStart startUser;
+	
+	private JLabel lblEjInloggad;
+	
 	private Pay1 pay1;
 	private Pay2 pay2;
 	private Pay3 pay3;
@@ -90,11 +96,25 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 
 		centercardpanel.setLayout(new CardLayout(0, 0));
 	
-		GuestStart startGuest = new GuestStart();
-		centercardpanel.add(startGuest, "startGuest");
+		startGuest = new GuestStart(this);
+		startUser = new UserStart();
 		
-		UserStart startUser = new UserStart();
-		centercardpanel.add(startUser, "startUser");
+		lblEjInloggad = new JLabel("Ej inloggad...");
+		
+		//NEW VISITOR
+		if(IMatDataHandler.getInstance().getUser().getUserName().equals("")){
+			
+			centercardpanel.add(startGuest, "startGuest");
+			centercardpanel.add(startUser, "startUser");
+		}
+		else{
+			//WELLKNOWN USER
+			lblEjInloggad.setText(IMatDataHandler.getInstance().getUser().getUserName());
+			centercardpanel.add(startUser, "startUser");
+			centercardpanel.add(startGuest, "startGuest");
+		}
+		
+		
 		
 		cart = new ShoppingCart(this);
 		centercardpanel.add(cart, "cart");
@@ -107,12 +127,16 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		pay1 = new Pay1(this,pay3);
 		centercardpanel.add(pay1, "pay1");
+		if(!IMatDataHandler.getInstance().getUser().getUserName().equals("")){
+		pay1.updateInfo();
+		}
+		
 		
 		pay2 = new Pay2(this);
 		centercardpanel.add(pay2, "pay2");
 		
 		
-		register = new Register();
+		register = new Register(this, pay1);
 		centercardpanel.add(register, "register");
 		
 		confirmed = new ConfirmedBuy(this);
@@ -567,7 +591,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		
-		JLabel lblEjInloggad = new JLabel("Ej inloggad...");
+		
 		lblEjInloggad.setForeground(new Color(204, 153, 0));
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
 		gl_kundvagnspanel.setHorizontalGroup(
@@ -815,7 +839,12 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		lblImat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				cardLayout.show(centercardpanel, "startUser");
+				if(IMatDataHandler.getInstance().getUser().getUserName().equals("")){
+					cardLayout.show(centercardpanel, "startGuest");
+				}
+				else{
+					cardLayout.show(centercardpanel, "startUser");
+				}
 			}
 		});
 		lblImat.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/main_logotype.png")));
@@ -889,7 +918,15 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		 receipt.setReceipt(o);
 	 }
 
-
+	 public void setUser(){
+		 lblEjInloggad.setText(IMatDataHandler.getInstance().getUser().getUserName());
+		 
+	 }
+	 
+	 public void setUser2(String s){
+		 lblEjInloggad.setText(s);
+		 
+	 }
 
 
 	@Override

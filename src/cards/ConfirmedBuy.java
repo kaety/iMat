@@ -48,7 +48,9 @@ public class ConfirmedBuy extends JPanel {
 		JButton lblLoggaUt = new JButton("Logga Ut");
 		lblLoggaUt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				mf.setUser2("utloggad");
 				mf.swapCard("startGuest");
+				
 			}
 		});
 		lblLoggaUt.setForeground(Color.BLUE);
