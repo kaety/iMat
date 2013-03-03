@@ -154,7 +154,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		imagePanel.add(lblImage);
 		lblImage.setText("");
 		setLayout(groupLayout);
-
+		isFavbut();
 	}
 
 	@Override
