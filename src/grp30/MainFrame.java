@@ -3,6 +3,7 @@ import gui.IMatColors;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -74,6 +75,11 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	private UserStart startUser;
 	
 	private JLabel lblEjInloggad;
+	private JLabel historyLabel;
+	private JLabel changeLabel;
+	private JLabel helpLabel;
+	private JLabel logOutLabel;
+	private JPanel menuPanel;
 	
 	private Pay1 pay1;
 	private Pay2 pay2;
@@ -84,7 +90,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	 * Create the frame.
 	 */
 	public MainFrame() {
-		
 		mf=new JFrame();
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
 		
@@ -100,6 +105,10 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		startUser = new UserStart();
 		
 		lblEjInloggad = new JLabel("Ej inloggad...");
+		lblEjInloggad.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		menuPanel = new JPanel();
+		menuPanel.setVisible(false);
 		
 		//NEW VISITOR
 		if(IMatDataHandler.getInstance().getUser().getUserName().equals("")){
@@ -112,6 +121,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			lblEjInloggad.setText(IMatDataHandler.getInstance().getUser().getUserName());
 			centercardpanel.add(startUser, "startUser");
 			centercardpanel.add(startGuest, "startGuest");
+			menuPanel.setVisible(true);
+			
 		}
 		
 		
@@ -597,22 +608,24 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addContainerGap(72, Short.MAX_VALUE)
 					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblEjInloggad))
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+						.addComponent(lblEjInloggad, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(cartbutton))
 		);
 		gl_kundvagnspanel.setVerticalGroup(
-			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
+			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addGap(7)
-					.addComponent(cartbutton))
-				.addGroup(gl_kundvagnspanel.createSequentialGroup()
-					.addComponent(lblEjInloggad)
-					.addPreferredGap(ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_kundvagnspanel.createSequentialGroup()
+							.addGap(7)
+							.addComponent(cartbutton))
+						.addGroup(gl_kundvagnspanel.createSequentialGroup()
+							.addComponent(lblEjInloggad)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel.setLayout(new GridLayout(2, 2, 10, 1));
 		
@@ -836,6 +849,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		foodandsearchpanel.setLayout(groupLayout);
 		
 		JLabel lblImat = new JLabel("");
+		lblImat.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		lblImat.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -851,19 +865,63 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		lblImat.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		lblImat.setBackground(Color.WHITE);
 		lblImat.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		menuPanel.setBackground(Color.WHITE);
 		GroupLayout gl_toppanel = new GroupLayout(toppanel);
 		gl_toppanel.setHorizontalGroup(
 			gl_toppanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_toppanel.createSequentialGroup()
 					.addComponent(lblImat)
-					.addContainerGap(795, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED, 386, Short.MAX_VALUE)
+					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		gl_toppanel.setVerticalGroup(
 			gl_toppanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_toppanel.createSequentialGroup()
+				.addGroup(gl_toppanel.createSequentialGroup()
 					.addGap(5)
-					.addComponent(lblImat, GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE))
+					.addComponent(lblImat, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
+				.addGroup(gl_toppanel.createSequentialGroup()
+					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(41, Short.MAX_VALUE))
 		);
+		
+		logOutLabel = new JLabel("Logga Ut");
+		logOutLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		helpLabel = new JLabel("Hj\u00E4lp");
+		helpLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		changeLabel = new JLabel("Mina Uppgifter");
+		changeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		historyLabel = new JLabel("Historik");
+		historyLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GroupLayout gl_menuPanel = new GroupLayout(menuPanel);
+		gl_menuPanel.setHorizontalGroup(
+			gl_menuPanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_menuPanel.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(changeLabel)
+					.addGap(18)
+					.addComponent(historyLabel)
+					.addGap(18)
+					.addComponent(helpLabel)
+					.addGap(18)
+					.addComponent(logOutLabel)
+					.addContainerGap())
+		);
+		gl_menuPanel.setVerticalGroup(
+			gl_menuPanel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_menuPanel.createSequentialGroup()
+					.addGroup(gl_menuPanel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(logOutLabel)
+						.addComponent(helpLabel)
+						.addComponent(historyLabel)
+						.addComponent(changeLabel))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		menuPanel.setLayout(gl_menuPanel);
 		toppanel.setLayout(gl_toppanel);
 		
 		
@@ -877,6 +935,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		contentPane.setLayout(gl_contentPane);
+		
 	}
 
 
