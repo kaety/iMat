@@ -35,6 +35,7 @@ import java.awt.Component;
 import java.awt.Image;
 
 import javax.swing.Box;
+import javax.swing.SwingConstants;
 
 
 public class SearchResultPanel extends JPanel implements MouseListener{
@@ -70,7 +71,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		
 		
 		middlePanel = new JPanel();
-		favbut = new JButton();
+		//favbut = new JButton();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -117,6 +118,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		initCombobox();
 		
 		lblPrice = new JLabel(product.getPrice() + " " +  product.getUnit());
+		lblPrice.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPrice.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		favbut = new JButton();
 		isFavbut();
@@ -125,10 +127,10 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		gl_selectorPanel.setHorizontalGroup(
 			gl_selectorPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_selectorPanel.createSequentialGroup()
-					.addContainerGap(23, Short.MAX_VALUE)
+					.addContainerGap(54, Short.MAX_VALUE)
 					.addComponent(favbut)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblPrice)
+					.addComponent(lblPrice, GroupLayout.PREFERRED_SIZE, 107, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -139,11 +141,12 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 			gl_selectorPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_selectorPanel.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_selectorPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnBattan)
-						.addComponent(lblPrice, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)
-						.addComponent(favbut))
+					.addGroup(gl_selectorPanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(favbut)
+						.addGroup(gl_selectorPanel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(btnBattan)
+							.addComponent(lblPrice, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(49, Short.MAX_VALUE))
 		);
 		selectorPanel.setLayout(gl_selectorPanel);
@@ -194,6 +197,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
+		System.out.println("Pressed " + product.getName());
 		
 	}
 
@@ -267,6 +271,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 //				favbut.setText("FAV");
 				favbut.setIcon(scaleIcon(new ImageIcon(MainFrame.class.getResource("/resources/goldstar.png")),30,30));
 			}
+			repaint();
 			observable.setChanged();
 			observable.notifyObservers("fav");
 			System.out.println(IMatDataHandler.getInstance().favorites());
