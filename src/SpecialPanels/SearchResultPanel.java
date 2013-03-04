@@ -30,6 +30,7 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Product;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.Image;
@@ -56,6 +57,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	JButton favbut;
 
 	public SearchResultPanel(Product p, boolean lightPanel) {
+		setBorder(new LineBorder(new Color(255, 255, 255)));
 		product = p;
 		if(lightPanel) panelColor = Color.white;
 		else panelColor = new Color(234,234,234);
@@ -67,6 +69,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		selectorPanel = new JPanel();
 		imagePanel.setBackground(panelColor);
 		selectorPanel.setBackground(panelColor);
+		
 		
 		
 		
@@ -173,7 +176,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		this.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
+		this.setBorder(new LineBorder(Color.black, 1, true));
 		/* Changed to just a border instead of change of colours.
 		setBackground(highLightColor);
 		imagePanel.setBackground(highLightColor);
@@ -184,7 +187,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
-		this.setBorder(null);
+		this.setBorder(new LineBorder(Color.white, 1, true));
 		/*
 		setBackground(panelColor);
 		imagePanel.setBackground(panelColor);
