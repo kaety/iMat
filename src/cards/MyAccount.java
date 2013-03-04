@@ -42,7 +42,7 @@ public class MyAccount extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public MyAccount(final MainFrame mf,final Pay3 pay3) {
+	public MyAccount(final MainFrame mf,final Pay1 pay1) {
 		
 		setBackground(Color.WHITE);
 		
@@ -209,6 +209,8 @@ public class MyAccount extends JPanel {
 					IMatDataHandler.getInstance().getCustomer().setPostCode(pCodeLabel.getText());
 					
 					mf.swapCard("startUser");
+					pay1.updateInfo();
+					
 					
 				}
 				
@@ -347,12 +349,12 @@ public class MyAccount extends JPanel {
 
 	public void updateInfo() {
 		firstLabel.setText(IMatDataHandler.getInstance().getCustomer().getFirstName());
+		lastLabel.setText(IMatDataHandler.getInstance().getCustomer().getLastName());
 		addressLabel.setText(IMatDataHandler.getInstance().getCustomer().getAddress());
 		tNumberLabel.setText(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
-		lastLabel.setText(IMatDataHandler.getInstance().getCustomer().getLastName());
+		cityLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostAddress());
 		mailLabel.setText(IMatDataHandler.getInstance().getCustomer().getEmail());
 		homePhoneLabel.setText(IMatDataHandler.getInstance().getCustomer().getPhoneNumber());
-		cityLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostAddress());
 		pCodeLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostCode());
 		
 	}

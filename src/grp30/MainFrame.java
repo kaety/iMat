@@ -140,7 +140,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		pay3 = new Pay3(this);
 		centercardpanel.add(pay3, "pay3");
 		
-		pay1 = new Pay1(this,pay3);
+		pay1 = new Pay1(this,pay3, this.myAccount);
 		centercardpanel.add(pay1, "pay1");
 		if(!IMatDataHandler.getInstance().getUser().getUserName().equals("")){
 		pay1.updateInfo();
@@ -166,7 +166,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		details = new DetailedFoodView(this);
 		centercardpanel.add(details, "details");
 		
-		myAccount = new MyAccount(this,pay3);
+		myAccount = new MyAccount(this,pay1);
 		centercardpanel.add(myAccount, "myAccount");
 		
 		
