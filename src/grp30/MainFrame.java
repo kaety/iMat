@@ -88,6 +88,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	private Pay3 pay3;
 	private JLabel lblSumma;
 	private JLabel lblRegistreraDig;
+	
+	private boolean loggedIn;
 	/**
 	 * Create the frame.
 	 */
@@ -106,7 +108,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		startGuest = new GuestStart(this);
 		startUser = new UserStart();
 		
-		lblEjInloggad = new JLabel("Ej inloggad...");
+		lblEjInloggad = new JLabel("Logga In");
 		lblEjInloggad.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		menuPanel = new JPanel();
@@ -895,7 +897,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		logOutLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				setUser2("Utloggad");
+				setUser2("Logga In");
 				swapCard("startGuest");
 				menuPanel.setVisible(false);
 			}

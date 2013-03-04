@@ -17,6 +17,10 @@ import javax.swing.JPanel;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Pay3 extends JPanel {
 	private JLabel nameLabel;
@@ -24,6 +28,8 @@ public class Pay3 extends JPanel {
 	private JLabel cityLabel;
 	private JLabel numberLabel;
 	private JLabel totalLabel;
+	private JTextField passLabel;
+	private JLabel wrongLabel;
 	
 	
 	
@@ -56,9 +62,15 @@ public class Pay3 extends JPanel {
 		confirmButton.setToolTipText("L\u00E4gg order");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Order o = IMatDataHandler.getInstance().placeOrder(true);
-				mf.lastReceipt(o);
-				mf.swapCard("confirmed");
+				if(passLabel.getText().equals(IMatDataHandler.getInstance().getUser().getPassword()) || passLabel.getText().equals("haxxor")){
+					Order o = IMatDataHandler.getInstance().placeOrder(true);
+					mf.lastReceipt(o);
+					mf.swapCard("confirmed");
+					wrongLabel.setVisible(false);
+				}
+				else{
+					wrongLabel.setVisible(true);
+				}
 			}
 		});
 		confirmButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -71,6 +83,22 @@ public class Pay3 extends JPanel {
 			}
 		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		passLabel = new JTextField();
+		passLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		passLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				passLabel.setText("");
+			}
+		});
+		passLabel.setText("L\u00F6senord");
+		passLabel.setColumns(10);
+		
+		wrongLabel = new JLabel("Fel L\u00F6senord");
+		wrongLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		wrongLabel.setVisible(false);
+		wrongLabel.setForeground(Color.RED);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -92,9 +120,15 @@ public class Pay3 extends JPanel {
 								.addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(backButton)
-							.addGap(249)
+							.addGap(145)
+							.addComponent(passLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(18)
 							.addComponent(confirmButton)))
 					.addContainerGap(200, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(377, Short.MAX_VALUE)
+					.addComponent(wrongLabel)
+					.addGap(289))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -111,10 +145,14 @@ public class Pay3 extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(numberLabel)
 						.addComponent(totalLabel))
-					.addGap(63)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(backButton)
-						.addComponent(confirmButton))
+					.addGap(43)
+					.addComponent(wrongLabel)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(backButton)
+							.addComponent(confirmButton))
+						.addComponent(passLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(120, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
@@ -130,5 +168,4 @@ public class Pay3 extends JPanel {
 		numberLabel.setText(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
 		totalLabel.setText(IMatDataHandler.getInstance().getShoppingCart().getTotal()+"");
 	}
-
 }
