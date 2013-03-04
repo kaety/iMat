@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -21,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import javax.swing.JPasswordField;
 
 public class Pay3 extends JPanel {
 	private JLabel nameLabel;
@@ -58,11 +60,25 @@ public class Pay3 extends JPanel {
 		totalLabel = new JLabel();
 		totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
+		passLabel = new JTextField();
+		passLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				passLabel.setText("");
+			}
+		});
+		passLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		passLabel.setText("L\u00F6senord");
+		passLabel.setColumns(10);
+		
+		
 		JButton confirmButton = new JButton("Bekr\u00E4fta");
 		confirmButton.setToolTipText("L\u00E4gg order");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(passLabel.getText().equals(IMatDataHandler.getInstance().getUser().getPassword()) || passLabel.getText().equals("haxxor")){
+				
+			
+				if(IMatDataHandler.getInstance().getUser().getPassword().equals(passLabel.getText())){
 					Order o = IMatDataHandler.getInstance().placeOrder(true);
 					mf.lastReceipt(o);
 					mf.swapCard("confirmed");
@@ -84,16 +100,7 @@ public class Pay3 extends JPanel {
 		});
 		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		passLabel = new JTextField();
-		passLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		passLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent arg0) {
-				passLabel.setText("");
-			}
-		});
-		passLabel.setText("L\u00F6senord");
-		passLabel.setColumns(10);
+
 		
 		wrongLabel = new JLabel("Fel L\u00F6senord");
 		wrongLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));

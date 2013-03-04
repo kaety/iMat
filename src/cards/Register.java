@@ -24,7 +24,7 @@ import java.awt.event.ActionEvent;
 
 public class Register extends JPanel {
 	private JTextField mailField;
-	private JPasswordField passField;
+	private JTextField passField;
 	private JLabel fel1;
 	private JLabel fel3;
 
@@ -57,12 +57,13 @@ public class Register extends JPanel {
 		mailField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		mailField.setColumns(10);
 		
-		passField = new JPasswordField();
+		passField = new JTextField();
 		
 		passField.setHorizontalAlignment(SwingConstants.CENTER);
 		passField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		passField.setForeground(Color.BLACK);
 		passField.setColumns(10);
+		
 		
 		JLabel lblNewLabel = new JLabel("E-Mail:");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,21 +84,22 @@ public class Register extends JPanel {
 		JButton regButton = new JButton("Registrera");
 		regButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(mailField.getText().equals("")  || passField.getPassword().length < 8){
-					System.out.println(passField.getPassword().length);
+				if(mailField.getText().equals("")  || passField.getText().length() < 8){
+					
 					if(mailField.getText().equals("")){
 						fel1.setVisible(true);
 						
 					}
-					if( passField.getPassword().length < 8){
+					if( passField.getText().length() < 8){
 						fel3.setVisible(true);
 					}
 					
 				}
 				else{
 					//SAVE USERNAME AND PASSWORD
+					System.out.println(passField.getText());
 					IMatDataHandler.getInstance().getUser().setUserName(mailField.getText());
-					IMatDataHandler.getInstance().getUser().setPassword(passField.getPassword().toString());
+					IMatDataHandler.getInstance().getUser().setPassword(passField.getText());
 					
 					mf.setUser();
 					
