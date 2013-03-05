@@ -734,7 +734,9 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		dropdown6.add(snacksLabel, "cell 3 1,alignx left,aligny top");
 		
 		JLabel lblNewLabel = new JLabel("Favoriter");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setForeground(Color.WHITE);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
 		
 		
 		favouritesScrollPane = new FavouritesScrollPane(this);
