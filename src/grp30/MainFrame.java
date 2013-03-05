@@ -107,13 +107,18 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		centercardpanel.setLayout(new CardLayout(0, 0));
 	
 		startGuest = new GuestStart(this);
-		startUser = new UserStart();
+		
 		
 		lblEjInloggad = new JLabel("Ej inloggad...");
 		lblEjInloggad.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		menuPanel = new JPanel();
 		menuPanel.setVisible(false);
+		
+		details = new DetailedFoodView(this);
+		
+		
+		startUser = new UserStart(this,details);
 		
 		//NEW VISITOR
 		if(IMatDataHandler.getInstance().getUser().getUserName().equals("")){
@@ -129,7 +134,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			menuPanel.setVisible(true);
 			
 		}
-		
+		centercardpanel.add(details, "details");
 		
 		
 		cart = new ShoppingCart(this);
@@ -164,8 +169,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		receipt = new Receipt();
 		centercardpanel.add(receipt, "receipt");
 		
-		details = new DetailedFoodView(this);
-		centercardpanel.add(details, "details");
+		
+		
 		
 		myAccount = new MyAccount(this,pay1);
 		centercardpanel.add(myAccount, "myAccount");

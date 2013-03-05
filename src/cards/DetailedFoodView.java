@@ -46,6 +46,7 @@ public class DetailedFoodView extends JPanel {
 	private final int[] prices = {1, 2, 3, 5, 10};
 	private final Action action = new SwingAction();
 	private JComboBox ammountCombo;
+	private JButton backButton;
 	
 	public DetailedFoodView(final MainFrame mf) {
 		
@@ -68,7 +69,7 @@ public class DetailedFoodView extends JPanel {
 		lblNringsinnehll.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblNringsinnehll.setHorizontalAlignment(SwingConstants.RIGHT);
 		
-		JButton backButton = new JButton("Tillbaka");
+		backButton = new JButton("Tillbaka");
 		backButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				mf.swapCard("searchResults");
@@ -180,7 +181,23 @@ public class DetailedFoodView extends JPanel {
 		recipeLabel1.setText(r.getNewRecipe(p.getName()));
 		recipeLabel2.setText(r.getNewRecipe(p.getName()));
 		recipeLabel3.setText(r.getNewRecipe(p.getName()));
+		backButton.setVisible(true);
 	}
+	
+	public void setActiveProduct2(Product p){
+		activeProduct = p;
+		picLabel.setIcon(IMatDataHandler.getInstance().getImageIcon(p, 170, 170));
+		priceLabel.setText(p.getPrice() + "kr / "+ p.getUnitSuffix());
+		productLabel.setText(p.getName());
+		RecipeGenerator r = new RecipeGenerator();
+		recipeLabel1.setText(r.getNewRecipe(p.getName()));
+		recipeLabel2.setText(r.getNewRecipe(p.getName()));
+		recipeLabel3.setText(r.getNewRecipe(p.getName()));
+		backButton.setVisible(false);
+		
+		
+	}
+	
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {
 			putValue(NAME, "Lägg Till");

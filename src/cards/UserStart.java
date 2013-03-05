@@ -1,17 +1,22 @@
 package cards;
 
+import grp30.MainFrame;
 import gui.IMatColors;
 
 import java.awt.Color;
 
 import javax.swing.JPanel;
 import java.awt.FlowLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
@@ -21,11 +26,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class UserStart extends JPanel {
-
+		private JLabel buyPicLabel1;
+		private JLabel buyPicLabel2;
+		private JLabel buyPicLabel3;
 	/**
 	 * Create the panel.
 	 */
-	public UserStart() {
+	public UserStart(final MainFrame mf,final DetailedFoodView df) {
 		
 		setBackground(IMatColors.BASE);
 		
@@ -134,10 +141,20 @@ public class UserStart extends JPanel {
 		
 		//PRESS ON IMAGE
 		
-		JLabel buyPicLabel1 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(34), 150, 150));
+		buyPicLabel1 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(34), 150, 150));
 		buyPicLabel1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				df.setActiveProduct2(IMatDataHandler.getInstance().getProduct(34));
+				mf.swapCard("details");
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				buyPicLabel1.setBorder(BorderFactory.createLineBorder(Color.black));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				buyPicLabel1.setBorder(BorderFactory.createLineBorder(Color.white));
 			}
 		});
 		buyPicLabel1.setToolTipText("Tryck här för att komma till veckans varor");
@@ -158,13 +175,23 @@ public class UserStart extends JPanel {
 		panel_8.setBackground(new Color(255, 255, 255));
 		panel_2.add(panel_8, "cell 3 0,grow");
 		
-		JLabel buyPicLabel2 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(78), 150, 150));
+		buyPicLabel2 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(78), 150, 150));
 		
 		//PRESS ON IMAGE
 		
 		buyPicLabel2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				df.setActiveProduct2(IMatDataHandler.getInstance().getProduct(78));
+				mf.swapCard("details");
+			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				buyPicLabel2.setBorder(BorderFactory.createLineBorder(Color.black));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				buyPicLabel2.setBorder(BorderFactory.createLineBorder(Color.white));
 			}
 		});
 		buyPicLabel2.setHorizontalAlignment(SwingConstants.CENTER);
@@ -185,13 +212,22 @@ public class UserStart extends JPanel {
 		panel_6.setBackground(new Color(255, 255, 255));
 		panel_2.add(panel_6, "cell 4 0,grow");
 		
-		JLabel buyPicLabel3 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(55), 150, 150));
+		buyPicLabel3 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(55), 150, 150));
 		buyPicLabel3.addMouseListener(new MouseAdapter() {
 			
 			//PRESS ON IMAGE
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				df.setActiveProduct2(IMatDataHandler.getInstance().getProduct(55));
+				mf.swapCard("details");
+			}
+			public void mouseEntered(MouseEvent arg0) {
+				buyPicLabel3.setBorder(BorderFactory.createLineBorder(Color.black));
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				buyPicLabel3.setBorder(BorderFactory.createLineBorder(Color.white));
 			}
 		});
 		GroupLayout gl_panel_6 = new GroupLayout(panel_6);
