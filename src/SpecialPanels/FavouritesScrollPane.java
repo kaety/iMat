@@ -1,5 +1,6 @@
 package SpecialPanels;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Observer;
 
@@ -20,6 +21,7 @@ public class FavouritesScrollPane extends JScrollPane{
 		b = false;
 		box = Box.createVerticalBox();
 		setViewportView(box);
+		getViewport().setBackground(Color.WHITE);
 		setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		
 		addFavourites();

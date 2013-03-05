@@ -85,7 +85,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	private JLabel lblEjInloggad;
 	private JLabel historyLabel;
 	private JLabel changeLabel;
-	private JLabel logOutLabel;
 	private JPanel menuPanel;
 	
 	private Pay1 pay1;
@@ -110,7 +109,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		startGuest = new GuestStart(this);
 		startUser = new UserStart();
 		
-		lblEjInloggad = new JLabel("Logga In");
+		lblEjInloggad = new JLabel("Ej inloggad...");
 		lblEjInloggad.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		menuPanel = new JPanel();
@@ -724,6 +723,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		dropdown6.add(snacksLabel, "cell 3 1,alignx left,aligny top");
 		
 		JLabel lblNewLabel = new JLabel("Favoriter");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
 		
 		favouritesScrollPane = new FavouritesScrollPane(this);
 		GroupLayout gl_rightpanel = new GroupLayout(rightpanel);
@@ -1124,32 +1125,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 					.addContainerGap(41, Short.MAX_VALUE))
 		);
 		
-		logOutLabel = new JLabel("Logga Ut");
-		logOutLabel.addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				setUser2("Logga In");
-				swapCard("startGuest");
-				menuPanel.setVisible(false);
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				super.mouseEntered(e);
-				logOutLabel.setForeground(IMatColors.BASE);
-			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				super.mouseExited(e);
-				logOutLabel.setForeground(Color.BLACK);
-				
-			}
-		});
-		logOutLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		logOutLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
 		changeLabel = new JLabel("Mitt Konto");
 		changeLabel.setForeground(Color.BLACK);
 		changeLabel.addMouseListener(new MouseAdapter() {
@@ -1202,19 +1177,16 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		gl_menuPanel.setHorizontalGroup(
 			gl_menuPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_menuPanel.createSequentialGroup()
-					.addContainerGap(58, Short.MAX_VALUE)
+					.addContainerGap(33, Short.MAX_VALUE)
 					.addComponent(changeLabel)
 					.addGap(18)
 					.addComponent(historyLabel)
-					.addGap(18)
-					.addComponent(logOutLabel)
-					.addContainerGap())
+					.addGap(84))
 		);
 		gl_menuPanel.setVerticalGroup(
 			gl_menuPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_menuPanel.createSequentialGroup()
 					.addGroup(gl_menuPanel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(logOutLabel)
 						.addComponent(historyLabel)
 						.addComponent(changeLabel))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
