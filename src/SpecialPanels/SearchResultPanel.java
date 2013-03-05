@@ -100,7 +100,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		lblFood.setFont(new Font("Tahoma", Font.BOLD, 18));
 		middlePanel.setBackground(panelColor);
 		
-		lblTryckPProdukten = new JLabel("Tryck h\u00E4r f\u00F6r mer information");
+		lblTryckPProdukten = new JLabel("Tryck f\u00F6r mer information");
 		lblTryckPProdukten.setForeground(new Color(102, 153, 153));
 		lblTryckPProdukten.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		lblTryckPProdukten.setVisible(false);
