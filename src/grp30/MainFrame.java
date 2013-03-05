@@ -57,6 +57,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Insets;
+import java.awt.Toolkit;
 
 
 
@@ -99,6 +100,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	 */
 	public MainFrame() {
 		mf=new JFrame();
+		mf.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/resources/app_icon.png")));
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
 		
 		
