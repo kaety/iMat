@@ -55,7 +55,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	JPanel middlePanel;
 	JLabel lblPrice;
 	JButton favbut;
-
+	JLabel lblTryckPProdukten;
 	public SearchResultPanel(Product p, boolean lightPanel) {
 		setBorder(new LineBorder(new Color(255, 255, 255)));
 		product = p;
@@ -99,20 +99,29 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 		JLabel lblFood = new JLabel(p.getName());
 		lblFood.setFont(new Font("Tahoma", Font.BOLD, 18));
 		middlePanel.setBackground(panelColor);
+		
+		lblTryckPProdukten = new JLabel("Tryck h\u00E4r f\u00F6r mer information");
+		lblTryckPProdukten.setForeground(new Color(102, 153, 153));
+		lblTryckPProdukten.setFont(new Font("Tahoma", Font.ITALIC, 11));
+		lblTryckPProdukten.setVisible(false);
 		GroupLayout gl_middlePanel = new GroupLayout(middlePanel);
 		gl_middlePanel.setHorizontalGroup(
 			gl_middlePanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_middlePanel.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblFood)
-					.addContainerGap(61, Short.MAX_VALUE))
+					.addGroup(gl_middlePanel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblFood)
+						.addComponent(lblTryckPProdukten))
+					.addContainerGap(41, Short.MAX_VALUE))
 		);
 		gl_middlePanel.setVerticalGroup(
 			gl_middlePanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_middlePanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblFood)
-					.addContainerGap(56, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(lblTryckPProdukten)
+					.addContainerGap(223, Short.MAX_VALUE))
 		);
 		middlePanel.setLayout(gl_middlePanel);
 		btnBattan = new JButton("battan");
@@ -177,6 +186,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		this.setBorder(new LineBorder(Color.black, 1, true));
+		lblTryckPProdukten.setVisible(true);
 		/* Changed to just a border instead of change of colours.
 		setBackground(highLightColor);
 		imagePanel.setBackground(highLightColor);
@@ -188,6 +198,7 @@ public class SearchResultPanel extends JPanel implements MouseListener{
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		this.setBorder(new LineBorder(Color.white, 1, true));
+		lblTryckPProdukten.setVisible(false);
 		/*
 		setBackground(panelColor);
 		imagePanel.setBackground(panelColor);
