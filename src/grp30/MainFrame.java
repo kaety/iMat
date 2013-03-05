@@ -55,6 +55,8 @@ import cards.ShoppingCart;
 import cards.UserStart;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+import net.miginfocom.swing.MigLayout;
+import java.awt.Insets;
 
 
 
@@ -255,25 +257,25 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		cardLayout = (CardLayout) (centercardpanel.getLayout());
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setOpaque(false);
-		
-		JPanel panel_4 = new JPanel();
-		panel_4.setOpaque(false);
-		GroupLayout gl_dropdown1 = new GroupLayout(dropdown1);
-		gl_dropdown1.setHorizontalGroup(
-			gl_dropdown1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_dropdown1.createSequentialGroup()
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(663, Short.MAX_VALUE))
-		);
-		gl_dropdown1.setVerticalGroup(
-			gl_dropdown1.createParallelGroup(Alignment.TRAILING)
-				.addComponent(panel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-				.addComponent(panel_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-		);
+		final JLabel label = new JLabel("K\u00F6tt");
+		label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		label.setForeground(Color.WHITE);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(IMatFonts.CATEGORYFONT);
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("MEAT");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				label.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				label.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
 		
 		final JLabel lblFisk = new JLabel("Fisk");
 		lblFisk.addMouseListener(new MouseAdapter() {
@@ -294,195 +296,209 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		lblFisk.setForeground(Color.WHITE);
 		lblFisk.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFisk.setFont(IMatFonts.CATEGORYFONT);
-		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
-		gl_panel_4.setHorizontalGroup(
-			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addGap(30)
-					.addComponent(lblFisk))
-		);
-		gl_panel_4.setVerticalGroup(
-			gl_panel_4.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_4.createSequentialGroup()
-					.addGap(30)
-					.addComponent(lblFisk))
-		);
-		panel_4.setLayout(gl_panel_4);
-		
-		final JLabel label = new JLabel("K\u00F6tt");
-		label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		label.setForeground(Color.WHITE);
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(IMatFonts.CATEGORYFONT);
-		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
-		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(30)
-					.addComponent(label))
-		);
-		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_3.createSequentialGroup()
-					.addGap(30)
-					.addComponent(label))
-		);
-		panel_3.setLayout(gl_panel_3);
-		label.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				pressed("MEAT");
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				label.setFont(IMatFonts.MARKEDFONT);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				label.setFont(IMatFonts.CATEGORYFONT);
-			}
-		});
-		dropdown1.setLayout(gl_dropdown1);
+		dropdown1.setLayout(new MigLayout("", "[25px][56px][31px]", "[25][17px]"));
+		dropdown1.add(label, "cell 2 1,alignx left,aligny top");
+		dropdown1.add(lblFisk, "cell 1 1,alignx left,aligny top");
 		
 		final JPanel dropdown2 = new JPanel();
 		dropdown2.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown2, "foodbutton2");
 		
-		JButton lblKl = new JButton("K\u00E5l");
-		lblKl.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("CABBAGE");
-			}
-		});
 		
-		JButton lblCitrusfrukt = new JButton("Citrusfrukter");
-		lblCitrusfrukt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("CITRUS_FRUIT");
-			}
-		});
-		
-		JButton lblNewLabel_1 = new JButton("B\u00E4r");
-		lblNewLabel_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("BERRY");
-			}
-		});
-		
-		JButton lblNewLabel_2 = new JButton("Exotiska frukter");
-		lblNewLabel_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("EXOTIC_FRUIT");
-			}
-		});
-		
-		JButton lblNewLabel_3 = new JButton("Frukt");
-		lblNewLabel_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		final JLabel fruitLabel = new JLabel("Frukt");
+		fruitLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		fruitLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		fruitLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		fruitLabel.setFont(IMatFonts.CATEGORYFONT);
+		fruitLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
 				pressed("FRUIT");
 			}
-		});
-		
-		JButton lblrter = new JButton("Gr\u00F6nsaker");
-		lblrter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("VEGETABLE_FRUIT");
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				fruitLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				fruitLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown2.setLayout(new MigLayout("", "[25px][70px][120px][140px][55px][50px][90px][103px][71px]", "[25][17px]"));
+		dropdown2.add(fruitLabel, "cell 1 1,alignx left,aligny top");
 		
-		JButton lblNewLabel_4 = new JButton("Meloner");
-		lblNewLabel_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		final JLabel citrusLabel = new JLabel("Citrusfrukter");
+		citrusLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		citrusLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		citrusLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		citrusLabel.setFont(IMatFonts.CATEGORYFONT);
+		citrusLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("CITRUS_FRUIT");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				citrusLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				citrusLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown2.add(citrusLabel, "cell 2 1,alignx left,aligny top");
+		
+		final JLabel exoticLabel = new JLabel("Exotiska frukter");
+		exoticLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		exoticLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		exoticLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		exoticLabel.setFont(IMatFonts.CATEGORYFONT);
+		exoticLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("EXOTIC_FRUIT");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				exoticLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				exoticLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown2.add(exoticLabel, "cell 3 1,alignx left,aligny top");
+		
+		final JLabel berryLabel = new JLabel("B\u00E4r");
+		berryLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		berryLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		berryLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		berryLabel.setFont(IMatFonts.CATEGORYFONT);
+		berryLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("BERRY");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				berryLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				berryLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown2.add(berryLabel, "cell 4 1,alignx left,aligny top");
+		
+		final JLabel lblKl = new JLabel("K\u00E5l");
+		lblKl.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblKl.setForeground(IMatFonts.CATEGORYCOLOR);
+		lblKl.setHorizontalAlignment(SwingConstants.CENTER);
+		lblKl.setFont(IMatFonts.CATEGORYFONT);
+		lblKl.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("CABBAGE");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblKl.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblKl.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown2.add(lblKl, "cell 5 1,alignx left,aligny top");
+		
+		final JLabel melonLabel = new JLabel("Meloner");
+		melonLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		melonLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		melonLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		melonLabel.setFont(IMatFonts.CATEGORYFONT);
+		melonLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
 				pressed("MELONS");
 			}
-		});
-		
-		JButton lblRotfrukter = new JButton("Rotfrukter");
-		lblRotfrukter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("ROOT_VEGETABLE");
-				
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				melonLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				melonLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown2.add(melonLabel, "cell 6 1,alignx left,aligny top");
 		
-		JPanel panel_5 = new JPanel();
-		panel_5.setOpaque(false);
-		GroupLayout gl_dropdown2 = new GroupLayout(dropdown2);
-		gl_dropdown2.setHorizontalGroup(
-			gl_dropdown2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_dropdown2.createSequentialGroup()
-					.addGroup(gl_dropdown2.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_dropdown2.createSequentialGroup()
-							.addGap(202)
-							.addComponent(lblNewLabel_1)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_2)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_3)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblrter)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_4)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblRotfrukter))
-						.addGroup(gl_dropdown2.createSequentialGroup()
-							.addGap(178)
-							.addComponent(lblKl, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblCitrusfrukt))
-						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(190, Short.MAX_VALUE))
-		);
-		gl_dropdown2.setVerticalGroup(
-			gl_dropdown2.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_dropdown2.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_dropdown2.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(lblNewLabel_1)
-						.addComponent(lblNewLabel_2)
-						.addComponent(lblNewLabel_3)
-						.addComponent(lblrter)
-						.addComponent(lblNewLabel_4)
-						.addComponent(lblRotfrukter))
-					.addGroup(gl_dropdown2.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_dropdown2.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-							.addComponent(lblKl)
-							.addContainerGap())
-						.addGroup(gl_dropdown2.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblCitrusfrukt)
-							.addContainerGap())))
-				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-		);
-		dropdown2.setLayout(gl_dropdown2);
+		final JLabel rootLabel = new JLabel("Rotfrukter");
+		rootLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		rootLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		rootLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		rootLabel.setFont(IMatFonts.CATEGORYFONT);
+		rootLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("ROOT_VEGETABLE");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				rootLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				rootLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown2.add(rootLabel, "cell 7 1,alignx left,aligny top");
+		
+		final JLabel vegLabel = new JLabel("Gr\u00F6nsaker");
+		vegLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		vegLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		vegLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		vegLabel.setFont(IMatFonts.CATEGORYFONT);
+		vegLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("VEGETABLE_FRUIT");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				vegLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				vegLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown2.add(vegLabel, "cell 8 1,alignx left,aligny top");
 		
 		final JPanel dropdown3 = new JPanel();
 		dropdown3.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown3, "foodbutton3");
 		
-		JButton lblMejeriprodukter = new JButton("Mejeriprodukter");
-		lblMejeriprodukter.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		final JLabel milkLabel = new JLabel("Mejeriprodukter");
+		milkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		milkLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		milkLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		milkLabel.setFont(IMatFonts.CATEGORYFONT);
+		milkLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
 				pressed("DAIRIES");
 			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				milkLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				milkLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
 		});
-		GroupLayout gl_dropdown3 = new GroupLayout(dropdown3);
-		gl_dropdown3.setHorizontalGroup(
-			gl_dropdown3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_dropdown3.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblMejeriprodukter)
-					.addContainerGap(851, Short.MAX_VALUE))
-		);
-		gl_dropdown3.setVerticalGroup(
-			gl_dropdown3.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_dropdown3.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblMejeriprodukter)
-					.addContainerGap(62, Short.MAX_VALUE))
-		);
-		dropdown3.setLayout(gl_dropdown3);
+		dropdown3.setLayout(new MigLayout("", "[25][112px]", "[25][17px]"));
+		dropdown3.add(milkLabel, "cell 1 1,alignx left,aligny top");
 		
 		final JPanel dropdown4 = new JPanel();
 		dropdown4.setBackground(IMatColors.BASE);
