@@ -296,9 +296,9 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		lblFisk.setForeground(Color.WHITE);
 		lblFisk.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFisk.setFont(IMatFonts.CATEGORYFONT);
-		dropdown1.setLayout(new MigLayout("", "[25px][116px][31px]", "[25][17px]"));
-		dropdown1.add(label, "cell 2 1,alignx left,aligny top");
-		dropdown1.add(lblFisk, "cell 1 1,alignx left,aligny top");
+		dropdown1.setLayout(new MigLayout("", "[25px][116px][32px]", "[25][17px]"));
+		dropdown1.add(label, "cell 1 1,alignx left,aligny top");
+		dropdown1.add(lblFisk, "cell 2 1,alignx left,aligny top");
 		
 		final JPanel dropdown2 = new JPanel();
 		dropdown2.setBackground(IMatColors.BASE);
