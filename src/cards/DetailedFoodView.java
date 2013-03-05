@@ -52,18 +52,17 @@ public class DetailedFoodView extends JPanel {
 		setBackground(Color.WHITE);
 		
 		picLabel = new JLabel();
-		picLabel.setText("BILD");
 		picLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		priceLabel = new JLabel("Pris");
 		priceLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		priceLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		priceLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		panel = new JPanel();
 		
 		productLabel = new JLabel("Matvara");
 		productLabel.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		productLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		productLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblNringsinnehll = new JLabel("N\u00E4ringsinneh\u00E5ll:");
 		lblNringsinnehll.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -98,35 +97,32 @@ public class DetailedFoodView extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE)
+						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(picLabel, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(18)
-									.addComponent(backButton)
-									.addGap(82)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(22)
-											.addComponent(priceLabel))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(productLabel)
-											.addGap(82)
-											.addComponent(ammountCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(addButton, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)))
-									.addGap(33))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(10)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addComponent(txtpnLoremIpsumDolor, GroupLayout.PREFERRED_SIZE, 165, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblNewLabel))
-									.addPreferredGap(ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addComponent(txtpnPerGram, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE)
 										.addComponent(lblNringsinnehll))
-									.addGap(3)))))
+									.addGap(3))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(18)
+									.addComponent(backButton)
+									.addGap(65)
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(priceLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(productLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+									.addGap(51)
+									.addComponent(ammountCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(addButton, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+									.addGap(33)))))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -153,9 +149,9 @@ public class DetailedFoodView extends JPanel {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(backButton)
-								.addComponent(picLabel, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+								.addComponent(picLabel, GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
