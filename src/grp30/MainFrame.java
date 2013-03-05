@@ -198,26 +198,26 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		JPanel kundvagnspanel = new JPanel();
 		kundvagnspanel.setBackground(IMatColors.BACKGROUND);
 		
-		JPanel foodandsearchpanel = new JPanel();
-		foodandsearchpanel.setBackground(IMatColors.BASE);
+		JPanel menuBarPanel = new JPanel();
+		menuBarPanel.setBackground(Color.WHITE);
 		
 		JPanel toppanel = new JPanel();
 		toppanel.setBackground(new Color(255, 255, 255));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup()
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addComponent(buttonpanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 970, Short.MAX_VALUE)
-								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
+								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
-						.addComponent(foodandsearchpanel, 0, 0, Short.MAX_VALUE)
-						.addGroup(gl_contentPane.createSequentialGroup()
+						.addComponent(menuBarPanel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)))
@@ -231,17 +231,17 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 						.addComponent(toppanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodandsearchpanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
+					.addComponent(menuBarPanel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 516, Short.MAX_VALUE))
-						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(18)
-					.addComponent(buttonpanel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
+						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE))
+					.addGap(10)
+					.addComponent(buttonpanel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+					.addGap(10))
 		);
 		carddropdownpanel.setLayout(new CardLayout(0, 0));
 		
@@ -653,22 +653,30 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		panel.add(lblRegistreraDig);
 		kundvagnspanel.setLayout(gl_kundvagnspanel);
 		
-		JLabel lblKontakt = new JLabel("Kontakt:");
+		JLabel lblKontakt = new JLabel("GRP30 DAT215 AB");
+		lblKontakt.setForeground(Color.BLACK);
 		
 		JLabel lblTelefon = new JLabel("Telefon:");
+		lblTelefon.setForeground(Color.GRAY);
 		
-		JLabel lblTom = new JLabel("Tom Doodle ");
+		JLabel lblTom = new JLabel("Innehar IT-skattsedel");
+		lblTom.setForeground(Color.GRAY);
+		
+		JLabel label_2 = new JLabel("031 - 42 42 42");
+		label_2.setForeground(Color.GRAY);
 		GroupLayout gl_buttonpanel = new GroupLayout(buttonpanel);
 		gl_buttonpanel.setHorizontalGroup(
-			gl_buttonpanel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_buttonpanel.createSequentialGroup()
-					.addContainerGap(712, Short.MAX_VALUE)
-					.addGroup(gl_buttonpanel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblTelefon)
-						.addComponent(lblKontakt))
-					.addPreferredGap(ComponentPlacement.RELATED)
+			gl_buttonpanel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_buttonpanel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblKontakt)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblTom)
-					.addGap(147))
+					.addGap(18)
+					.addComponent(lblTelefon)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(786, Short.MAX_VALUE))
 		);
 		gl_buttonpanel.setVerticalGroup(
 			gl_buttonpanel.createParallelGroup(Alignment.LEADING)
@@ -676,42 +684,20 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 					.addContainerGap()
 					.addGroup(gl_buttonpanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblKontakt)
-						.addComponent(lblTom))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblTelefon)
-					.addContainerGap(29, Short.MAX_VALUE))
+						.addComponent(lblTom)
+						.addComponent(lblTelefon)
+						.addComponent(label_2))
+					.addContainerGap(49, Short.MAX_VALUE))
 		);
 		buttonpanel.setLayout(gl_buttonpanel);
-		
-		searchstring = new JTextField();
-		searchstring.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent arg0) {
-				searchstring.setText("");
-			}
-		/*	@Override
-			public void focusLost(FocusEvent e) {
-				searchstring.setText("Search...");
-			}*/
-		});
-		searchstring.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent arg0) {
-				
-				int key = arg0.getKeyCode();
-			    if (key == KeyEvent.VK_ENTER){
-			    	
-			    	searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
-					cardLayout.show(centercardpanel, "searchResults");
-			    	searchstring.setText("");
-				}
-			}
-		});
-		searchstring.setText("Search...");
-		searchstring.setColumns(10);
 
-		JButton foodButton1 = new JButton("K\u00F6tt & Fisk");
-		foodButton1.addActionListener(new ActionListener() {
+		JButton kottFiskButton = new JButton("");
+		kottFiskButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		kottFiskButton.setBorder(null);
+		kottFiskButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/kott_fisk_active.png")));
+		kottFiskButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/kott_fisk_active.png")));
+		kottFiskButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/kott_fisk.png")));
+		kottFiskButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				if (dropdown1.isVisible()) {
@@ -726,8 +712,13 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			}}
 		});
 
-		JButton foodButton2 = new JButton("Frukt & Gr\u00F6nsaker");
-		foodButton2.addActionListener(new ActionListener() {
+		JButton fruktGronsakerButton = new JButton("");
+		fruktGronsakerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		fruktGronsakerButton.setBorder(null);
+		fruktGronsakerButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/frukt_gronsaker.png")));
+		fruktGronsakerButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/frukt_gronsaker_active.png")));
+		fruktGronsakerButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/frukt_gronsaker_active.png")));
+		fruktGronsakerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				if (dropdown2.isVisible()) {
@@ -742,8 +733,13 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			}}
 		});
 		
-		JButton foodbutton3 = new JButton("Mejeri");
-		foodbutton3.addActionListener(new ActionListener() {
+		JButton mejeriButton = new JButton("");
+		mejeriButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		mejeriButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/mejeri_active.png")));
+		mejeriButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/mejeri_active.png")));
+		mejeriButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/mejeri.png")));
+		mejeriButton.setBorder(null);
+		mejeriButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (dropdown3.isVisible()) {
 					carddropdownpanel.changeState();
@@ -759,8 +755,13 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			}
 		});
 		
-		JButton foodbutton4 = new JButton("Dryck");
-		foodbutton4.addActionListener(new ActionListener() {
+		JButton dryckButton = new JButton("");
+		dryckButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		dryckButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/dryck_active.png")));
+		dryckButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/dryck_active.png")));
+		dryckButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/dryck.png")));
+		dryckButton.setBorder(null);
+		dryckButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (dropdown5.isVisible()) {
 					carddropdownpanel.changeState();
@@ -775,8 +776,13 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			}
 		});
 		
-		JButton foodbutton5 = new JButton("Basvaror");
-		foodbutton5.addActionListener(new ActionListener() {
+		JButton basvarorButton = new JButton("");
+		basvarorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		basvarorButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
+		basvarorButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
+		basvarorButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror.png")));
+		basvarorButton.setBorder(null);
+		basvarorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (dropdown4.isVisible()) {
 					carddropdownpanel.changeState();
@@ -791,8 +797,13 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			}
 		});
 		
-		JButton foodbutton6 = new JButton("\u00D6vrigt");
-		foodbutton6.addActionListener(new ActionListener() {
+		JButton ovrigaVarorButton = new JButton("");
+		ovrigaVarorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		ovrigaVarorButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/ovrigt_active.png")));
+		ovrigaVarorButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/ovrigt_active.png")));
+		ovrigaVarorButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/ovrigt.png")));
+		ovrigaVarorButton.setBorder(null);
+		ovrigaVarorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (dropdown6.isVisible()) {
 					carddropdownpanel.changeState();
@@ -806,54 +817,106 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			}
 		});
 		
-		JButton btnSearch = new JButton("Search");
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/right_menu_corner.png")));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(IMatColors.BASE);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(IMatColors.BASE);
+		GroupLayout groupLayout = new GroupLayout(menuBarPanel);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addComponent(kottFiskButton, 106, 106, GroupLayout.PREFERRED_SIZE)
+					.addComponent(fruktGronsakerButton, 164, 164, GroupLayout.PREFERRED_SIZE)
+					.addComponent(mejeriButton, 69, 69, GroupLayout.PREFERRED_SIZE)
+					.addComponent(basvarorButton, 92, 92, GroupLayout.PREFERRED_SIZE)
+					.addComponent(dryckButton, 66, 66, GroupLayout.PREFERRED_SIZE)
+					.addComponent(ovrigaVarorButton, 70, 70, GroupLayout.PREFERRED_SIZE)
+					.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 277, GroupLayout.PREFERRED_SIZE)
+					.addComponent(label_1))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+						.addComponent(panel_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+						.addGroup(Alignment.LEADING, groupLayout.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(kottFiskButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(fruktGronsakerButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(mejeriButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(basvarorButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(dryckButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(ovrigaVarorButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(label_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+					.addContainerGap())
+		);
+		
+		searchstring = new JTextField();
+		searchstring.setBorder(new LineBorder(Color.GRAY));
+		searchstring.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				searchstring.setText("");
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				if (searchstring.getText().equals(""))
+				searchstring.setText(" S\u00F6k i butiken...");
+			}
+		});
+		searchstring.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				int key = arg0.getKeyCode();
+			    if (key == KeyEvent.VK_ENTER){
+			    	
+			    	searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
+					cardLayout.show(centercardpanel, "searchResults");
+			    	searchstring.setText("");
+				}
+			}
+		});
+		searchstring.setText(" S\u00F6k i butiken...");
+		searchstring.setColumns(10);
+		
+		JButton btnSearch = new JButton("S\u00F6k");
+		btnSearch.setBorder(new LineBorder(new Color(0, 0, 0)));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				searchResults.displayFoodList((ArrayList<Product>) IMatDataHandler.getInstance().findProducts(searchstring.getText()));
 				cardLayout.show(centercardpanel, "searchResults");
-		    	searchstring.setText("Search...");
+		    	searchstring.setText(" S\u00F6k i butiken...");
 				
 				
 			}
 		});
-		GroupLayout groupLayout = new GroupLayout(foodandsearchpanel);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(6)
-					.addComponent(foodButton1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap(40, Short.MAX_VALUE)
+					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodButton2, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodbutton3, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodbutton5, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodbutton4, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(foodbutton6, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnSearch)
+					.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+					.addGap(6))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+						.addComponent(searchstring, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
 					.addContainerGap())
 		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(foodButton1)
-						.addComponent(foodButton2)
-						.addComponent(foodbutton5)
-						.addComponent(foodbutton3)
-						.addComponent(foodbutton4)
-						.addComponent(foodbutton6)
-						.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnSearch))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		foodandsearchpanel.setLayout(groupLayout);
+		panel_1.setLayout(gl_panel_1);
+		menuBarPanel.setLayout(groupLayout);
 		
 		JLabel lblImat = new JLabel("");
 		lblImat.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -895,23 +958,52 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		logOutLabel = new JLabel("Logga Ut");
 		logOutLabel.addMouseListener(new MouseAdapter() {
+			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				setUser2("Logga In");
 				swapCard("startGuest");
 				menuPanel.setVisible(false);
 			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				logOutLabel.setForeground(IMatColors.BASE);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				logOutLabel.setForeground(Color.BLACK);
+				
+			}
 		});
 		logOutLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		logOutLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
-		changeLabel = new JLabel("Mina Uppgifter");
+		changeLabel = new JLabel("Mitt Konto");
+		changeLabel.setForeground(Color.BLACK);
 		changeLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				myAccount.updateInfo();
 				swapCard("myAccount");
 			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				changeLabel.setForeground(IMatColors.BASE);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				changeLabel.setForeground(Color.BLACK);
+				
+			}
+			
 		});
 		changeLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		changeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -921,6 +1013,19 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				swapCard("history");
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				historyLabel.setForeground(IMatColors.BASE);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				historyLabel.setForeground(Color.BLACK);
+				
 			}
 		});
 		historyLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
