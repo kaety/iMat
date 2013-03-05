@@ -52,7 +52,7 @@ public class Pay2 extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public Pay2(final MainFrame mf) {
+	public Pay2(final MainFrame mf,final Pay3 pay3) {
 		
 		setBackground(Color.WHITE);
 		
@@ -241,8 +241,13 @@ public class Pay2 extends JPanel {
 					else{
 						IMatDataHandler.getInstance().getCreditCard().setCardType("C");
 					}
-					
+					pay3.checkForUser();
+					pay3.erasePassword();
 					mf.swapCard("pay3");
+					cvcFail.setVisible(false);
+					dateFail.setVisible(false);
+					cardFail.setVisible(false);
+					nameFail.setVisible(false);
 					}catch(NumberFormatException e){
 						cvcFail.setVisible(true);
 					}

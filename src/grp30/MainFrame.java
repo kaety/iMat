@@ -155,7 +155,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		}
 		
 		
-		pay2 = new Pay2(this);
+		pay2 = new Pay2(this,pay3);
 		centercardpanel.add(pay2, "pay2");
 		
 		
@@ -180,7 +180,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mf.setBounds(100, 100, 1200, 900);
+		mf.setBounds(100, 100, 1280, 800);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

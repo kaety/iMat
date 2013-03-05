@@ -11,6 +11,7 @@ import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -68,40 +69,40 @@ public class UserStart extends JPanel {
 		lblNewLabel_1.setVerticalAlignment(SwingConstants.TOP);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel recipePicLabel1 = new JLabel("Bild");
+		JLabel recipePicLabel1 = new JLabel(new ImageIcon("dist/resources/recept1.jpg"));
 		recipePicLabel1.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JLabel recipePicLabel2 = new JLabel("Bild");
+		JLabel recipePicLabel2 = new JLabel(new ImageIcon("dist/resources/recept2.jpg"));
 		recipePicLabel2.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel recipePicLabel3 = new JLabel("Bild");
+		JLabel recipePicLabel3 = new JLabel(new ImageIcon("dist/resources/recept3.jpg"));
 		recipePicLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.TRAILING)
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(25)
-					.addComponent(recipePicLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(167)
-					.addComponent(recipePicLabel2, GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-					.addGap(169)
-					.addComponent(recipePicLabel3, GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-					.addGap(23))
-				.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
-					.addGap(172)
-					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-					.addGap(172))
+					.addGap(34)
+					.addComponent(recipePicLabel1, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+					.addGap(71)
+					.addComponent(recipePicLabel2, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+					.addGap(75)
+					.addComponent(recipePicLabel3, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
+					.addGap(49))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(83)
+					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(90))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
-					.addGap(40)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(recipePicLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(recipePicLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(recipePicLabel2, GroupLayout.DEFAULT_SIZE, 14, Short.MAX_VALUE))
-					.addGap(46))
+					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(recipePicLabel2, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+						.addComponent(recipePicLabel3, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+						.addComponent(recipePicLabel1, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE))
+					.addGap(26))
 		);
 		panel_1.setLayout(gl_panel_1);
 		

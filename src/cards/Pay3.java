@@ -146,4 +146,19 @@ public class Pay3 extends JPanel {
 		numberLabel.setText(IMatDataHandler.getInstance().getCustomer().getMobilePhoneNumber());
 		totalLabel.setText(IMatDataHandler.getInstance().getShoppingCart().getTotal()+"");
 	}
+	
+	public void erasePassword(){
+		passLabel.setText("");
+	}
+	
+	public void checkForUser(){
+		if(IMatDataHandler.getInstance().getUser().getUserName().equals("")){
+			passLabel.setVisible(false);
+			lblBekrftaLsenord.setVisible(false);
+		}
+		else{
+			passLabel.setVisible(true);
+			lblBekrftaLsenord.setVisible(true);
+		}
+	}
 }

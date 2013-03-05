@@ -220,6 +220,15 @@ public class Pay1 extends JPanel {
 					pay3.updateInfo();
 					
 					mf.swapCard("pay2");
+					l1.setVisible(false);
+					l2.setVisible(false);
+					l3.setVisible(false);
+					l4.setVisible(false);
+					l5.setVisible(false);
+					l6.setVisible(false);
+					l7.setVisible(false);
+					l8.setVisible(false);
+					
 					
 				}
 				
