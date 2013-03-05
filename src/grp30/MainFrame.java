@@ -1,5 +1,6 @@
 package grp30;
 import gui.IMatColors;
+import gui.IMatFonts;
 
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -52,6 +53,8 @@ import cards.Register;
 import cards.SearchResults;
 import cards.ShoppingCart;
 import cards.UserStart;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
 
 
 
@@ -252,40 +255,93 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		cardLayout = (CardLayout) (centercardpanel.getLayout());
 		
-		JButton label = new JButton("K\u00F6tt");
-		label.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("MEAT");
-				
-				
-			}
-		});
+		JPanel panel_3 = new JPanel();
+		panel_3.setOpaque(false);
 		
-		JButton lblFisk = new JButton("Fisk");
-		lblFisk.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				pressed("FISH");
-			}
-		});
+		JPanel panel_4 = new JPanel();
+		panel_4.setOpaque(false);
 		GroupLayout gl_dropdown1 = new GroupLayout(dropdown1);
 		gl_dropdown1.setHorizontalGroup(
 			gl_dropdown1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_dropdown1.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-					.addGap(10)
-					.addComponent(lblFisk, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(793, Short.MAX_VALUE))
+					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(663, Short.MAX_VALUE))
 		);
 		gl_dropdown1.setVerticalGroup(
-			gl_dropdown1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_dropdown1.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_dropdown1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFisk)
-						.addComponent(label))
-					.addContainerGap(38, Short.MAX_VALUE))
+			gl_dropdown1.createParallelGroup(Alignment.TRAILING)
+				.addComponent(panel_3, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+				.addComponent(panel_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
 		);
+		
+		final JLabel lblFisk = new JLabel("Fisk");
+		lblFisk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				pressed("FISH");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				lblFisk.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				lblFisk.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		lblFisk.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		lblFisk.setForeground(Color.WHITE);
+		lblFisk.setHorizontalAlignment(SwingConstants.CENTER);
+		lblFisk.setFont(IMatFonts.CATEGORYFONT);
+		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
+		gl_panel_4.setHorizontalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(30)
+					.addComponent(lblFisk))
+		);
+		gl_panel_4.setVerticalGroup(
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addGap(30)
+					.addComponent(lblFisk))
+		);
+		panel_4.setLayout(gl_panel_4);
+		
+		final JLabel label = new JLabel("K\u00F6tt");
+		label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		label.setForeground(Color.WHITE);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(IMatFonts.CATEGORYFONT);
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(30)
+					.addComponent(label))
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addGap(30)
+					.addComponent(label))
+		);
+		panel_3.setLayout(gl_panel_3);
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("MEAT");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				label.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				label.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
 		dropdown1.setLayout(gl_dropdown1);
 		
 		final JPanel dropdown2 = new JPanel();
@@ -348,42 +404,56 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				
 			}
 		});
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setOpaque(false);
 		GroupLayout gl_dropdown2 = new GroupLayout(dropdown2);
 		gl_dropdown2.setHorizontalGroup(
 			gl_dropdown2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_dropdown2.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblKl, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblCitrusfrukt)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_1)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_2)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_3)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblrter)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_4)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblRotfrukter)
-					.addContainerGap(288, Short.MAX_VALUE))
+					.addGroup(gl_dropdown2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_dropdown2.createSequentialGroup()
+							.addGap(202)
+							.addComponent(lblNewLabel_1)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_2)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_3)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblrter)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_4)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblRotfrukter))
+						.addGroup(gl_dropdown2.createSequentialGroup()
+							.addGap(178)
+							.addComponent(lblKl, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblCitrusfrukt))
+						.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(190, Short.MAX_VALUE))
 		);
 		gl_dropdown2.setVerticalGroup(
 			gl_dropdown2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_dropdown2.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_dropdown2.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(lblKl)
-						.addComponent(lblCitrusfrukt)
 						.addComponent(lblNewLabel_1)
 						.addComponent(lblNewLabel_2)
 						.addComponent(lblNewLabel_3)
 						.addComponent(lblrter)
 						.addComponent(lblNewLabel_4)
 						.addComponent(lblRotfrukter))
-					.addContainerGap(174, Short.MAX_VALUE))
+					.addGroup(gl_dropdown2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_dropdown2.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+							.addComponent(lblKl)
+							.addContainerGap())
+						.addGroup(gl_dropdown2.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblCitrusfrukt)
+							.addContainerGap())))
+				.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
 		);
 		dropdown2.setLayout(gl_dropdown2);
 		
