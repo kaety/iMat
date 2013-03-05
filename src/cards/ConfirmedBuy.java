@@ -1,6 +1,8 @@
 package cards;
 
 import grp30.MainFrame;
+import gui.IMatColors;
+import gui.IMatFonts;
 
 import java.awt.Color;
 
@@ -16,6 +18,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.Dimension;
+import javax.swing.UIManager;
+import java.awt.Cursor;
 
 public class ConfirmedBuy extends JPanel {
 
@@ -26,72 +33,85 @@ public class ConfirmedBuy extends JPanel {
 		
 		setBackground(Color.WHITE);
 		
-		JLabel lblNewLabel = new JLabel("Tack f\u00F6r din best\u00E4llning!");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		
-		JLabel lblDittKvittoHar = new JLabel("Ditt kvitto har skickats till din mail men");
-		lblDittKvittoHar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		JLabel lblDuKanven = new JLabel("du kan \u00E4ven se det");
-		lblDuKanven.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		JButton lblNewLabel_1 = new JButton("H\u00E4r");
-		lblNewLabel_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mf.swapCard("receipt");
-			}
-		});
-		lblNewLabel_1.setForeground(Color.BLUE);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		
-		JButton lblLoggaUt = new JButton("Logga Ut");
-		lblLoggaUt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				mf.setUser2("utloggad");
-				mf.swapCard("startGuest");
-				
-			}
-		});
-		lblLoggaUt.setForeground(Color.BLUE);
-		lblLoggaUt.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(IMatColors.BASE, 3, true));
+		panel.setBackground(Color.WHITE);
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(67)
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE)
-					.addGap(61))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(106)
-					.addComponent(lblDittKvittoHar, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-					.addGap(113))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addGap(146)
-					.addComponent(lblDuKanven, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(lblNewLabel_1)
-					.addGap(160))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(192)
-					.addComponent(lblLoggaUt, GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
-					.addGap(195))
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(20)
-					.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(lblDittKvittoHar, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblDuKanven, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
-						.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(50)
-					.addComponent(lblLoggaUt, GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE)
-					.addGap(125))
+					.addContainerGap()
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 173, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(116, Short.MAX_VALUE))
 		);
+		
+		JLabel dittKvittoText = new JLabel("Kvittens har skickats till din E-mail.");
+		dittKvittoText.setHorizontalAlignment(SwingConstants.CENTER);
+		dittKvittoText.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JLabel tackForBestallningText = new JLabel("Tack f\u00F6r din best\u00E4llning!");
+		tackForBestallningText.setHorizontalAlignment(SwingConstants.CENTER);
+		tackForBestallningText.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setOpaque(false);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+						.addComponent(dittKvittoText, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+						.addComponent(tackForBestallningText, GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(tackForBestallningText, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(dittKvittoText, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(86, Short.MAX_VALUE))
+		);
+		
+		final JLabel goToReceipLabel = new JLabel("Klicka h\u00E4r f\u00F6r att se kvitto");
+		goToReceipLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		goToReceipLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		goToReceipLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				super.mouseEntered(arg0);
+				goToReceipLabel.setForeground(IMatColors.BASE_LIGHT);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				goToReceipLabel.setForeground(IMatColors.BASE);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				mf.swapCard("receipt");
+			}
+			
+		});
+		goToReceipLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
+		goToReceipLabel.setForeground(IMatColors.BASE);
+		panel_1.add(goToReceipLabel);
+		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
 
 	}
