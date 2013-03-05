@@ -100,6 +100,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	 */
 	public MainFrame() {
 		mf=new JFrame();
+		mf.setTitle("iMat Shoppen");
 		mf.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/resources/app_icon.png")));
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
 		
