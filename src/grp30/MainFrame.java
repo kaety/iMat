@@ -58,6 +58,7 @@ import java.awt.GridBagConstraints;
 import net.miginfocom.swing.MigLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.Dimension;
 
 
 
@@ -100,6 +101,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	 */
 	public MainFrame() {
 		mf=new JFrame();
+		mf.setPreferredSize(new Dimension(1090, 730));
+		mf.setMinimumSize(new Dimension(1090, 730));
 		mf.setTitle("iMat Shoppen");
 		mf.setIconImage(Toolkit.getDefaultToolkit().getImage(MainFrame.class.getResource("/resources/app_icon.png")));
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
