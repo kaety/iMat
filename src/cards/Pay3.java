@@ -23,6 +23,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JPasswordField;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.SwingConstants;
 
 public class Pay3 extends JPanel {
 	private JLabel nameLabel;
@@ -32,6 +34,8 @@ public class Pay3 extends JPanel {
 	private JLabel totalLabel;
 	private JTextField passLabel;
 	private JLabel wrongLabel;
+	private JLabel label;
+	private JLabel lblBekrftaLsenord;
 	
 	
 	
@@ -41,38 +45,62 @@ public class Pay3 extends JPanel {
 	public Pay3(final MainFrame mf) {
 		
 		setBackground(Color.WHITE);
+		setLayout(new MigLayout("", "[150][112px][10][29px][30][112px][10][49px][10][89px][40][14px]", "[44px][23px][22px][22px][22px][22px][22px][30px][22px][40px][25px]"));
+		
+		label = new JLabel("3/3");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		add(label, "cell 5 1,alignx center");
 		
 		nameLabel = new JLabel();
-		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		nameLabel.setText("Namn");
+		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(nameLabel, "cell 1 3,growx,aligny center");
 		
 		addressLabel = new JLabel();
-		addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		addressLabel.setText("address");
+		addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(addressLabel, "cell 1 4,alignx left,aligny center");
 		
 		cityLabel = new JLabel();
-		cityLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		numberLabel = new JLabel();
-		numberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		cityLabel.setText("Stad");
+		cityLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(cityLabel, "cell 1 5,growx,aligny center");
 		
 		JLabel lblTotalsumma = new JLabel("Totalsumma:");
-		lblTotalsumma.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblTotalsumma.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(lblTotalsumma, "cell 5 5,alignx left,aligny center");
+		
+		numberLabel = new JLabel();
+		numberLabel.setText("telefon");
+		numberLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(numberLabel, "cell 1 6,growx,aligny center");
 		
 		totalLabel = new JLabel();
-		totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		totalLabel.setText("totalsumma");
+		totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		add(totalLabel, "cell 5 6,alignx left,aligny center");
 		
-		passLabel = new JTextField();
-		passLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent arg0) {
-				passLabel.setText("");
+		JButton backButton = new JButton("Tillbaka");
+		backButton.setToolTipText("Tillbaka till betals\u00E4tt");
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mf.swapCard("pay2");
 			}
 		});
-		passLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		passLabel.setText("L\u00F6senord");
-		passLabel.setColumns(10);
+		
+
+		
+		wrongLabel = new JLabel("Fel L\u00F6senord");
+		wrongLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		wrongLabel.setVisible(false);
+		wrongLabel.setForeground(Color.RED);
+		add(wrongLabel, "cell 7 9,alignx left,aligny bottom");
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(backButton, "cell 1 10,alignx left,aligny center");
 		
 		
-		JButton confirmButton = new JButton("Bekr\u00E4fta");
+		JButton confirmButton = new JButton("L\u00E4gg Order");
 		confirmButton.setToolTipText("L\u00E4gg order");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -89,80 +117,23 @@ public class Pay3 extends JPanel {
 				}
 			}
 		});
-		confirmButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JButton backButton = new JButton("Tillbaka");
-		backButton.setToolTipText("Tillbaka till betals\u00E4tt");
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mf.swapCard("pay2");
+		passLabel = new JTextField();
+		passLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				passLabel.setText("");
 			}
 		});
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-
-		
-		wrongLabel = new JLabel("Fel L\u00F6senord");
-		wrongLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		wrongLabel.setVisible(false);
-		wrongLabel.setForeground(Color.RED);
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(134)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(13)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(nameLabel)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(numberLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addComponent(cityLabel, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-									.addGap(126)
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblTotalsumma)
-										.addComponent(totalLabel)))
-								.addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(backButton)
-							.addGap(145)
-							.addComponent(passLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addComponent(confirmButton)))
-					.addContainerGap(200, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(377, Short.MAX_VALUE)
-					.addComponent(wrongLabel)
-					.addGap(289))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(58)
-					.addComponent(nameLabel)
-					.addGap(18)
-					.addComponent(addressLabel)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cityLabel)
-						.addComponent(lblTotalsumma))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(numberLabel)
-						.addComponent(totalLabel))
-					.addGap(43)
-					.addComponent(wrongLabel)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(backButton)
-							.addComponent(confirmButton))
-						.addComponent(passLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(120, Short.MAX_VALUE))
-		);
-		setLayout(groupLayout);
+		lblBekrftaLsenord = new JLabel("Bekr\u00E4fta L\u00F6senord:");
+		add(lblBekrftaLsenord, "cell 5 10,alignx right");
+		passLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		passLabel.setText("L\u00F6senord");
+		passLabel.setColumns(10);
+		add(passLabel, "cell 7 10,alignx right,aligny center");
+		confirmButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(confirmButton, "cell 9 10,alignx left,aligny center");
 
 	}
 

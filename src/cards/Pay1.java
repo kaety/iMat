@@ -1,6 +1,7 @@
 package cards;
 
 import grp30.MainFrame;
+import gui.IMatColors;
 import gui.IMatFonts;
 
 import java.awt.Color;
@@ -24,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 public class Pay1 extends JPanel {
 	private JTextField firstLabel;
@@ -153,11 +155,12 @@ public class Pay1 extends JPanel {
 				firstLabel.setText("Förnamn");
 				addressLabel.setText("Adress");
 				lastLabel.setText("Efternamn");
-				//homePhoneLabel.setText("Hemtelefon");
+				homePhoneLabel.setText("Hemtelefon");
 				cityLabel.setText("Postadress");
 				tNumberLabel.setText("Mobilnummer");
 				pCodeLabel.setText("Postkod");
-				//mailLabel.setText("E-Mail");
+				mailLabel.setText("E-Mail");
+				mailLabel.setText(IMatDataHandler.getInstance().getCustomer().getEmail());
 				
 				
 				
@@ -215,7 +218,6 @@ public class Pay1 extends JPanel {
 					IMatDataHandler.getInstance().getCustomer().setPostCode(pCodeLabel.getText());
 					
 					pay3.updateInfo();
-					//myAccount.updateInfo();
 					
 					mf.swapCard("pay2");
 					

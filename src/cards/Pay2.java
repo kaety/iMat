@@ -1,6 +1,7 @@
 package cards;
 
 import grp30.MainFrame;
+import gui.IMatColors;
 
 import java.awt.Color;
 
@@ -22,6 +23,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.ButtonGroup;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
+import net.miginfocom.swing.MigLayout;
 
 public class Pay2 extends JPanel {
 	private JTextField cardNumberLabel;
@@ -41,6 +43,10 @@ public class Pay2 extends JPanel {
 	
 	
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JLabel lblKortnummer;
+	private JLabel lblCvckod;
+	private JLabel lblFullstndigtNamn;
+	private JLabel lblNewLabel;
 	
 
 	/**
@@ -50,21 +56,32 @@ public class Pay2 extends JPanel {
 		
 		setBackground(Color.WHITE);
 		
+		setLayout(new MigLayout("", "[140][112px][10][60px][][30][][60px][10][][29px][30][89px][10][14px]", "[44px][23px][22px][22px][22px][30px][22px][30px][22px][30px][25px]"));
+		
 		JLabel label = new JLabel("2/3");
 		label.setFont(new Font("Tahoma", Font.PLAIN, 19));
+		add(label, "cell 5 1,alignx center,aligny top");
 		
 		chckbx1 = new JCheckBox("Visa/Mastercard");
 		buttonGroup.add(chckbx1);
 		chckbx1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(chckbx1, "cell 1 3,alignx left,aligny top");
 		//chckbx1.setSelected(true);
 		
 		chckbx2 = new JCheckBox("American Express");
 		buttonGroup.add(chckbx2);
 		chckbx2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(chckbx2, "cell 5 3,alignx center,aligny top");
 		
 		chckbx3 = new JCheckBox("Maestro");
 		buttonGroup.add(chckbx3);
 		chckbx3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(chckbx3, "cell 9 3,growx,aligny top");
+		
+		lblFel = new JLabel("Fel");
+		lblFel.setForeground(Color.RED);
+		lblFel.setVisible(false);
+		add(lblFel, "cell 11 3,alignx left,aligny center");
 		
 		cardNumberLabel = new JTextField();
 		cardNumberLabel.addFocusListener(new FocusAdapter() {
@@ -73,20 +90,21 @@ public class Pay2 extends JPanel {
 				cardNumberLabel.setText("");
 			}
 		});
+		
+		lblKortnummer = new JLabel("Kortnummer");
+		add(lblKortnummer, "cell 1 4,aligny bottom");
+		
+		lblFullstndigtNamn = new JLabel("Fullst\u00E4ndigt Namn");
+		add(lblFullstndigtNamn, "cell 5 4,aligny bottom");
 		cardNumberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		cardNumberLabel.setColumns(10);
+		add(cardNumberLabel, "cell 1 5,growx,aligny top");
 		
-		cvcLabel = new JTextField();
-		cvcLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				cvcLabel.setText("");
-			}
-		});
-		cvcLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		cvcLabel.setColumns(10);
+		cardFail = new JLabel("FEL");
+		cardFail.setForeground(Color.RED);
+		cardFail.setVisible(false);
+		add(cardFail, "cell 3 5,alignx left,aligny center");
 		
 		nameLabel = new JTextField();
 		nameLabel.addFocusListener(new FocusAdapter() {
@@ -98,14 +116,56 @@ public class Pay2 extends JPanel {
 		nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		nameLabel.setColumns(10);
+		add(nameLabel, "cell 5 5,growx,aligny top");
+		
+		nameFail = new JLabel("FEL");
+		nameFail.setForeground(Color.RED);
+		nameFail.setVisible(false);
+		add(nameFail, "cell 7 5,alignx left,aligny center");
+		
+		
+		JButton backButton = new JButton("Tillbaka");
+		backButton.setToolTipText("Tillbaka till address");
+		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		backButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mf.swapCard("pay1");
+			}
+		});
+		
+		cvcLabel = new JTextField();
+		cvcLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				cvcLabel.setText("");
+			}
+		});
+		
+		lblCvckod = new JLabel("CVC-kod");
+		add(lblCvckod, "cell 1 6,aligny bottom");
+		
+		lblNewLabel = new JLabel("Utg\u00E5ngsdatum");
+		add(lblNewLabel, "cell 5 6,aligny bottom");
+		cvcLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		
+		cvcLabel.setColumns(10);
+		add(cvcLabel, "cell 1 7,growx,aligny top");
+		
+		cvcFail = new JLabel("FEL");
+		cvcFail.setForeground(Color.RED);
+		cvcFail.setVisible(false);
+		add(cvcFail, "cell 3 7,alignx left,aligny center");
 		
 		yyCombo = new JComboBox();
 		yyCombo.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		yyCombo.setModel(new DefaultComboBoxModel(new String[] {"\u00C5\u00C5", "13", "14", "15", "16", "17", "18"}));
+		add(yyCombo, "flowx,cell 5 7,alignx left,aligny top");
 		
-		mmCombo = new JComboBox();
-		mmCombo.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		mmCombo.setModel(new DefaultComboBoxModel(new String[] {"MM", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+		dateFail = new JLabel("FEL");
+		dateFail.setForeground(Color.RED);
+		dateFail.setVisible(false);
+		add(dateFail, "cell 7 7,alignx left,aligny center");
+		add(backButton, "cell 1 10,alignx left,aligny top");
 		
 		
 		if(!IMatDataHandler.getInstance().getCreditCard().getCardNumber().equals("")){
@@ -131,37 +191,6 @@ public class Pay2 extends JPanel {
 			
 			
 		}
-		
-		
-		
-		JButton backButton = new JButton("Tillbaka");
-		backButton.setToolTipText("Tillbaka till address");
-		backButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		backButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				mf.swapCard("pay1");
-			}
-		});
-		
-		cardFail = new JLabel("FEL");
-		cardFail.setForeground(Color.RED);
-		cardFail.setVisible(false);
-		
-		cvcFail = new JLabel("FEL");
-		cvcFail.setForeground(Color.RED);
-		cvcFail.setVisible(false);
-		
-		nameFail = new JLabel("FEL");
-		nameFail.setForeground(Color.RED);
-		nameFail.setVisible(false);
-		
-		dateFail = new JLabel("FEL");
-		dateFail.setForeground(Color.RED);
-		dateFail.setVisible(false);
-		
-		lblFel = new JLabel("Fel");
-		lblFel.setForeground(Color.RED);
-		lblFel.setVisible(false);
 		
 		// TODO more checks
 		JButton okButton = new JButton("G\u00E5 Vidare");
@@ -222,88 +251,12 @@ public class Pay2 extends JPanel {
 			}
 		});
 		okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(okButton, "cell 9 10,alignx right,aligny top");
 		
-		
-
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(163)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(cvcLabel, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(cvcFail, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-											.addGap(14)
-											.addComponent(yyCombo, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-											.addComponent(mmCombo, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(cardNumberLabel, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(cardFail, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(dateFail, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-										.addComponent(nameFail, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-									.addGap(106))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(backButton, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-											.addComponent(okButton))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(chckbx1, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-											.addComponent(chckbx2, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-											.addGap(29)
-											.addComponent(chckbx3, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblFel, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(332)
-							.addComponent(label, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
-					.addGap(170))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(label, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(chckbx1)
-						.addComponent(chckbx2)
-						.addComponent(chckbx3)
-						.addComponent(lblFel))
-					.addGap(47)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cardNumberLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(nameLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cardFail)
-						.addComponent(nameFail))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cvcLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(mmCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(yyCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(cvcFail)
-						.addComponent(dateFail))
-					.addGap(46)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(okButton)
-						.addComponent(backButton))
-					.addContainerGap(121, Short.MAX_VALUE))
-		);
-		setLayout(groupLayout);
+		mmCombo = new JComboBox();
+		mmCombo.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		mmCombo.setModel(new DefaultComboBoxModel(new String[] {"MM", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"}));
+		add(mmCombo, "cell 5 7,alignx right,aligny top");
 
 	}
 }
