@@ -103,9 +103,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		IMatDataHandler.getInstance().getShoppingCart().addShoppingCartListener(this);
 		
 		
-		
-		
-		
 		centercardpanel = new JPanel();
 
 		centercardpanel.setLayout(new CardLayout(0, 0));
@@ -188,10 +185,10 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		//SLIDER
-		final SlidingPanel carddropdownpanel = new SlidingPanel();
+		final JPanel carddropdownpanel = new JPanel();
 		carddropdownpanel.setBackground(Color.white);
-		//carddropdownpanel.setVisible(false);
-		carddropdownpanel.changeState();
+		carddropdownpanel.setVisible(false);
+		
 		
 		JPanel rightpanel = new JPanel();
 		rightpanel.setBackground(IMatColors.BASE);
@@ -210,19 +207,19 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		toppanel.setBackground(new Color(255, 255, 255));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(buttonpanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
-								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE))
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+						.addComponent(buttonpanel, GroupLayout.DEFAULT_SIZE, 1154, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(carddropdownpanel, GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
+								.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(rightpanel, GroupLayout.PREFERRED_SIZE, 276, GroupLayout.PREFERRED_SIZE))
-						.addComponent(menuBarPanel, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+						.addComponent(menuBarPanel, 0, 0, Short.MAX_VALUE)
+						.addGroup(gl_contentPane.createSequentialGroup()
 							.addComponent(toppanel, GroupLayout.DEFAULT_SIZE, 857, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(kundvagnspanel, GroupLayout.PREFERRED_SIZE, 291, GroupLayout.PREFERRED_SIZE)))
@@ -240,10 +237,10 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
-						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE))
+							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE))
+						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE))
 					.addGap(10)
 					.addComponent(buttonpanel, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 					.addGap(10))
@@ -256,26 +253,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		cardLayout = (CardLayout) (centercardpanel.getLayout());
-		
-		final JLabel label = new JLabel("K\u00F6tt");
-		label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		label.setForeground(Color.WHITE);
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(IMatFonts.CATEGORYFONT);
-		label.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				pressed("MEAT");
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				label.setFont(IMatFonts.MARKEDFONT);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				label.setFont(IMatFonts.CATEGORYFONT);
-			}
-		});
+		dropdown1.setLayout(new MigLayout("", "[25px][116px][31px]", "[25][][][17px]"));
 		
 		final JLabel lblFisk = new JLabel("Fisk");
 		lblFisk.addMouseListener(new MouseAdapter() {
@@ -296,13 +274,53 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		lblFisk.setForeground(Color.WHITE);
 		lblFisk.setHorizontalAlignment(SwingConstants.CENTER);
 		lblFisk.setFont(IMatFonts.CATEGORYFONT);
-		dropdown1.setLayout(new MigLayout("", "[25px][116px][32px]", "[25][17px]"));
-		dropdown1.add(label, "cell 1 1,alignx left,aligny top");
-		dropdown1.add(lblFisk, "cell 2 1,alignx left,aligny top");
+		dropdown1.add(lblFisk, "cell 1 1,alignx left,aligny top");
+		
+		final JLabel label = new JLabel("K\u00F6tt");
+		label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		label.setForeground(Color.WHITE);
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(IMatFonts.CATEGORYFONT);
+		label.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("MEAT");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				label.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				label.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown1.add(label, "cell 2 1,alignx left,aligny top");
 		
 		final JPanel dropdown2 = new JPanel();
 		dropdown2.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown2, "foodbutton2");
+		dropdown2.setLayout(new MigLayout("", "[15px][80px][130px][150px][65px][60px][100px][113px][81px]", "[25][][][17px]"));
+		
+		final JLabel citrusLabel = new JLabel("Citrusfrukter");
+		citrusLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		citrusLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		citrusLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		citrusLabel.setFont(IMatFonts.CATEGORYFONT);
+		citrusLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("CITRUS_FRUIT");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				citrusLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				citrusLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
 		
 		
 		final JLabel fruitLabel = new JLabel("Frukt");
@@ -324,28 +342,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				fruitLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
-		dropdown2.setLayout(new MigLayout("", "[15px][80px][130px][150px][65px][60px][100px][113px][81px]", "[25][17px]"));
 		dropdown2.add(fruitLabel, "cell 1 1,alignx left,aligny top");
-		
-		final JLabel citrusLabel = new JLabel("Citrusfrukter");
-		citrusLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		citrusLabel.setForeground(IMatFonts.CATEGORYCOLOR);
-		citrusLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		citrusLabel.setFont(IMatFonts.CATEGORYFONT);
-		citrusLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				pressed("CITRUS_FRUIT");
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				citrusLabel.setFont(IMatFonts.MARKEDFONT);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				citrusLabel.setFont(IMatFonts.CATEGORYFONT);
-			}
-		});
 		dropdown2.add(citrusLabel, "cell 2 1,alignx left,aligny top");
 		
 		final JLabel exoticLabel = new JLabel("Exotiska frukter");
@@ -477,6 +474,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		final JPanel dropdown3 = new JPanel();
 		dropdown3.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown3, "foodbutton3");
+		dropdown3.setLayout(new MigLayout("", "[25][][112px]", "[25][][][17px]"));
 		
 		final JLabel milkLabel = new JLabel("Mejeriprodukter");
 		milkLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -497,12 +495,12 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				milkLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
-		dropdown3.setLayout(new MigLayout("", "[25][112px]", "[25][17px]"));
 		dropdown3.add(milkLabel, "cell 1 1,alignx left,aligny top");
 		
 		final JPanel dropdown4 = new JPanel();
 		dropdown4.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown4, "foodbutton4");
+		dropdown4.setLayout(new MigLayout("", "[35][119px][214px][113px][172px][82px]", "[25][][][17px]"));
 		
 		final JLabel breadLabel = new JLabel("Br\u00F6d");
 		breadLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -523,6 +521,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				breadLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown4.add(breadLabel, "cell 1 1,alignx left,aligny top");
 		
 		final JLabel flourLabel = new JLabel("Mj\u00F6l, Socker & Salt");
 		flourLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -543,6 +542,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				flourLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown4.add(flourLabel, "cell 2 1,alignx left,aligny top");
 		
 		final JLabel pastaLabel = new JLabel("Pasta");
 		pastaLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -563,6 +563,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				pastaLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown4.add(pastaLabel, "cell 3 1,alignx left,aligny top");
 		
 		final JLabel potatoLabel = new JLabel("Potatis & Ris");
 		potatoLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -583,6 +584,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				potatoLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown4.add(potatoLabel, "cell 4 1,alignx left,aligny top");
 		
 		final JLabel herbsLabel = new JLabel("\u00D6rter");
 		herbsLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -603,16 +605,12 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				herbsLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
-		dropdown4.setLayout(new MigLayout("", "[35][119px][214px][113px][172px][82px]", "[25][17px]"));
-		dropdown4.add(breadLabel, "cell 1 1,alignx left,aligny top");
-		dropdown4.add(flourLabel, "cell 2 1,alignx left,aligny top");
-		dropdown4.add(pastaLabel, "cell 3 1,alignx left,aligny top");
-		dropdown4.add(potatoLabel, "cell 4 1,alignx left,aligny top");
 		dropdown4.add(herbsLabel, "cell 5 1,alignx left,aligny top");
 		
 		final JPanel dropdown5 = new JPanel();
 		dropdown5.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown5, "foodbutton5");
+		dropdown5.setLayout(new MigLayout("", "[25][180px][102px]", "[25][][][17px]"));
 		
 		final JLabel coldLabel = new JLabel("Kylda Drycker");
 		coldLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -633,6 +631,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				coldLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown5.add(coldLabel, "cell 1 1,alignx left,aligny top");
 		
 		final JLabel warmLabel = new JLabel("Varma Drycker");
 		warmLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -653,13 +652,12 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				warmLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
-		dropdown5.setLayout(new MigLayout("", "[25][180px][102px]", "[25][17px]"));
-		dropdown5.add(coldLabel, "cell 1 1,alignx left,aligny top");
 		dropdown5.add(warmLabel, "cell 2 1,alignx left,aligny top");
 		
 		final JPanel dropdown6 = new JPanel();
 		dropdown6.setBackground(IMatColors.BASE);
 		carddropdownpanel.add(dropdown6, "foodbutton6");
+		dropdown6.setLayout(new MigLayout("", "[25px][182px][184px][73px]", "[25px][][][17px]"));
 		
 		final JLabel nutLabel = new JLabel("N\u00F6tter & Fr\u00F6n");
 		nutLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -680,6 +678,28 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 				nutLabel.setFont(IMatFonts.CATEGORYFONT);
 			}
 		});
+		dropdown6.add(nutLabel, "cell 1 1,alignx left,aligny top");
+		
+		final JLabel beanLabel = new JLabel("\u00C4rtor & B\u00F6nor");
+		beanLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		beanLabel.setForeground(IMatFonts.CATEGORYCOLOR);
+		beanLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		beanLabel.setFont(IMatFonts.CATEGORYFONT);
+		beanLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				pressed("POD");
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				beanLabel.setFont(IMatFonts.MARKEDFONT);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				beanLabel.setFont(IMatFonts.CATEGORYFONT);
+			}
+		});
+		dropdown6.add(beanLabel, "cell 2 1,alignx left,aligny top");
 		
 		final JLabel snacksLabel = new JLabel("Snacks");
 		snacksLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -701,29 +721,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			}
 		});
 		snacksLabel.setHorizontalAlignment(SwingConstants.TRAILING);
-		
-		final JLabel beanLabel = new JLabel("\u00C4rtor & B\u00F6nor");
-		beanLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		beanLabel.setForeground(IMatFonts.CATEGORYCOLOR);
-		beanLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		beanLabel.setFont(IMatFonts.CATEGORYFONT);
-		beanLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				pressed("POD");
-			}
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				beanLabel.setFont(IMatFonts.MARKEDFONT);
-			}
-			@Override
-			public void mouseExited(MouseEvent e) {
-				beanLabel.setFont(IMatFonts.CATEGORYFONT);
-			}
-		});
-		dropdown6.setLayout(new MigLayout("", "[25px][182px][184px][73px]", "[25px][17px]"));
-		dropdown6.add(nutLabel, "cell 1 1,alignx left,aligny top");
-		dropdown6.add(beanLabel, "cell 2 1,alignx left,aligny top");
 		dropdown6.add(snacksLabel, "cell 3 1,alignx left,aligny top");
 		
 		JLabel lblNewLabel = new JLabel("Favoriter");
@@ -857,11 +854,14 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		kottFiskButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				if (dropdown1.isVisible()) {
-					carddropdownpanel.changeState();
-				}
-				
-				else {
+				if (carddropdownpanel.isVisible() && dropdown1.isVisible()) {
+					 	
+					          carddropdownpanel.setVisible(false);
+					  	
+					       } else {
+						  	
+					         carddropdownpanel.setVisible(true);
+					
 					CardLayout cardLayout = (CardLayout) (carddropdownpanel
 							.getLayout());
 					cardLayout.show(carddropdownpanel, "foodbutton1");
@@ -878,15 +878,18 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		fruktGronsakerButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (dropdown2.isVisible()) {
-					carddropdownpanel.changeState();
-				
-			}else {
-					CardLayout cardLayout = (CardLayout) (carddropdownpanel
-							.getLayout());
-					cardLayout.show(carddropdownpanel, "foodbutton2");
-					
-
+				if (carddropdownpanel.isVisible() && dropdown2.isVisible()) {
+				 	
+			          carddropdownpanel.setVisible(false);
+			  	
+			       } else {
+				  	
+			         carddropdownpanel.setVisible(true);
+			
+			CardLayout cardLayout = (CardLayout) (carddropdownpanel
+					.getLayout());
+			cardLayout.show(carddropdownpanel, "foodbutton2");
+			
 			}}
 		});
 		
@@ -898,18 +901,20 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		mejeriButton.setBorder(null);
 		mejeriButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (dropdown3.isVisible()) {
-					carddropdownpanel.changeState();
-				} else {
-
-					CardLayout cardLayout = (CardLayout) (carddropdownpanel
-							.getLayout());
-					cardLayout.show(carddropdownpanel, "foodbutton3");
-					
-
-				}
+				if (carddropdownpanel.isVisible() && dropdown3.isVisible()) {
+				 	
+			          carddropdownpanel.setVisible(false);
+			  	
+			       } else {
+				  	
+			         carddropdownpanel.setVisible(true);
+			
+			CardLayout cardLayout = (CardLayout) (carddropdownpanel
+					.getLayout());
+			cardLayout.show(carddropdownpanel, "foodbutton3");
+			
 				
-			}
+			}}
 		});
 		
 		JButton dryckButton = new JButton("");
@@ -920,17 +925,18 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		dryckButton.setBorder(null);
 		dryckButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (dropdown5.isVisible()) {
-					carddropdownpanel.changeState();
-				} else {
-
-					CardLayout cardLayout = (CardLayout) (carddropdownpanel
-							.getLayout());
-					cardLayout.show(carddropdownpanel, "foodbutton5");
-					
-				}
-
-			}
+				if (carddropdownpanel.isVisible() && dropdown4.isVisible()) {
+				 	
+			          carddropdownpanel.setVisible(false);
+			  	
+			       } else {
+				  	
+			         carddropdownpanel.setVisible(true);
+			
+			CardLayout cardLayout = (CardLayout) (carddropdownpanel
+					.getLayout());
+			cardLayout.show(carddropdownpanel, "foodbutton4");
+			       }}
 		});
 		
 		JButton basvarorButton = new JButton("");
@@ -941,17 +947,19 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		basvarorButton.setBorder(null);
 		basvarorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (dropdown4.isVisible()) {
-					carddropdownpanel.changeState();
-
-				} else {
-
-					CardLayout cardLayout = (CardLayout) (carddropdownpanel
-							.getLayout());
-					cardLayout.show(carddropdownpanel, "foodbutton4");
-					
-				}
-			}
+				if (carddropdownpanel.isVisible() && dropdown5.isVisible()) {
+				 	
+			          carddropdownpanel.setVisible(false);
+			  	
+			       } else {
+				  	
+			         carddropdownpanel.setVisible(true);
+			
+			CardLayout cardLayout = (CardLayout) (carddropdownpanel
+					.getLayout());
+			cardLayout.show(carddropdownpanel, "foodbutton5");
+			
+			}}
 		});
 		
 		JButton ovrigaVarorButton = new JButton("");
@@ -962,16 +970,19 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		ovrigaVarorButton.setBorder(null);
 		ovrigaVarorButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (dropdown6.isVisible()) {
-					carddropdownpanel.changeState();
-				} else {
-
-					CardLayout cardLayout = (CardLayout) (carddropdownpanel
-							.getLayout());
-					cardLayout.show(carddropdownpanel, "foodbutton6");
-				
-				}
-			}
+				if (carddropdownpanel.isVisible() && dropdown6.isVisible()) {
+				 	
+			          carddropdownpanel.setVisible(false);
+			  	
+			       } else {
+				  	
+			         carddropdownpanel.setVisible(true);
+			
+			CardLayout cardLayout = (CardLayout) (carddropdownpanel
+					.getLayout());
+			cardLayout.show(carddropdownpanel, "foodbutton6");
+			       }}
+			
 		});
 		
 		JLabel label_1 = new JLabel("");

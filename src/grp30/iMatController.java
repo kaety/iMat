@@ -31,10 +31,10 @@ public class iMatController extends Observable implements Observer{
 			}
 	
 	private void init(){
-		t = new testFrame();
-		t.addObserver(this);
+		//t = new testFrame();
+		//t.addObserver(this);
 		m = new iMatModel();
-		m.addObserver(t);
+		//m.addObserver(t);
 		//trying the Inglorious Bastard Observer pattern on MainFrame
 		mf = new MainFrame();
 		m.addObserver(mf);

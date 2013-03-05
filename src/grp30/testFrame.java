@@ -60,7 +60,7 @@ public class testFrame extends Observable implements Observer{
 				try {
 					//testFrame window = new testFrame();
 					initialize();
-					this.frame.setVisible(true);
+				//	this.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
