@@ -21,7 +21,7 @@ public class iMatController extends Observable implements Observer{
 	
 	public iMatController(){
 		//Reset for Debugging //Kryztof
-		//IMatDataHandler.getInstance().reset();
+		IMatDataHandler.getInstance().reset();
 		init();
 	}
 	

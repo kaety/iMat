@@ -106,7 +106,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 
 		centercardpanel.setLayout(new CardLayout(0, 0));
 	
-		startGuest = new GuestStart(this);
+		
 		
 		
 		lblEjInloggad = new JLabel("Ej inloggad...");
@@ -117,7 +117,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		details = new DetailedFoodView(this);
 		
-		
+		startGuest = new GuestStart(this, details);
 		startUser = new UserStart(this,details);
 		
 		//NEW VISITOR

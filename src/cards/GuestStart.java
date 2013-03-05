@@ -21,7 +21,7 @@ public class GuestStart extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public GuestStart(final MainFrame mf) {
+	public GuestStart(final MainFrame mf, final DetailedFoodView df) {
 		
 		setBackground(Color.WHITE);
 		
