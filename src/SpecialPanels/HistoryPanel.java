@@ -16,11 +16,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.UIManager;
 
 import net.miginfocom.swing.MigLayout;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
+import javax.swing.JTextPane;
 
 public class HistoryPanel extends JPanel{
 	private final Action action = new SwingAction();
@@ -64,15 +66,12 @@ public class HistoryPanel extends JPanel{
 		add(scrollPane, "cell 2 0,growx,aligny top");
 		
 		JList list = new JList();
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setSelectionModel(new DefaultListSelectionModel());
-        list.setEnabled(false);
+		list.setEnabled(false);
 		scrollPane.setViewportView(list);
-		list.setListData(ab.toArray());
 		JPanel panel = new JPanel();
 		panel.setBackground(c);
 		add(panel, "cell 3 0,grow");
-		
+		list.setListData(ab.toArray());
 		JButton btnLggTill = new JButton("L\u00E4gg TIll");
 		btnLggTill.setAction(action);
 		GroupLayout gl_panel = new GroupLayout(panel);
