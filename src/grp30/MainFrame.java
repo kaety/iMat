@@ -224,6 +224,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		JPanel kundvagnspanel = new JPanel();
+		kundvagnspanel.setToolTipText("Tryck h\u00E4r f\u00F6r att se din varukorg.");
 		kundvagnspanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		kundvagnspanel.setBackground(IMatColors.BACKGROUND);
 		
@@ -779,6 +780,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		rightpanel.setLayout(gl_rightpanel);
 		
 		JButton shoppingCartbutton = new JButton("");
+		shoppingCartbutton.setToolTipText("Tryck h\u00E4r f\u00F6r att se din varukorg");
 		shoppingCartbutton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		shoppingCartbutton.setIconTextGap(2);
 		shoppingCartbutton.setRequestFocusEnabled(false);
@@ -1110,6 +1112,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		searchstring.setColumns(10);
 		
 		JButton btnSearch = new JButton("S\u00F6k");
+		btnSearch.setToolTipText("S\u00F6k produkter");
 		btnSearch.setRequestFocusEnabled(false);
 		btnSearch.setBorder(new LineBorder(new Color(0, 0, 0)));
 		btnSearch.addActionListener(new ActionListener() {
@@ -1182,6 +1185,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		);
 		
 		changeLabel = new JLabel("Mina Uppgifter");
+		changeLabel.setToolTipText("\u00D6versk\u00E5da och redigera dina personuppgifter");
 		changeLabel.setForeground(Color.BLACK);
 		changeLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1208,6 +1212,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		changeLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		historyLabel = new JLabel("Historik");
+		historyLabel.setToolTipText("Din orderhistorik");
 		historyLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
