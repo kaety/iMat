@@ -23,6 +23,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
@@ -125,7 +128,7 @@ public class Pay1 extends JPanel {
 		pCodeLabel.setColumns(10);
 		
 		homePhoneLabel = new JTextField();
-		homePhoneLabel.setText("Hemtelefon");
+		//homePhoneLabel.setText("Hemtelefon");
 		homePhoneLabel.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -134,12 +137,7 @@ public class Pay1 extends JPanel {
 		});
 		mailLabel = new JTextField();
 		mailLabel.setText("E-Mail");
-		mailLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				mailLabel.setText("");
-			}
-		});
+		
 		mailLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 			//IF we have first name, we have also other info
 			if(!IMatDataHandler.getInstance().getCustomer().getFirstName().equals("")){
@@ -154,14 +152,14 @@ public class Pay1 extends JPanel {
 				pCodeLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostCode());
 			
 			}else{
-				firstLabel.setText("Förnamn");
+			/*	firstLabel.setText("Förnamn");
 				addressLabel.setText("Adress");
 				lastLabel.setText("Efternamn");
 				homePhoneLabel.setText("Hemtelefon");
 				cityLabel.setText("Postadress");
 				tNumberLabel.setText("Mobilnummer");
 				pCodeLabel.setText("Postkod");
-				mailLabel.setText("E-Mail");
+				mailLabel.setText("E-Mail"); */ //behövs ej tycker jag /Kristofer
 				mailLabel.setText(IMatDataHandler.getInstance().getCustomer().getEmail());
 				
 				
@@ -174,22 +172,45 @@ public class Pay1 extends JPanel {
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// CHECK FOR EMPTY FIELDS AND NOTIFY
-				// TODO more checks
-				if (firstLabel.getText().equals("")
-						|| addressLabel.getText().equals("")
-						|| tNumberLabel.getText().equals("")
-						|| lastLabel.getText().equals("")
-						|| cityLabel.getText().equals("")
-						|| mailLabel.getText().equals("")
-						|| homePhoneLabel.getText().equals("")
-						|| pCodeLabel.getText().equals("")) {
+				
+			    
+			    
+			    String re1="([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})"; //mail regexp
+				
+			    Pattern p2 = Pattern.compile(re1,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+				Matcher m5 = p2.matcher(mailLabel.getText());
+				
+				String nr="(\\d+)";	//nr regexp
+				Pattern p3 = Pattern.compile(nr,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			    Matcher m6 = p3.matcher(tNumberLabel.getText());
+			    Matcher m7 = p3.matcher(homePhoneLabel.getText());
+				
+			    String pk1="(\\d)";	// Any Single Digit 1
+			    String pk2="(\\d)";	// Any Single Digit 2
+			    String pk3="(\\d)";	// Any Single Digit 3
+			    String pk4="(\\s+)";	// White Space 1
+			    String pk5="(\\d)";	// Any Single Digit 4
+			    String pk6="(\\d)";	// Any Single Digit 5
+			    
+			    Pattern p4 = Pattern.compile(pk1+pk2+pk3+pk4+pk5+pk6,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			    Matcher m8 = p4.matcher(pCodeLabel.getText());
+			    boolean a = m5.find();
+			    boolean b = m6.find();
+			    boolean c = m7.find();
+			    boolean d = m8.find();
+			    
+			    
+				
+				if (firstLabel.getText().equals("") || lastLabel.getText().equals("") || addressLabel.getText().equals("") || cityLabel.getText().equals("")
+						|| !a || !b || !c
+						|| !d) {
 					if (firstLabel.getText().equals("")) {
 						l1.setVisible(true);
 					}
 					if (addressLabel.getText().equals("")) {
 						l2.setVisible(true);
 					}
-					if (tNumberLabel.getText().equals("")) {
+					if (!b) {
 						l3.setVisible(true);
 					}
 					if (lastLabel.getText().equals("")) {
@@ -198,13 +219,13 @@ public class Pay1 extends JPanel {
 					if (cityLabel.getText().equals("")) {
 						l5.setVisible(true);
 					}
-					if (mailLabel.getText().equals("")) {
+					if (!a) {
 						l6.setVisible(true);
 					}
-					if (homePhoneLabel.getText().equals("")) {
+					if (!c) {
 						l7.setVisible(true);
 					}
-					if (pCodeLabel.getText().equals("")) {
+					if (!d) {
 						l8.setVisible(true);
 					}
 				} else {
@@ -331,7 +352,7 @@ public class Pay1 extends JPanel {
 		lblMobiltelefon.setForeground(IMatFonts.REGFONTCOLOR);
 		add(lblMobiltelefon, "cell 1 7,aligny bottom");
 		
-		lblHemtelefon = new JLabel("Personnummer");
+		lblHemtelefon = new JLabel("Hemtelefon");
 		lblHemtelefon.setFont(IMatFonts.REGFONT);
 		lblHemtelefon.setForeground(IMatFonts.REGFONTCOLOR);
 		add(lblHemtelefon, "cell 5 7,aligny bottom");

@@ -985,28 +985,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		dryckButton.setBorder(null);
 		dryckButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (carddropdownpanel.isVisible() && dropdown4.isVisible()) {
-				 	
-			          carddropdownpanel.setVisible(false);
-			  	
-			       } else {
-				  	
-			         carddropdownpanel.setVisible(true);
-			
-			CardLayout cardLayout = (CardLayout) (carddropdownpanel
-					.getLayout());
-			cardLayout.show(carddropdownpanel, "foodbutton4");
-			       }}
-		});
-		
-		JButton basvarorButton = new JButton("");
-		basvarorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		basvarorButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
-		basvarorButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
-		basvarorButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror.png")));
-		basvarorButton.setBorder(null);
-		basvarorButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				if (carddropdownpanel.isVisible() && dropdown5.isVisible()) {
 				 	
 			          carddropdownpanel.setVisible(false);
@@ -1018,6 +996,28 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			CardLayout cardLayout = (CardLayout) (carddropdownpanel
 					.getLayout());
 			cardLayout.show(carddropdownpanel, "foodbutton5");
+			       }}
+		});
+		
+		JButton basvarorButton = new JButton("");
+		basvarorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		basvarorButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
+		basvarorButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
+		basvarorButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror.png")));
+		basvarorButton.setBorder(null);
+		basvarorButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (carddropdownpanel.isVisible() && dropdown4.isVisible()) {
+				 	
+			          carddropdownpanel.setVisible(false);
+			  	
+			       } else {
+				  	
+			         carddropdownpanel.setVisible(true);
+			
+			CardLayout cardLayout = (CardLayout) (carddropdownpanel
+					.getLayout());
+			cardLayout.show(carddropdownpanel, "foodbutton4");
 			
 			}}
 		});

@@ -5,6 +5,8 @@ import gui.IMatColors;
 
 import java.awt.Color;
 
+import java.util.regex.*;
+
 import javax.swing.JPanel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -68,7 +70,7 @@ public class Pay2 extends JPanel {
 		buttonGroup.add(chckbx1);
 		chckbx1.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		add(chckbx1, "cell 1 3,alignx left,aligny top");
-		//chckbx1.setSelected(true);
+		chckbx1.setSelected(true);
 		
 		chckbx2 = new JCheckBox("American Express");
 		buttonGroup.add(chckbx2);
@@ -201,19 +203,33 @@ public class Pay2 extends JPanel {
 		okButton.setToolTipText("G\u00E5 vidare till bekr\u00E4ftning");
 		okButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (cardNumberLabel.getText().equals("") ||
-						cardNumberLabel.getText().equals("Kortnummer") ||
-						cvcLabel.getText().equals("cvc") ||
-						nameLabel.getText().equals("Fullst‰ndigtnamn")
-						|| cvcLabel.getText().equals("")
+				
+
+			    String re1="(\\d)";	// Any Single Digit 1
+			    String re2="(\\d)";	// Any Single Digit 2
+			    String re3="(\\d)";	// Any Single Digit 3
+
+			    Pattern p = Pattern.compile(re1+re2+re3,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			    Matcher m = p.matcher(cvcLabel.getText());
+				boolean cvcmatch=m.find();
+				
+				String re4="(\\d+)";	// Integer Number 
+
+				    Pattern p2 = Pattern.compile(re4,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+				    Matcher m2 = p2.matcher(cardNumberLabel.getText());
+				    boolean cardmatch=m2.find();
+				
+				
+				if (!cardmatch ||!cvcmatch ||
+						nameLabel.getText().equals("Fullst‰ndigt namn")
 						|| nameLabel.getText().equals("")
 						|| yyCombo.getSelectedItem().equals("≈≈")
 						|| mmCombo.getSelectedItem().equals("MM") ||
 						buttonGroup.isSelected(null)) {
-					if (cardNumberLabel.getText().equals("") || cardNumberLabel.getText().equals("Kortnummer")) {
+					if (!cardmatch) {
 						cardFail.setVisible(true);
 					}
-					if (cvcLabel.getText().equals("") || cvcLabel.getText().equals("cvc")) {
+					if (!cvcmatch) {
 						cvcFail.setVisible(true);
 					}
 					if (nameLabel.getText().equals("") || nameLabel.getText().equals("Fullst‰ndigt namn")) {
