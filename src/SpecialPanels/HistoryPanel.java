@@ -1,22 +1,26 @@
 package SpecialPanels;
 
 import java.awt.Color;
-import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
+import net.miginfocom.swing.MigLayout;
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
-import javax.swing.AbstractAction;
-import java.awt.event.ActionEvent;
-import javax.swing.Action;
 
 public class HistoryPanel extends JPanel{
 	private final Action action = new SwingAction();
@@ -26,10 +30,8 @@ public class HistoryPanel extends JPanel{
 		if(b)  c = new Color(240,240,240);
 		else c = Color.WHITE;
 		setBackground(c);
-		setLayout(new GridLayout(1, 0, 0, 0));
 		this.o = o;
-		JLabel lblNewLabel_1 = new JLabel(o.getDate() + "");
-		add(lblNewLabel_1);
+		setLayout(new MigLayout("", "[119.00px,grow][12.00px,grow][135.00,grow][156px]", "[74.00px,grow]"));
 		
 		ArrayList<ShoppingItem> l = (ArrayList<ShoppingItem>) o.getItems(); 
 		double d = 0.0;
@@ -37,29 +39,56 @@ public class HistoryPanel extends JPanel{
 			d += i.getTotal();
 		}
 		
-		JLabel lblNewLabel = new JLabel(d + ":-");
-		add(lblNewLabel);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(c);
+		add(panel_1, "cell 0 0,grow");
+		panel_1.setLayout(new MigLayout("", "[][][][][]", "[]"));
+		JLabel lblNewLabel_1 = new JLabel(o.getDate() + "");
+		panel_1.add(lblNewLabel_1, "cell 0 0");
 		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(c);
+		add(panel_2, "cell 1 0,grow");
+		panel_2.setLayout(new MigLayout("", "[][][]", "[]"));
+		
+		JLabel lblNewLabel = new JLabel(d + ":-");
+		panel_2.add(lblNewLabel, "cell 2 0");
+		ArrayList<ShoppingItem> aa =(ArrayList<ShoppingItem>) o.getItems();
+		ArrayList<String> ab = new ArrayList<String>();
+		for(ShoppingItem i : aa){
+			ab.add(i.getProduct().getName() + " (" + i.getAmount() + i.getProduct().getUnitSuffix() + ") " );
+		}
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		add(scrollPane, "cell 2 0,growx,aligny top");
+		
+		JList list = new JList();
+        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.setSelectionModel(new DefaultListSelectionModel());
+        list.setEnabled(false);
+		scrollPane.setViewportView(list);
+		list.setListData(ab.toArray());
 		JPanel panel = new JPanel();
 		panel.setBackground(c);
-		add(panel);
+		add(panel, "cell 3 0,grow");
 		
 		JButton btnLggTill = new JButton("L\u00E4gg TIll");
 		btnLggTill.setAction(action);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(83)
+					.addContainerGap(53, Short.MAX_VALUE)
 					.addComponent(btnLggTill, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnLggTill)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap(63, Short.MAX_VALUE))
 		);
 		panel.setLayout(gl_panel);
 	}
