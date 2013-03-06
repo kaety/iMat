@@ -1276,6 +1276,10 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		contentPane.setLayout(gl_contentPane);
 		
+		
+		//LAST-MINUTE INIT
+		shoppingCartChanged();
+		
 	}
 
 
