@@ -15,6 +15,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -1331,6 +1332,6 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	@Override
 	public void shoppingCartChanged() {
 		lblSumma.setText(IMatDataHandler.getInstance().getShoppingCart().getItems().size() + " varor");
-		lblRegistreraDig.setText(IMatDataHandler.getInstance().getShoppingCart().getTotal() + ":-");
+		lblRegistreraDig.setText(BigDecimal.valueOf(IMatDataHandler.getInstance().getShoppingCart().getTotal()).setScale(2, BigDecimal.ROUND_HALF_UP) + " :-");
 	}
 }
