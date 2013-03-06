@@ -164,8 +164,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		searchResults = new SearchResults(this);
 		centercardpanel.add(searchResults, "searchResults");
-		
-		pay3 = new Pay3(this);
+		history = new History();
+		pay3 = new Pay3(this,history);
 		centercardpanel.add(pay3, "pay3");
 		
 		pay1 = new Pay1(this,pay3, this.myAccount);
@@ -185,7 +185,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		confirmed = new ConfirmedBuy(this);
 		centercardpanel.add(confirmed, "confirmed");
 		
-		history = new History();
+		
 		centercardpanel.add(history, "history");
 		
 		receipt = new Receipt();

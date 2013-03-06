@@ -24,6 +24,7 @@ import javax.swing.ButtonGroup;
 
 import se.chalmers.ait.dat215.project.IMatDataHandler;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.ImageIcon;
 
 public class Pay2 extends JPanel {
 	private JTextField cardNumberLabel;
@@ -47,6 +48,7 @@ public class Pay2 extends JPanel {
 	private JLabel lblCvckod;
 	private JLabel lblFullstndigtNamn;
 	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
 	
 
 	/**
@@ -58,9 +60,9 @@ public class Pay2 extends JPanel {
 		
 		setLayout(new MigLayout("", "[140][112px][10][60px][][30][][60px][10][][29px][30][89px][10][14px]", "[44px][23px][22px][22px][22px][30px][22px][30px][22px][30px][25px]"));
 		
-		JLabel label = new JLabel("2/3");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		add(label, "cell 5 1,alignx center,aligny top");
+		lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(Pay2.class.getResource("/resources/pay2.png")));
+		add(lblNewLabel_1, "cell 5 1");
 		
 		chckbx1 = new JCheckBox("Visa/Mastercard");
 		buttonGroup.add(chckbx1);

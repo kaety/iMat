@@ -100,7 +100,7 @@ public class Register extends JPanel {
 					System.out.println(passField.getText());
 					IMatDataHandler.getInstance().getUser().setUserName(mailField.getText());
 					IMatDataHandler.getInstance().getUser().setPassword(passField.getText());
-					
+					IMatDataHandler.getInstance().getCustomer().setEmail(mailField.getText());
 					mf.setUser();
 					
 					pay1.updateInfo();

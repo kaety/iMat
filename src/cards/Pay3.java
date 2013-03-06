@@ -25,6 +25,7 @@ import java.awt.event.FocusEvent;
 import javax.swing.JPasswordField;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 
 public class Pay3 extends JPanel {
 	private JLabel nameLabel;
@@ -34,23 +35,22 @@ public class Pay3 extends JPanel {
 	private JLabel totalLabel;
 	private JTextField passLabel;
 	private JLabel wrongLabel;
-	private JLabel label;
 	private JLabel lblBekrftaLsenord;
+	private JLabel lblNewLabel;
 	
 	
 	
 	/**
 	 * Create the panel.
 	 */
-	public Pay3(final MainFrame mf) {
+	public Pay3(final MainFrame mf, final History history) {
 		
 		setBackground(Color.WHITE);
 		setLayout(new MigLayout("", "[150][112px][10][29px][30][112px][10][49px][10][89px][40][14px]", "[44px][23px][22px][22px][22px][22px][22px][30px][22px][40px][25px]"));
 		
-		label = new JLabel("3/3");
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		add(label, "cell 5 1,alignx center");
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Pay3.class.getResource("/resources/pay3.png")));
+		add(lblNewLabel, "cell 5 1");
 		
 		nameLabel = new JLabel();
 		nameLabel.setText("Namn");
@@ -110,6 +110,7 @@ public class Pay3 extends JPanel {
 					Order o = IMatDataHandler.getInstance().placeOrder(true);
 					mf.lastReceipt(o);
 					mf.swapCard("confirmed");
+					history.updateHistory();
 					wrongLabel.setVisible(false);
 				}
 				else{

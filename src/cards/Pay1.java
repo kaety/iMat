@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
+import javax.swing.ImageIcon;
 
 public class Pay1 extends JPanel {
 	private JTextField firstLabel;
@@ -52,6 +53,7 @@ public class Pay1 extends JPanel {
 	private JLabel lblPostnummer;
 	private JLabel lblMobiltelefon;
 	private JLabel lblEmail;
+	private JLabel lblNewLabel;
 
 	/**
 	 * Create the panel.
@@ -245,9 +247,6 @@ public class Pay1 extends JPanel {
 		});
 		okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel label = new JLabel("1/3");
-		label.setFont(new Font("Tahoma", Font.PLAIN, 19));
-		
 		l1 = new JLabel("Fel");
 		l1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l1.setForeground(Color.RED);
@@ -278,7 +277,10 @@ public class Pay1 extends JPanel {
 		l8.setForeground(Color.RED);
 		l8.setVisible(false);
 		setLayout(new MigLayout("", "[150][112px][10][29px][30][112px][10][29px][30][89px][10][14px]", "[44px][23px][22px][22px][22px][30px][22px][30px][22px][30px][25px]"));
-		add(label, "cell 5 1,alignx center,aligny top");
+		
+		lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon(Pay1.class.getResource("/resources/pay1.png")));
+		add(lblNewLabel, "cell 5 1");
 		
 		lblFrnamn = new JLabel("F\u00F6rnamn");
 		lblFrnamn.setFont(IMatFonts.REGFONT);
@@ -329,7 +331,7 @@ public class Pay1 extends JPanel {
 		lblMobiltelefon.setForeground(IMatFonts.REGFONTCOLOR);
 		add(lblMobiltelefon, "cell 1 7,aligny bottom");
 		
-		lblHemtelefon = new JLabel("Hemtelefon");
+		lblHemtelefon = new JLabel("Personnummer");
 		lblHemtelefon.setFont(IMatFonts.REGFONT);
 		lblHemtelefon.setForeground(IMatFonts.REGFONTCOLOR);
 		add(lblHemtelefon, "cell 5 7,aligny bottom");
@@ -365,5 +367,9 @@ public class Pay1 extends JPanel {
 		mailLabel.setText(IMatDataHandler.getInstance().getCustomer().getEmail());
 		homePhoneLabel.setText(IMatDataHandler.getInstance().getCustomer().getPhoneNumber());
 		pCodeLabel.setText(IMatDataHandler.getInstance().getCustomer().getPostCode());
+	}
+	
+	public void updateMail(){
+		mailLabel.setText(IMatDataHandler.getInstance().getUser().getUserName());
 	}
 }

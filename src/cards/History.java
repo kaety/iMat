@@ -10,6 +10,7 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import SpecialPanels.HistoryScrollPane;
 
 public class History extends JPanel {
+	private HistoryScrollPane historyScrollPane;
 
 	/**
 	 * Create the panel.
@@ -18,7 +19,7 @@ public class History extends JPanel {
 		
 		setBackground(Color.BLUE);
 		
-		HistoryScrollPane historyScrollPane = new HistoryScrollPane();
+		historyScrollPane = new HistoryScrollPane();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -29,5 +30,10 @@ public class History extends JPanel {
 				.addComponent(historyScrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
+	}
+	
+	public void updateHistory(){
+		
+		historyScrollPane.placeHistory();
 	}
 }
