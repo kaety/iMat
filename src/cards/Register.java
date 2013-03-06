@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class Register extends JPanel {
 	private JTextField mailField;
-	private JTextField passField;
+	private JPasswordField passField;
 	private JLabel fel1;
 	private JLabel fel3;
 
@@ -59,7 +59,7 @@ public class Register extends JPanel {
 		mailField.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		mailField.setColumns(10);
 		
-		passField = new JTextField();
+		passField = new JPasswordField();
 		
 		passField.setHorizontalAlignment(SwingConstants.CENTER);
 		passField.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -87,27 +87,26 @@ public class Register extends JPanel {
 		regButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String re1="([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,7})";
+				String re1="([\\w-+]+(?:\\.[\\w-+]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,24})";
 				
 				Pattern p = Pattern.compile(re1,Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
 				Matcher m = p.matcher(mailField.getText());
-				
-				if(!m.find() || passField.getText().length() < 8){
+				char[] string =passField.getPassword();
+				if(!m.find() || string.length <8){
 					
 					if(!m.find()){
 						fel1.setVisible(true);
 						
 					}
-					if( passField.getText().length() < 8){
+					if( string.length < 8){
 						fel3.setVisible(true);
 					}
 					
 				}
 				else{
-					//SAVE USERNAME AND PASSWORD
-					System.out.println(passField.getText());
 					IMatDataHandler.getInstance().getUser().setUserName(mailField.getText());
-					IMatDataHandler.getInstance().getUser().setPassword(passField.getText());
+					String password =new String(string);
+					IMatDataHandler.getInstance().getUser().setPassword(password);
 					IMatDataHandler.getInstance().getCustomer().setEmail(mailField.getText());
 					mf.setUser();
 					

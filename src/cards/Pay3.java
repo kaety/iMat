@@ -33,7 +33,7 @@ public class Pay3 extends JPanel {
 	private JLabel cityLabel;
 	private JLabel numberLabel;
 	private JLabel totalLabel;
-	private JTextField passLabel;
+	private JPasswordField passLabel;
 	private JLabel wrongLabel;
 	private JLabel lblBekrftaLsenord;
 	private JLabel lblNewLabel;
@@ -89,6 +89,7 @@ public class Pay3 extends JPanel {
 			}
 		});
 		
+		passLabel = new JPasswordField();
 
 		
 		wrongLabel = new JLabel("Fel L\u00F6senord");
@@ -104,9 +105,10 @@ public class Pay3 extends JPanel {
 		confirmButton.setToolTipText("L\u00E4gg order");
 		confirmButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				char[] charlizard = passLabel.getPassword();
+				String password = new String(charlizard);
 			
-				if(IMatDataHandler.getInstance().getUser().getPassword().equals(passLabel.getText())){
+				if(IMatDataHandler.getInstance().getUser().getPassword().equals(password)){
 					Order o = IMatDataHandler.getInstance().placeOrder(true);
 					mf.lastReceipt(o);
 					mf.swapCard("confirmed");
@@ -119,18 +121,11 @@ public class Pay3 extends JPanel {
 			}
 		});
 		
-		passLabel = new JTextField();
-		passLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent arg0) {
-				passLabel.setText("");
-			}
-		});
+		
 		
 		lblBekrftaLsenord = new JLabel("Bekr\u00E4fta L\u00F6senord:");
 		add(lblBekrftaLsenord, "cell 5 10,alignx right");
 		passLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		passLabel.setText("L\u00F6senord");
 		passLabel.setColumns(10);
 		add(passLabel, "cell 7 10,alignx right,aligny center");
 		confirmButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
