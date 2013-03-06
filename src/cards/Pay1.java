@@ -268,32 +268,44 @@ public class Pay1 extends JPanel {
 		});
 		okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		l1 = new JLabel("Fel");
+		l1 = new JLabel("");
+		l1.setToolTipText("Felaktigt f\u00F6rnamn");
+		l1.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l1.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l1.setForeground(Color.RED);
 		l1.setVisible(false);
 		
-		l2 = new JLabel("Fel");
+		l2 = new JLabel("");
+		l2.setToolTipText("Ogiltlig adress");
+		l2.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l2.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l2.setForeground(Color.RED);
 		l2.setVisible(false);
 		
-		l3 = new JLabel("Fel");
+		l3 = new JLabel("");
+		l3.setToolTipText("Ogiltligt telefonnummer");
+		l3.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l3.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l3.setForeground(Color.RED);
 		l3.setVisible(false);
 		
-		l4 = new JLabel("Fel");
+		l4 = new JLabel("");
+		l4.setToolTipText("Felaktigt efternamn");
+		l4.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l4.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l4.setForeground(Color.RED);
 		l4.setVisible(false);
 		
-		l5 = new JLabel("Fel");
+		l5 = new JLabel("");
+		l5.setToolTipText("Ogiltlig postort");
+		l5.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l5.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l5.setForeground(Color.RED);
 		l5.setVisible(false);
 		
-		l8 = new JLabel("Fel");
+		l8 = new JLabel("");
+		l8.setToolTipText("<html>Ogiltligt postnummer<br />\r\nPostorten ska vara p\u00E5 formen XXX XX</html>");
+		l8.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l8.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l8.setForeground(Color.RED);
 		l8.setVisible(false);
@@ -324,7 +336,9 @@ public class Pay1 extends JPanel {
 		mailLabel.setColumns(10);
 		add(mailLabel, "cell 9 4,growx,aligny top");
 		
-		l6 = new JLabel("Fel");
+		l6 = new JLabel("");
+		l6.setToolTipText("Ogiltlig E-mail");
+		l6.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l6.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l6.setForeground(Color.RED);
 		l6.setVisible(false);
@@ -370,7 +384,9 @@ public class Pay1 extends JPanel {
 		homePhoneLabel.setColumns(10);
 		add(homePhoneLabel, "cell 5 8,growx,aligny top");
 		
-		l7 = new JLabel("Fel");
+		l7 = new JLabel("");
+		l7.setToolTipText("Ogiltligt telefonnummer");
+		l7.setIcon(new ImageIcon(Pay1.class.getResource("/resources/error.png")));
 		l7.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		l7.setForeground(Color.RED);
 		l7.setVisible(false);

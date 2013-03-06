@@ -23,6 +23,7 @@ import se.chalmers.ait.dat215.project.IMatDataHandler;
 import se.chalmers.ait.dat215.project.Order;
 import se.chalmers.ait.dat215.project.ShoppingItem;
 import javax.swing.JTextPane;
+import javax.swing.SwingConstants;
 
 public class HistoryPanel extends JPanel{
 	private final Action action = new SwingAction();
@@ -54,7 +55,8 @@ public class HistoryPanel extends JPanel{
 		panel_2.setLayout(new MigLayout("", "[][][]", "[]"));
 		
 		JLabel lblNewLabel = new JLabel(d + ":-");
-		panel_2.add(lblNewLabel, "cell 2 0");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_2.add(lblNewLabel, "cell 0 0 3 1");
 		ArrayList<ShoppingItem> aa =(ArrayList<ShoppingItem>) o.getItems();
 		ArrayList<String> ab = new ArrayList<String>();
 		for(ShoppingItem i : aa){
