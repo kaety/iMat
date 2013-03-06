@@ -1,6 +1,7 @@
 package cards;
 
 import grp30.MainFrame;
+import gui.IMatFonts;
 
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -18,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import net.miginfocom.swing.MigLayout;
 
 public class MyAccount extends JPanel {
 
@@ -38,99 +40,31 @@ public class MyAccount extends JPanel {
 	private JLabel l6;
 	private JLabel l7;
 	private JLabel l8;
+	private JLabel lblndraUppgifter;
 
 	/**
 	 * Create the panel.
 	 */
 	public MyAccount(final MainFrame mf,final Pay1 pay1) {
 		
-		setBackground(Color.WHITE);
-		
 		firstLabel = new JTextField();
-		firstLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent arg0) {
-				firstLabel.setText("");
-			}
-		});
-		firstLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		firstLabel.setColumns(10);
-		
-		addressLabel = new JTextField();
-		addressLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				addressLabel.setText("");
-			}
-		});
-		addressLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		addressLabel.setColumns(10);
-		
-		tNumberLabel = new JTextField();
-		tNumberLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				tNumberLabel.setText("");
-			}
-		});
-		tNumberLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		tNumberLabel.setColumns(10);
-		
+		firstLabel.setFont(IMatFonts.NORMALFONT);
 		lastLabel = new JTextField();
-		lastLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				lastLabel.setText("");
-			}
-		});
-		lastLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		lastLabel.setColumns(10);
-		
+		lastLabel.setFont(IMatFonts.NORMALFONT);
+		addressLabel = new JTextField();
+		addressLabel.setFont(IMatFonts.NORMALFONT);
 		cityLabel = new JTextField();
-		cityLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				cityLabel.setText("");
-			}
-		});
-		cityLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		cityLabel.setColumns(10);
-		
-		mailLabel = new JTextField();
-		mailLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				mailLabel.setText("");
-			}
-		});
-		mailLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		mailLabel.setColumns(10);
-		
-		homePhoneLabel = new JTextField();
-		homePhoneLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				homePhoneLabel.setText("");
-			}
-		});
-		homePhoneLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		homePhoneLabel.setColumns(10);
-		
+		cityLabel.setFont(IMatFonts.NORMALFONT);
 		pCodeLabel = new JTextField();
-		pCodeLabel.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusGained(FocusEvent e) {
-				pCodeLabel.setText("");
-			}
-		});
-		pCodeLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		pCodeLabel.setText("Postnummer");
-		pCodeLabel.setColumns(10);
+		pCodeLabel.setFont(IMatFonts.NORMALFONT);
+		tNumberLabel = new JTextField();
+		tNumberLabel.setFont(IMatFonts.NORMALFONT);
+		homePhoneLabel = new JTextField();
+		homePhoneLabel.setFont(IMatFonts.NORMALFONT);
+		mailLabel = new JTextField();
+		mailLabel.setFont(IMatFonts.NORMALFONT);
+		
+		setBackground(Color.WHITE);
 			//IF we have first name, we have also other info
 			if(!IMatDataHandler.getInstance().getCustomer().getFirstName().equals("")){
 				
@@ -156,7 +90,159 @@ public class MyAccount extends JPanel {
 				
 				
 			}
-			
+		setLayout(new MigLayout("", "[91px][112px][29px][61px][112px][21px][36px][145px][4px][14px]", "[40px][22px][22px][22px][10px][22px][22px][10px][22px][22px][][]"));
+		
+		lblndraUppgifter = new JLabel("\u00C4ndra Uppgifter");
+		lblndraUppgifter.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		add(lblndraUppgifter, "cell 3 0 2 1,alignx right");
+		
+		JLabel lblNewLabel = new JLabel("F\u00F6rnamn");
+		lblNewLabel.setFont(IMatFonts.REGFONT);
+		lblNewLabel.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel, "cell 1 2,alignx left,aligny center");
+		
+		JLabel lblNewLabel_3 = new JLabel("Efternamn");
+		lblNewLabel_3.setFont(IMatFonts.REGFONT);
+		lblNewLabel_3.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel_3, "cell 4 2,alignx left,aligny center");
+		
+		firstLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent arg0) {
+				firstLabel.setText("");
+			}
+		});
+		
+		JLabel lblNewLabel_5 = new JLabel("E-Mail");
+		lblNewLabel_5.setFont(IMatFonts.REGFONT);
+		lblNewLabel_5.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel_5, "cell 7 2,alignx left,aligny center");
+		firstLabel.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		firstLabel.setColumns(10);
+		add(firstLabel, "cell 1 3,growx,aligny top");
+		
+		l1 = new JLabel("Fel");
+		l1.setForeground(Color.RED);
+		l1.setVisible(false);
+		add(l1, "cell 2 3,growx,aligny center");
+		
+		lastLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				lastLabel.setText("");
+			}
+		});
+		
+		lastLabel.setColumns(10);
+		add(lastLabel, "cell 4 3,growx,aligny top");
+		
+		l4 = new JLabel("Fel");
+		l4.setForeground(Color.RED);
+		l4.setVisible(false);
+		add(l4, "cell 5 3,growx,aligny center");
+
+		
+		mailLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				mailLabel.setText("");
+			}
+		});
+		
+		mailLabel.setColumns(10);
+		add(mailLabel, "cell 7 3,growx,aligny top");
+		
+		l6 = new JLabel("Fel");
+		l6.setForeground(Color.RED);
+		l6.setVisible(false);
+		add(l6, "cell 9 3,alignx left,aligny center");
+		
+		JLabel lblNewLabel_1 = new JLabel("Adress");
+		lblNewLabel_1.setFont(IMatFonts.REGFONT);
+		lblNewLabel_1.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel_1, "cell 1 5,alignx left,aligny center");
+		
+		addressLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				addressLabel.setText("");
+			}
+		});
+		
+		JLabel lblNewLabel_4 = new JLabel("Postort");
+		lblNewLabel_4.setFont(IMatFonts.REGFONT);
+		lblNewLabel_4.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel_4, "cell 4 5,alignx left,aligny center");
+		
+		l5 = new JLabel("Fel");
+		l5.setForeground(Color.RED);
+		l5.setVisible(false);
+		add(l5, "cell 5 5,growx,aligny center");
+		
+		JLabel lblNewLabel_7 = new JLabel("Postnummer");
+		lblNewLabel_7.setFont(IMatFonts.REGFONT);
+		lblNewLabel_7.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel_7, "cell 7 5,alignx left,aligny center");
+
+		addressLabel.setColumns(10);
+		add(addressLabel, "cell 1 6,growx,aligny top");
+		
+		l2 = new JLabel("Fel");
+		l2.setForeground(Color.RED);
+		l2.setVisible(false);
+		add(l2, "cell 2 6,growx,aligny center");
+		
+		cityLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				cityLabel.setText("");
+			}
+		});
+		
+		cityLabel.setColumns(10);
+		add(cityLabel, "cell 4 6,growx,aligny top");
+		
+		pCodeLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				pCodeLabel.setText("");
+			}
+		});
+
+		pCodeLabel.setText("Postnummer");
+		pCodeLabel.setColumns(10);
+		add(pCodeLabel, "cell 7 6,alignx left,aligny top");
+		
+		l8 = new JLabel("Fel");
+		l8.setForeground(Color.RED);
+		l8.setVisible(false);
+		add(l8, "cell 9 6,alignx left,aligny center");
+		
+		JLabel lblNewLabel_2 = new JLabel("Telefonnummer");
+		lblNewLabel_2.setFont(IMatFonts.REGFONT);
+		lblNewLabel_2.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel_2, "cell 1 8,alignx left,aligny center");
+		
+		tNumberLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				tNumberLabel.setText("");
+			}
+		});
+		
+		JLabel lblNewLabel_6 = new JLabel("Hemtelefon");
+		lblNewLabel_6.setFont(IMatFonts.REGFONT);
+		lblNewLabel_6.setForeground(IMatFonts.REGFONTCOLOR);
+		add(lblNewLabel_6, "cell 4 8,alignx left,aligny center");
+		
+		tNumberLabel.setColumns(10);
+		add(tNumberLabel, "cell 1 9,growx,aligny top");
+		
+		l3 = new JLabel("Fel");
+		l3.setForeground(Color.RED);
+		l3.setVisible(false);
+		add(l3, "cell 2 9,growx,aligny center");
+		
 		
 		JButton okButton = new JButton("Uppdatera");
 		okButton.setToolTipText("");
@@ -225,168 +311,23 @@ public class MyAccount extends JPanel {
 				
 			}
 		});
-		okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		
-		l1 = new JLabel("Fel");
-		l1.setForeground(Color.RED);
-		l1.setVisible(false);
-		
-		l2 = new JLabel("Fel");
-		l2.setForeground(Color.RED);
-		l2.setVisible(false);
-		
-		l3 = new JLabel("Fel");
-		l3.setForeground(Color.RED);
-		l3.setVisible(false);
-		
-		l4 = new JLabel("Fel");
-		l4.setForeground(Color.RED);
-		l4.setVisible(false);
-		
-		l5 = new JLabel("Fel");
-		l5.setForeground(Color.RED);
-		l5.setVisible(false);
-		
-		l6 = new JLabel("Fel");
-		l6.setForeground(Color.RED);
-		l6.setVisible(false);
 		
 		l7 = new JLabel("Fel");
 		l7.setForeground(Color.RED);
 		l7.setVisible(false);
 		
-		l8 = new JLabel("Fel");
-		l8.setForeground(Color.RED);
-		l8.setVisible(false);
+		homePhoneLabel.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				homePhoneLabel.setText("");
+			}
+		});
 		
-		JLabel lblNewLabel = new JLabel("F\u00F6rnamn:");
-		
-		JLabel lblNewLabel_1 = new JLabel("Adress:");
-		
-		JLabel lblNewLabel_2 = new JLabel("Telefonnummer:");
-		
-		JLabel lblNewLabel_3 = new JLabel("Efternamn:");
-		
-		JLabel lblNewLabel_4 = new JLabel("Postort:");
-		
-		JLabel lblNewLabel_5 = new JLabel("E-Mail:");
-		
-		JLabel lblNewLabel_6 = new JLabel("Personnummer:");
-		
-		JLabel lblNewLabel_7 = new JLabel("Postnummer:");
-		
-		GroupLayout groupLayout = new GroupLayout(this);
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_1)
-						.addComponent(lblNewLabel)
-						.addComponent(lblNewLabel_2))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(firstLabel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(l1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(l2, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(tNumberLabel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(l3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(21)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel_4)
-								.addComponent(lblNewLabel_5)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_3)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lastLabel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addComponent(mailLabel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)
-							.addComponent(cityLabel, GroupLayout.PREFERRED_SIZE, 112, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(l5, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-								.addComponent(l4, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE))
-							.addGap(8)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel_6)
-								.addComponent(lblNewLabel_7))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(pCodeLabel, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
-										.addComponent(homePhoneLabel, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(l8)
-										.addComponent(l7)))
-								.addComponent(okButton)))
-						.addComponent(l6))
-					.addContainerGap())
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(62)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(firstLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(l1)
-								.addComponent(lblNewLabel))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(addressLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(l2)
-								.addComponent(lblNewLabel_1))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(tNumberLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(l3)
-								.addComponent(lblNewLabel_2)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lastLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(l4)
-								.addComponent(lblNewLabel_3))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cityLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(l5)
-								.addComponent(lblNewLabel_4))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(mailLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(l6)
-								.addComponent(lblNewLabel_5)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(l7)
-								.addComponent(homePhoneLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_6))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(l8)
-								.addComponent(pCodeLabel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_7))))
-					.addGap(69)
-					.addComponent(okButton)
-					.addContainerGap(42, Short.MAX_VALUE))
-		);
-		setLayout(groupLayout);
+		homePhoneLabel.setColumns(10);
+		add(homePhoneLabel, "cell 4 9,growx,aligny top");
+		add(l7, "cell 5 9,alignx left,aligny center");
+		okButton.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		add(okButton, "cell 7 11,alignx left,aligny top");
 
 	}
 	
