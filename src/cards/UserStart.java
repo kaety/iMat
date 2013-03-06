@@ -112,6 +112,7 @@ public class UserStart extends JPanel {
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		
 		JPanel panel_2 = new JPanel();
+		panel_2.setToolTipText("");
 		panel_2.setBackground(new Color(255, 255, 255));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -173,7 +174,7 @@ public class UserStart extends JPanel {
 		panel_9.setLayout(gl_panel_9);
 		
 		JPanel panel_8 = new JPanel();
-		panel_8.setToolTipText("Tryck h\u00E4r f\u00F6r att se erbjudandet");
+		panel_8.setToolTipText("");
 		panel_8.setBackground(new Color(255, 255, 255));
 		panel_2.add(panel_8, "cell 3 0,grow");
 		
@@ -212,6 +213,7 @@ public class UserStart extends JPanel {
 		panel_8.setLayout(gl_panel_8);
 		
 		JPanel panel_6 = new JPanel();
+		panel_6.setToolTipText("");
 		panel_6.setBackground(new Color(255, 255, 255));
 		panel_2.add(panel_6, "cell 4 0,grow");
 		

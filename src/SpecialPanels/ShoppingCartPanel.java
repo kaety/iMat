@@ -50,6 +50,7 @@ public class ShoppingCartPanel extends JPanel{
 		textField_1.setText(p.getAmount() +"");
 		
 		JButton btnTaBort = new JButton("Ta Bort");
+		btnTaBort.setToolTipText("Ta bort varan fr\u00E5n varukorgen");
 		btnTaBort.setAction(action);
 		
 		JLabel lblNewLabel_2 = new JLabel(p.getTotal() + " kr");

@@ -32,6 +32,7 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 		setBackground(IMatColors.BASE_LIGHT);
 		
 		JButton btnTillKassan = new JButton("Till Kassan");
+		btnTillKassan.setToolTipText("Checka ut och best\u00E4ll dina varor");
 		btnTillKassan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(IMatDataHandler.getInstance().getShoppingCart().getItems().size() == 0){
@@ -52,7 +53,7 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 		
 		
 		//TODO ÄNDRA TILL JDIALOG 
-		lblEmptyCart = new JLabel("Tom Korg!!!");
+		lblEmptyCart = new JLabel("Varukorgen \u00E4r tom");
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

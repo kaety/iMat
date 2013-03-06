@@ -144,6 +144,8 @@ public class Pay2 extends JPanel {
 		});
 		
 		lblCvckod = new JLabel("CVC-kod");
+		lblCvckod.setToolTipText("<html>CVC-kod \u00E4r en extra s\u00E4kerhets\u00E5tg\u00E4rd, som <br />\r\nanv\u00E4nds n\u00E4r man handlar med kort och den som <br />\r\nska ha betalt inte kan se kortet. <br />\r\n<br />\r\nP\u00E5 Visa el Mastercard \u00E4r koden lika med de tre <br />\r\nsista siffrorna som \u00E4r tryckta i namnteckningsf\u00E4ltet <br />\r\np\u00E5 kortets baksida.</html>");
+		lblCvckod.setIcon(new ImageIcon(Pay2.class.getResource("/resources/qmark.png")));
 		add(lblCvckod, "cell 1 6,aligny bottom");
 		
 		lblNewLabel = new JLabel("Utg\u00E5ngsdatum");

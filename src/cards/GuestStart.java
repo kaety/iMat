@@ -172,7 +172,7 @@ public class GuestStart extends JPanel {
 				buyPicLabel1.setBorder(BorderFactory.createLineBorder(Color.white));
 			}
 		});
-		buyPicLabel1.setToolTipText("Tryck här för att komma till veckans varor");
+		buyPicLabel1.setToolTipText("Tryck h\u00E4r f\u00F6r att se erbjudandet");
 		GroupLayout gl_panel_9 = new GroupLayout(panel_9);
 		gl_panel_9.setHorizontalGroup(
 			gl_panel_9.createParallelGroup(Alignment.LEADING)
@@ -191,6 +191,7 @@ public class GuestStart extends JPanel {
 		panel_2.add(panel_8, "cell 3 0,grow");
 		
 		buyPicLabel2 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(78), 150, 150));
+		buyPicLabel2.setToolTipText("Tryck h\u00E4r f\u00F6r att se erbjudandet");
 		
 		//PRESS ON IMAGE
 		
@@ -228,6 +229,7 @@ public class GuestStart extends JPanel {
 		panel_2.add(panel_6, "cell 4 0,grow");
 		
 		buyPicLabel3 = new JLabel(IMatDataHandler.getInstance().getImageIcon(IMatDataHandler.getInstance().getProduct(55), 150, 150));
+		buyPicLabel3.setToolTipText("Tryck h\u00E4r f\u00F6r att se erbjudandet");
 		buyPicLabel3.addMouseListener(new MouseAdapter() {
 			
 			//PRESS ON IMAGE
