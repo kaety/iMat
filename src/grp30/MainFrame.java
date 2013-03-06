@@ -59,6 +59,7 @@ import net.miginfocom.swing.MigLayout;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.Dimension;
+import javax.swing.border.MatteBorder;
 
 
 
@@ -84,7 +85,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	private UserStart startUser;
 	private MyAccount myAccount;
 	
-	private JLabel lblEjInloggad;
+	private final JLabel lblEjInloggad;
 	private JLabel historyLabel;
 	private JLabel changeLabel;
 	private JPanel menuPanel;
@@ -115,7 +116,22 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		
-		lblEjInloggad = new JLabel("Ej inloggad...");
+		lblEjInloggad = new JLabel("Registrera Dig");
+		lblEjInloggad.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				if (IMatDataHandler.getInstance().getUser().getUserName().equals("")){
+					swapCard("register");
+				} else {
+					myAccount.updateInfo();
+					swapCard("myAccount");
+				}
+				
+			}
+		});
+		lblEjInloggad.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEjInloggad.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		
 		menuPanel = new JPanel();
@@ -134,7 +150,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		}
 		else{
 			//WELLKNOWN USER
-			lblEjInloggad.setText(IMatDataHandler.getInstance().getUser().getUserName());
+			setUser();
 			centercardpanel.add(startUser, "startUser");
 			centercardpanel.add(startGuest, "startGuest");
 			menuPanel.setVisible(true);
@@ -208,6 +224,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		JPanel kundvagnspanel = new JPanel();
+		kundvagnspanel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		kundvagnspanel.setBackground(IMatColors.BACKGROUND);
 		
 		JPanel menuBarPanel = new JPanel();
@@ -761,64 +778,89 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		);
 		rightpanel.setLayout(gl_rightpanel);
 		
-		JButton cartbutton = new JButton("");
-		cartbutton.setIconTextGap(2);
-		cartbutton.setFocusable(false);
-		cartbutton.setRolloverEnabled(false);
-		cartbutton.setRequestFocusEnabled(false);
-		cartbutton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/shopping_cart.png")));
-		cartbutton.addActionListener(new ActionListener() {
+		JButton shoppingCartbutton = new JButton("");
+		shoppingCartbutton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		shoppingCartbutton.setIconTextGap(2);
+		shoppingCartbutton.setRequestFocusEnabled(false);
+		shoppingCartbutton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/shopping_cart.png")));
+		shoppingCartbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cart.shoppingCartChanged2();
 				cardLayout.show(centercardpanel, "cart");
 			}
 		});
 		
-		JPanel panel = new JPanel();
-		panel.setBackground(new Color(255, 255, 255));
+		final JPanel antalVarorPanel = new JPanel();
+		antalVarorPanel.setBorder(new MatteBorder(1, 0, 0, 0, (Color) Color.BLACK));
+		antalVarorPanel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				super.mouseEntered(e);
+				antalVarorPanel.setBackground(IMatColors.BASE_LIGHT);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				super.mouseExited(e);
+				antalVarorPanel.setBackground(IMatColors.BACKGROUND);
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				cart.shoppingCartChanged2();
+				cardLayout.show(centercardpanel, "cart");
+			}
+			
+		});
+		antalVarorPanel.setBackground(new Color(255, 255, 255));
 		
 		
-		lblEjInloggad.setForeground(new Color(204, 153, 0));
+		lblEjInloggad.setForeground(IMatColors.BASE);
 		GroupLayout gl_kundvagnspanel = new GroupLayout(kundvagnspanel);
 		gl_kundvagnspanel.setHorizontalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
+					.addContainerGap()
 					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-						.addComponent(lblEjInloggad, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(cartbutton))
+						.addGroup(gl_kundvagnspanel.createSequentialGroup()
+							.addComponent(antalVarorPanel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(Alignment.TRAILING, gl_kundvagnspanel.createSequentialGroup()
+							.addComponent(lblEjInloggad, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+							.addGap(7)))
+					.addComponent(shoppingCartbutton))
 		);
 		gl_kundvagnspanel.setVerticalGroup(
 			gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_kundvagnspanel.createSequentialGroup()
+					.addGap(3)
 					.addGroup(gl_kundvagnspanel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_kundvagnspanel.createSequentialGroup()
-							.addGap(7)
-							.addComponent(cartbutton))
-						.addGroup(gl_kundvagnspanel.createSequentialGroup()
+							.addGap(4)
 							.addComponent(lblEjInloggad)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(2)
+							.addComponent(antalVarorPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(shoppingCartbutton))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
-		panel.setLayout(new GridLayout(2, 2, 10, 1));
+		antalVarorPanel.setLayout(new GridLayout(2, 2, 10, 1));
 		
 		JLabel lblAntalVaror = new JLabel("Antal varor:");
 		lblAntalVaror.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(lblAntalVaror);
+		antalVarorPanel.add(lblAntalVaror);
 		
 		lblSumma = new JLabel(IMatDataHandler.getInstance().getShoppingCart().getItems().size() + " varor");
-		panel.add(lblSumma);
+		antalVarorPanel.add(lblSumma);
 		
 		JLabel lblSumma_1 = new JLabel("Summa:");
 		lblSumma_1.setHorizontalAlignment(SwingConstants.RIGHT);
-		panel.add(lblSumma_1);
+		antalVarorPanel.add(lblSumma_1);
 		
 		lblRegistreraDig = new JLabel(IMatDataHandler.getInstance().getShoppingCart().getTotal() + ":-");
 		lblRegistreraDig.setHorizontalAlignment(SwingConstants.LEFT);
 		lblRegistreraDig.setForeground(new Color(0, 0, 0));
-		panel.add(lblRegistreraDig);
+		antalVarorPanel.add(lblRegistreraDig);
 		kundvagnspanel.setLayout(gl_kundvagnspanel);
 		
 		JLabel lblKontakt = new JLabel("GRP30 DAT215 AB");
@@ -1068,6 +1110,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		searchstring.setColumns(10);
 		
 		JButton btnSearch = new JButton("S\u00F6k");
+		btnSearch.setRequestFocusEnabled(false);
 		btnSearch.setBorder(new LineBorder(new Color(0, 0, 0)));
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -1082,8 +1125,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap(40, Short.MAX_VALUE)
-					.addComponent(searchstring, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap()
+					.addComponent(searchstring, GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 					.addGap(6))
@@ -1091,7 +1134,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addContainerGap(12, Short.MAX_VALUE)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnSearch, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 						.addComponent(searchstring, GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
@@ -1124,21 +1167,21 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 			gl_toppanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_toppanel.createSequentialGroup()
 					.addComponent(lblImat)
-					.addPreferredGap(ComponentPlacement.RELATED, 434, Short.MAX_VALUE)
-					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addPreferredGap(ComponentPlacement.RELATED, 524, Short.MAX_VALUE)
+					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 242, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_toppanel.setVerticalGroup(
 			gl_toppanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_toppanel.createSequentialGroup()
 					.addGap(5)
-					.addComponent(lblImat, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE))
-				.addGroup(gl_toppanel.createSequentialGroup()
-					.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(41, Short.MAX_VALUE))
+					.addGroup(gl_toppanel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_toppanel.createSequentialGroup()
+							.addComponent(menuPanel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
+						.addComponent(lblImat, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)))
 		);
 		
-		changeLabel = new JLabel("Mitt Konto");
+		changeLabel = new JLabel("Mina Uppgifter");
 		changeLabel.setForeground(Color.BLACK);
 		changeLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -1186,21 +1229,27 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		});
 		historyLabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		historyLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		
+		JLabel label_3 = new JLabel("|");
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		GroupLayout gl_menuPanel = new GroupLayout(menuPanel);
 		gl_menuPanel.setHorizontalGroup(
 			gl_menuPanel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_menuPanel.createSequentialGroup()
-					.addContainerGap(33, Short.MAX_VALUE)
+					.addContainerGap(85, Short.MAX_VALUE)
 					.addComponent(changeLabel)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(label_3)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(historyLabel)
-					.addGap(84))
+					.addContainerGap())
 		);
 		gl_menuPanel.setVerticalGroup(
 			gl_menuPanel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_menuPanel.createSequentialGroup()
 					.addGroup(gl_menuPanel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(historyLabel)
+						.addComponent(label_3)
 						.addComponent(changeLabel))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
@@ -1261,7 +1310,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 	 }
 
 	 public void setUser(){
-		 lblEjInloggad.setText(IMatDataHandler.getInstance().getUser().getUserName());
+		 lblEjInloggad.setText("Konto: " + IMatDataHandler.getInstance().getUser().getUserName());
 		 menuPanel.setVisible(true);
 		 
 	 }
