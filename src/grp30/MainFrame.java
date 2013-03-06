@@ -117,6 +117,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		
 		lblEjInloggad = new JLabel("Registrera Dig");
+		lblEjInloggad.setToolTipText("Tryck h\u00E4r f\u00F6r att registrera dig som anv\u00E4ndare");
 		lblEjInloggad.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -793,6 +794,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		});
 		
 		final JPanel antalVarorPanel = new JPanel();
+		antalVarorPanel.setToolTipText("Tryck h\u00E4r f\u00F6r att se din varukorg.");
 		antalVarorPanel.setBorder(new MatteBorder(1, 0, 0, 0, (Color) Color.BLACK));
 		antalVarorPanel.addMouseListener(new MouseAdapter() {
 			@Override
