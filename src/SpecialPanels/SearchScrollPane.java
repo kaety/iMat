@@ -1,6 +1,7 @@
 package SpecialPanels;
 
 
+import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.Observer;
 
@@ -40,6 +41,7 @@ public class SearchScrollPane extends JPanel {
 				.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
 		);
 		setLayout(groupLayout);
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
 	}
 	
