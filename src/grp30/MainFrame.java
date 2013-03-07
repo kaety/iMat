@@ -267,7 +267,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+							.addComponent(carddropdownpanel, GroupLayout.PREFERRED_SIZE, 40, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(centercardpanel, GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE))
 						.addComponent(rightpanel, GroupLayout.DEFAULT_SIZE, 665, Short.MAX_VALUE))
@@ -882,16 +882,16 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		GroupLayout gl_buttonpanel = new GroupLayout(buttonpanel);
 		gl_buttonpanel.setHorizontalGroup(
 			gl_buttonpanel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_buttonpanel.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_buttonpanel.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(lblKontakt)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblTom)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(lblTelefon)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(786, Short.MAX_VALUE))
+					.addContainerGap(878, Short.MAX_VALUE))
 		);
 		gl_buttonpanel.setVerticalGroup(
 			gl_buttonpanel.createParallelGroup(Alignment.LEADING)
@@ -902,7 +902,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 						.addComponent(lblTom)
 						.addComponent(lblTelefon)
 						.addComponent(label_2))
-					.addContainerGap(49, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		buttonpanel.setLayout(gl_buttonpanel);
 
@@ -1323,6 +1323,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 
 	 public void setUser(){
 		 lblEjInloggad.setText("Konto: " + IMatDataHandler.getInstance().getUser().getUserName());
+		 lblEjInloggad.setToolTipText("Tryck h\u00E4r f\u00F6r att se ditt konto");
 		 menuPanel.setVisible(true);
 		 
 	 }
