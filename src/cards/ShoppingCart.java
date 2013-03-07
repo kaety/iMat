@@ -141,6 +141,8 @@ public class ShoppingCart extends JPanel implements ShoppingCartListener {
 	public void shoppingCartChanged2() {
 		refreshList();
 		shoppingCartScrollPane.shoppingCartChanged();
+		lblEmptyCart.setVisible(false);
+		
 
 	}
 }
