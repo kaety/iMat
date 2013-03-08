@@ -907,6 +907,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		buttonpanel.setLayout(gl_buttonpanel);
 
 		JButton kottFiskButton = new JButton("");
+		kottFiskButton.setBorderPainted(false);
 		kottFiskButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		kottFiskButton.setBorder(null);
 		kottFiskButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/kott_fisk_active.png")));
@@ -931,6 +932,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		});
 
 		JButton fruktGronsakerButton = new JButton("");
+		fruktGronsakerButton.setBorderPainted(false);
 		fruktGronsakerButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		fruktGronsakerButton.setBorder(null);
 		fruktGronsakerButton.setIcon(new ImageIcon(MainFrame.class.getResource("/resources/frukt_gronsaker.png")));
@@ -955,6 +957,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		});
 		
 		JButton mejeriButton = new JButton("");
+		mejeriButton.setBorderPainted(false);
 		mejeriButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		mejeriButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/mejeri_active.png")));
 		mejeriButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/mejeri_active.png")));
@@ -979,6 +982,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		});
 		
 		JButton dryckButton = new JButton("");
+		dryckButton.setBorderPainted(false);
 		dryckButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		dryckButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/dryck_active.png")));
 		dryckButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/dryck_active.png")));
@@ -1001,6 +1005,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		});
 		
 		JButton basvarorButton = new JButton("");
+		basvarorButton.setBorderPainted(false);
 		basvarorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		basvarorButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
 		basvarorButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/basvaror_active.png")));
@@ -1024,6 +1029,7 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		});
 		
 		JButton ovrigaVarorButton = new JButton("");
+		ovrigaVarorButton.setBorderPainted(false);
 		ovrigaVarorButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		ovrigaVarorButton.setPressedIcon(new ImageIcon(MainFrame.class.getResource("/resources/ovrigt_active.png")));
 		ovrigaVarorButton.setRolloverIcon(new ImageIcon(MainFrame.class.getResource("/resources/ovrigt_active.png")));
@@ -1279,6 +1285,8 @@ public class MainFrame extends Observable implements Observer, ShoppingCartListe
 		
 		//LAST-MINUTE INIT
 		shoppingCartChanged();
+		System.out.println("Borde is painted:" + kottFiskButton.isBorderPainted());
+		
 		
 	}
 
